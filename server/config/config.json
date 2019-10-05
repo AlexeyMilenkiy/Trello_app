@@ -1,26 +1,32 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
+    "username": "alexmilenkiy",
+    "password": " ",
+    "database": "trello",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+    }
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "alexmilenkiy",
+    "password": " ",
+    "database": "trello",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+    }
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
+    "username": "alexmilenkiy",
+    "password": " ",
+    "database": "trello",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorsAliases": false
+    "dialect": "postgres",
+    "define": {
+      "timestamps": false
+    }
   }
 }
