@@ -8,9 +8,6 @@ const errorHandler = require('./helpers/error-handlers');
 
 const loginRouter = require('./routes/login-router');
 const registerRouter = require('./routes/register-router');
-const usersRouter = require('./routes/users-router');
-const followersRouter = require('./routes/followers-router');
-const postsRouter = require('./routes/posts-router');
 
 const app = express();
 
@@ -25,8 +22,5 @@ app.use(errorHandler);
 
 app.use('/api/v1/login', loginRouter);
 app.use('/api/v1/register', registerRouter);
-app.use('/api/v1/get-users', usersRouter);
-app.use('/api/v1/change-subscription', followersRouter);
-app.use('/api/v1/posts', postsRouter);
 
 module.exports = app;
