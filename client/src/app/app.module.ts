@@ -4,11 +4,17 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StartPageComponent } from './components/start-page/start-page.component';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { MainHeaderComponent } from './components/main-header/main-header.component';
+import { StartHeaderComponent } from './components/start-header/start-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    StartPageComponent
+    StartPageComponent,
+    NotFoundPageComponent,
+    MainHeaderComponent,
+    StartHeaderComponent
   ],
   imports: [
     BrowserModule,
