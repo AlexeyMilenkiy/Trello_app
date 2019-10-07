@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StartPageComponent } from './components/start-layout/start-page/start-page.component';
-import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { StartPageComponent } from './components/pages/start-page/start-page.component';
+import { NotFoundPageComponent } from './components/pages/not-found-page/not-found-page.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
-import { StartHeaderComponent } from './components/start-layout/start-header/start-header.component';
-import { LogoutPageComponent } from './components/start-layout/logout-page/logout-page.component';
-import { StartLayoutComponent } from './components/start-layout/start-layout.component';
+import { StartHeaderComponent } from './components/start-header/start-header.component';
+import { LogoutPageComponent } from './components/pages/logout-page/logout-page.component';
+import { LoginPageComponent } from './components/auth/login-page/login-page.component';
+import { AuthLayoutComponent } from './components/auth/auth-layout/auth-layout.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StartLayoutComponent } from './components/start-layout/start-layout.com
     MainHeaderComponent,
     StartHeaderComponent,
     LogoutPageComponent,
-    StartLayoutComponent
+    LoginPageComponent,
+    AuthLayoutComponent,
   ],
   imports: [
     BrowserModule,

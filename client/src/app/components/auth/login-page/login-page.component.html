@@ -1,0 +1,27 @@
+<form class="auth__form" >
+  <h1 class="auth__form__headline">Login to Trello</h1>
+  <a routerLink="/sign-up" class="auth__form__link">or create an account</a>
+
+  <label for="email" class="auth__form__label">Email (or user name)</label>
+  <input
+         type="email" id="email"
+         class="auth__form__input"
+         name="email">
+
+  <label for="pass" class="auth__form__label">Password</label>
+  <input
+         type="password"
+         id="pass"
+         class="auth__form__input"
+         name="password">
+
+  <button type="submit"
+          class="auth__form__submit">
+          Sign in</button>
+
+  <div id="google-link" class="google-button" tabindex="0">
+    <span class="icon"></span>
+    <span class="label" data-gas-action-subject-id="loginWithGmailButton">Sign in with Google</span>
+  </div>
+
+</form>
