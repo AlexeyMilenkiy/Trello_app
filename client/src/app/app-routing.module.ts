@@ -4,7 +4,8 @@ import {StartPageComponent} from './components/pages/start-page/start-page.compo
 import {NotFoundPageComponent} from './components/pages/not-found-page/not-found-page.component';
 import {LogoutPageComponent} from './components/pages/logout-page/logout-page.component';
 import {AuthLayoutComponent} from './components/auth/auth-layout/auth-layout.component';
-import {LoginPageComponent} from './components/auth/login-page/login-page.component';
+import {SignInPageComponent} from './components/auth/sign-in-page/sign-in-page.component';
+import {SignUpPageComponent} from './components/auth/sign-up-page/sign-up-page.component';
 
 
 const routes: Routes = [
@@ -14,7 +15,8 @@ const routes: Routes = [
   {
       path: '', component: AuthLayoutComponent,
       children: [
-        { path: 'login', component: LoginPageComponent },
+        { path: 'login', component: SignInPageComponent },
+        { path: 'sign-up', component: SignUpPageComponent },
       ]
     },
   { path: '**', component: NotFoundPageComponent}
