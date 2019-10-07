@@ -7,6 +7,7 @@ import { StartPageComponent } from './components/start-page/start-page.component
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { MainHeaderComponent } from './components/main-header/main-header.component';
 import { StartHeaderComponent } from './components/start-header/start-header.component';
+import { LogoutPageComponent } from './components/logout-page/logout-page.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { StartHeaderComponent } from './components/start-header/start-header.com
     StartPageComponent,
     NotFoundPageComponent,
     MainHeaderComponent,
-    StartHeaderComponent
+    StartHeaderComponent,
+    LogoutPageComponent
   ],
   imports: [
     BrowserModule,

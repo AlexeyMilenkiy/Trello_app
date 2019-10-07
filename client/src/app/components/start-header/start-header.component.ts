@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./start-header.component.less']
 })
 export class StartHeaderComponent implements OnInit {
-  @Input() start: boolean;
+  @Input() isLogout: boolean;
   constructor() { }
 
   ngOnInit() {

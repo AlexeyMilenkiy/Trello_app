@@ -46,6 +46,42 @@
   }
 }
 
-.background {
-  background: transparent;
+.logout__header {
+  background: #F8F9F9;
+}
+
+.logout__logo {
+  opacity: .3;
+
+  &:hover {
+    opacity:  .5;
+  }
+}
+
+.logout__login__link {
+  background-color: #E2E4E6;
+  border-radius: .4em;
+  box-shadow: 0 2px 0 #CDD2D4;
+  color: hsl(0,0%,30%);
+  font-size: 1.1em;
+  padding: 1em 1.2em;
+  text-decoration: none;
+
+  &:hover {
+    color: hsl(0,0%,30%);
+    background-color: #D6DADC;
+    box-shadow: 0 2px 0 #C4C9CC;
+    text-decoration: none;
+  }
+}
+
+.logout__register__link {
+  background: linear-gradient(to bottom, #61BD4F 0%, #5AAC44 100%);
+  box-shadow: 0 2px 0 #3F6F21;
+  color: #fff;
+  border-radius: .4rem;
+
+  &:hover {
+    background: linear-gradient(to bottom, #5AAC44 0%, #519839 100%);
+  }
 }
