@@ -19,9 +19,12 @@
           class="auth__form__submit">
           Sign in</button>
 
-  <div id="google-link" class="google-button" tabindex="0">
+  <div (click)="signInWithGoogle()"
+    id="google-link" class="google-button" tabindex="0">
     <span class="icon"></span>
     <span class="label" data-gas-action-subject-id="loginWithGmailButton">Sign in with Google</span>
   </div>
-
+  <button (click)="signOut()">
+    signout
+  </button>
 </form>
