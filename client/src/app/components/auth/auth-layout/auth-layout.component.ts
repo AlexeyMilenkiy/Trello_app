@@ -5,7 +5,6 @@ import { AuthService } from '@app/services/auth.service';
   selector: 'app-auth-layout',
   templateUrl: './auth-layout.component.html',
   styleUrls: ['./auth-layout.component.less'],
-  providers: [AuthService]
 })
 export class AuthLayoutComponent implements OnInit {
 

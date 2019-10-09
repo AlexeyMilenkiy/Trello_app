@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
-import { User } from '@interfaces/user';
+import { User } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth.service';
 
 @Component({
@@ -44,6 +44,7 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
+    this.form.reset();
     this.user = {
       name: this.form.value.name,
       email: this.form.value.email,

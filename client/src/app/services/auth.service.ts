@@ -4,24 +4,18 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { AuthResponse } from '@interfaces/auth-response';
-import { User } from '@interfaces/user';
+import { AuthResponse } from '@app/interfaces/auth-response';
+import { User } from '@app/interfaces/user';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
 
   constructor(private http: HttpClient) {}
 
-  get token(): string {
-    const expiresDate = new Date(localStorage.getItem('expiresIn'));
-    if (new Date() > expiresDate) {
-      this.logout();
-      return null;
-    }
-    return localStorage.getItem('authToken');
-  }
 
   register(user: User): Observable<any> {
     return this.http.post(`${environment.baseUrl}sign-up`, user)
@@ -66,10 +60,6 @@ export class AuthService {
 
   logout() {
     this.setStorage(null);
-  }
-
-  isAuthenticated(): boolean {
-    return !!this.token;
   }
 
   setStorage(response: AuthResponse | null) {
