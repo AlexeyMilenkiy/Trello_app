@@ -1,5 +1,5 @@
-const checkHash = require('../helpers/checkHash');
-const helper = require('../helpers/createToken');
+const checkHash = require('../services/checkHash');
+const helper = require('../services/createToken');
 const models = require('../models');
 const User = models.User;
 

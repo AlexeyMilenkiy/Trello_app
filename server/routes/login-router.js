@@ -2,7 +2,7 @@ const express = require('express');
 const login = express.Router();
 const controller = require('../controllers/login-controller');
 const { body } = require('express-validator');
-const { validate } = require('../helpers/validator');
+const { validate } = require('../services/validator');
 
 
 login.post('/', validate([

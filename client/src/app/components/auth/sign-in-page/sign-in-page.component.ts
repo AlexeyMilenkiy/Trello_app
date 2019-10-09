@@ -20,8 +20,4 @@ export class SignInPageComponent implements OnInit {
 
   ngOnInit() {
   }
-
-  signOut(): void {
-    this.authService.signOut();
-  }
 }

@@ -1,8 +1,9 @@
 <form class="auth__form" >
+
   <h1 class="auth__form__headline">Login to Trello</h1>
   <a routerLink="/sign-up" class="auth__form__link">or create an account</a>
 
-  <label for="email" class="auth__form__label">Email (or user name)</label>
+  <label for="email" class="auth__form__label">Email (or username)</label>
   <input
          type="email" id="email"
          class="auth__form__input"
@@ -17,14 +18,12 @@
 
   <button type="submit"
           class="auth__form__submit">
-          Sign in</button>
+          Log in</button>
 
   <div (click)="signInWithGoogle()"
     id="google-link" class="google-button" tabindex="0">
     <span class="icon"></span>
-    <span class="label" data-gas-action-subject-id="loginWithGmailButton">Sign in with Google</span>
+    <span class="label" data-gas-action-subject-id="loginWithGmailButton">Log in with Google</span>
   </div>
-  <button (click)="signOut()">
-    signout
-  </button>
+
 </form>

@@ -1,4 +1,4 @@
-const createHash = require('../helpers/createHash');
+const createHash = require('../services/createHash');
 const models = require('../models');
 const User = models.User;
 
