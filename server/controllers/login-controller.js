@@ -1,7 +1,7 @@
 const checkHash = require('../services/checkHash');
 const helper = require('../services/createToken');
 const models = require('../models');
-const User = models.User;
+const User = models.user;
 
 const loginUser = (req, res) => {
     let user = req.body;

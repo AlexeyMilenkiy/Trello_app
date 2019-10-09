@@ -8,6 +8,7 @@ import { NotFoundPageComponent } from '@components/pages/not-found-page/not-foun
 import { MainHeaderComponent } from '@components/main-header/main-header.component';
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
+import { SharedModule } from '@components/shared.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.c
   imports: [
     BrowserModule,
     AppRoutingModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]

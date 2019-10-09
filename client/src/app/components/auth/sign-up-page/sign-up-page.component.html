@@ -9,7 +9,8 @@
           name="email">
 
   <label for="name" class="auth__form__label">Name</label>
-  <input
+  <input [ngClass]="{invalid: form.get('name').touched && form.get('name').invalid}"
+           formControlName="name"
            type="text"
            id="name"
            class="auth__form__input"
@@ -23,7 +24,9 @@
           name="password">
 
   <button type="submit"
-          class="auth__form__submit">
+          class="auth__form__submit"
+          [ngClass]="{disabled: form.invalid}"
+          [disabled]="form.invalid">
           Sign up</button>
 
   <div id="google-link" class="google-button" tabindex="0">
