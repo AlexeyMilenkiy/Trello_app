@@ -16,16 +16,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-
   register(user: User): Observable<any> {
-    return this.http.post(`${environment.baseUrl}sign-up`, user)
+    return this.http.post(`${environment.baseUrl}auth/sign-up`, user)
       .pipe(
         catchError(this.checkError.bind(this))
       );
   }
 
   login(user: User): Observable<any> {
-    return this.http.post(`${environment.baseUrl}login`, user)
+    return this.http.post(`${environment.baseUrl}auth/sign-in`, user)
       .pipe(
         tap(this.setStorage),
         catchError(this.checkError.bind(this))

@@ -44,7 +44,6 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
     if (this.form.invalid) {
       return;
     }
-    this.form.reset();
     this.user = {
       name: this.form.value.name,
       email: this.form.value.email,
@@ -58,7 +57,6 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
         },
         (error) => {
           if (error.status !== 401) {
-            console.log(error);
             this.isError = true;
           }
         }

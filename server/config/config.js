@@ -1,8 +1,9 @@
+require('dotenv').config(); // this is important!
 module.exports = {
   "development": {
-    "username": process.env.USER_NAME,
-    "password": process.env.USER_PASSWORD,
-    "database": process.env.DATABASE_NAME,
+    "username": process.env.USER,
+    "password": process.env.PASSWORD,
+    "database": process.env.DATABASE,
     "host": "127.0.0.1",
     "dialect": "postgres",
     "define": {
@@ -10,9 +11,9 @@ module.exports = {
     }
   },
   "test": {
-    "username": process.env.USER_NAME,
-    "password": process.env.USER_PASSWORD,
-    "database": process.env.DATABASE_NAME,
+    "username": process.env.USER,
+    "password": process.env.PASSWORD,
+    "database": process.env.DATABASE,
     "host": "127.0.0.1",
     "dialect": "postgres",
     "define": {
@@ -20,9 +21,9 @@ module.exports = {
     }
   },
   "production": {
-    "username": process.env.USER_NAME,
-    "password": process.env.USER_PASSWORD,
-    "database": process.env.DATABASE_NAME,
+    "username": process.env.USER,
+    "password": process.env.PASSWORD,
+    "database": process.env.DATABASE,
     "host": "127.0.0.1",
     "dialect": "postgres",
     "define": {
