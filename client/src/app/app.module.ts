@@ -9,6 +9,7 @@ import { MainHeaderComponent } from '@components/main-header/main-header.compone
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { SharedModule } from '@components/shared.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { SharedModule } from '@components/shared.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

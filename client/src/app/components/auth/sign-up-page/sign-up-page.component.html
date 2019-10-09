@@ -1,9 +1,10 @@
-<form class="auth__form" >
-  <h1 class="auth__form__headline">Create account Trello</h1>
-  <a routerLink="/login" class="auth__form__link">or login</a>
+<form class="auth__form" [formGroup]="form" (ngSubmit)="submit()">
+  <h1 class="auth__form__headline">Create a Trello Account</h1>
+  <a routerLink="/login" class="auth__form__link">or sign in to your account</a>
 
   <label for="email" class="auth__form__label">Email</label>
-  <input
+  <input [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
+          formControlName="email"
           type="email" id="email"
           class="auth__form__input"
           name="email">
@@ -17,11 +18,16 @@
            name="name">
 
   <label for="pass" class="auth__form__label">Password</label>
-  <input
+  <input [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
+          formControlName="password"
           type="password"
           id="pass"
           class="auth__form__input"
           name="password">
+
+  <div class="warning"
+        *ngIf="(form.get('password').touched && form.get('password').errors)">
+        Minimum password length 8 characters</div>
 
   <button type="submit"
           class="auth__form__submit"
@@ -33,5 +39,9 @@
     <span class="icon"></span>
     <span class="label" data-gas-action-subject-id="loginWithGmailButton">Register with Google</span>
   </div>
+
+  <span class="alert" *ngIf="auth.error$ | async as error">
+    {{error}}
+  </span>
 
 </form>

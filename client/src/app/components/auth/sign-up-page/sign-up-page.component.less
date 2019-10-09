@@ -1,6 +1,5 @@
 .auth__form {
   width: 500px;
-  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -8,7 +7,7 @@
   &__headline {
     font-family: Roboto, sans-serif;
     color: #333;
-    font-size: 3em;
+    font-size: 2.9em;
     margin: 0;
   }
 
@@ -52,7 +51,6 @@
 
     &:hover {
       cursor: pointer;
-      background: #5AAC44;
     }
   }
 }
@@ -83,4 +81,33 @@
   font-size: 1.3em;
   font-weight: bold;
   font-family: Roboto, sans-serif;
+}
+
+.disabled {
+  background: #E2E4E6;
+  box-shadow: none;
+  color: hsl(0,0%,55%);
+}
+
+.invalid{
+  box-shadow: 0 0 0 2px rgba(250,10,10,1);
+}
+
+.warning {
+  margin: .5em 0;
+  box-sizing: border-box;
+  padding: .5em;
+  width: 100%;
+  max-width: 400px;
+  background: #eb5a46;
+  color: #fbedeb;
+  font-size: 1.3em;
+  border-radius: 4px;
+}
+
+.alert {
+  margin-top: 1rem;
+  color: red;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
 }

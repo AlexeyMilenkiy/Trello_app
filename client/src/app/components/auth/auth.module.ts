@@ -8,6 +8,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { SignInPageComponent } from './sign-in-page/sign-in-page.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { SignUpPageComponent } from './sign-up-page/sign-up-page.component';
+import {AuthService} from '@app/services/auth.service';
 
 
 const config = new AuthServiceConfig([
