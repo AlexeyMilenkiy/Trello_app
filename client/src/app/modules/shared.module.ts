@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { ModalComponent } from '@components/modal/modal.component';
+import { ModalErrorComponent } from '@components/modal-error/modal-error.component';
 
 @NgModule({
   declarations: [
-    ModalComponent
+    ModalErrorComponent
   ],
   imports: [
     CommonModule,
@@ -16,7 +16,7 @@ import { ModalComponent } from '@components/modal/modal.component';
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    ModalComponent
+    ModalErrorComponent
   ]
 })
 export class SharedModule { }

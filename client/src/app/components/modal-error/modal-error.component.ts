@@ -1,12 +1,12 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './modal.component.html',
-  styleUrls: ['./modal.component.less']
+  selector: 'app-modal-error',
+  templateUrl: './modal-error.component.html',
+  styleUrls: ['./modal-error.component.less']
 })
 
-export class ModalComponent {
+export class ModalErrorComponent {
   @Input() isModal: boolean;
   @Input() message: string;
   @Output() closed = new EventEmitter<boolean>();
