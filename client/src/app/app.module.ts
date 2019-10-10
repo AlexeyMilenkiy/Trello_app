@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -10,7 +10,8 @@ import { MainHeaderComponent } from '@components/main-header/main-header.compone
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { SharedModule } from '@app/modules/shared.module';
-import { BoardsComponent } from './components/boards/boards.component';
+import { BoardsComponent } from '@components/boards/boards.component';
+import { AuthInterceptor } from '@app/services/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { BoardsComponent } from './components/boards/boards.component';
     SharedModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

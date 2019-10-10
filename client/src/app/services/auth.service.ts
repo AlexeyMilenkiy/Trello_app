@@ -63,10 +63,21 @@ export class AuthService {
       case 'invalid_password':
         this.error$.next('Wrong password');
         break;
+      case 'password_null':
+        this.error$.next('This account doesn\'t have a password set - perhaps you normally log in with Google?');
+        break;
       case 'email_registered':
-        this.error$.next('Email already in use by another account. You can use log in');
+        this.error$.next('Email already in use by another account. You can use sign in');
     }
     return throwError(error);
+  }
+
+  getToken() {
+    return localStorage.getItem('authToken');
+  }
+
+  boards() {
+    return this.http.get(`${environment.baseUrl}boards`);
   }
 
   logout() {

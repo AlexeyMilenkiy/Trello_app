@@ -1,6 +1,6 @@
 const createHash = require('../services/createHash');
 const checkHash = require('../services/checkHash');
-const service = require('../services/createToken');
+const createToken = require('../services/createToken');
 const models = require('../models');
 const User = models.User;
 
@@ -15,7 +15,7 @@ module.exports = {
                 res.json({
                     name: data.name,
                     id: data.id,
-                    token: service.createToken({name, id})
+                    token: createToken({name, id})
                 });
             })
             .catch(() => {
@@ -30,13 +30,15 @@ module.exports = {
             .then(data => {
                 if(!data){
                     res.status(401).send('invalid_email')
+                } else if(data.password === null) {
+                    res.status(401).send('password_null')
                 } else {
                     let isHash = checkHash(user.password, data.password);
                     if (isHash) {
                         res.json({
                                 name: data.name,
                                 id: data.id,
-                                token: service.createToken({name, id})
+                                token: createToken({name: data.name, id: data.id})
                         });
                     } else {
                         res.status(401).send('invalid_password');
