@@ -58,13 +58,13 @@ export class AuthService {
     }
     switch (error.error) {
       case 'invalid_email':
-        this.error$.next('Such an email does not exist');
+        this.error$.next('There isn\'t an account for this email');
         break;
       case 'invalid_password':
         this.error$.next('Wrong password');
         break;
       case 'email_registered':
-        this.error$.next('Such email address is registered');
+        this.error$.next('Email already in use by another account. You can use log in');
     }
     return throwError(error);
   }
