@@ -75,7 +75,6 @@ export class AuthService {
 
   setStorage(response: AuthResponse | null) {
     if (response) {
-      console.log(response);
       localStorage.setItem('name', response.name);
       localStorage.setItem('id', `${response.id}`);
       localStorage.setItem('authToken', response.token);

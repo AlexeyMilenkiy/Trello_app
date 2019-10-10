@@ -27,24 +27,6 @@ export class SignInPageComponent implements OnInit, OnDestroy {
               private authService: AuthService,
               private router: Router) { }
 
-  signInWithGoogle(): void {
-    this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then((user: SocialUser) => {
-        console.log(user);
-
-        this.subscriptions.add(this.authService.socialAuth(user)
-          .subscribe(() => {
-              this.router.navigate(['/boards']);
-            },
-            (error) => {
-              if ((error.status !== 401) && (error.status !== 422)) {
-                this.isError = true;
-              }
-            }
-          ));
-      });
-  }
-
   ngOnInit(): void {
     this.form = new FormGroup({
       email: new FormControl(null, [
@@ -78,6 +60,23 @@ export class SignInPageComponent implements OnInit, OnDestroy {
           }
         }
       ));
+  }
+
+  signInWithGoogle(): void {
+    this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((user: SocialUser) => {
+
+        this.subscriptions.add(this.authService.socialAuth(user)
+          .subscribe(() => {
+              this.router.navigate(['/boards']);
+            },
+            (error) => {
+              if ((error.status !== 401) && (error.status !== 422)) {
+                this.isError = true;
+              }
+            }
+          ));
+      });
   }
 
   ngOnDestroy(): void {

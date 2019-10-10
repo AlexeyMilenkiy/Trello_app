@@ -38,12 +38,16 @@
           class="auth__form__submit"
           [ngClass]="{disabled: form.invalid}"
           [disabled]="form.invalid">
-          Sign up</button>
+          Create New Account</button>
 
-  <div id="google-link" class="google-button" tabindex="0">
+  <div (click)="signInWithGoogle()"
+       id="google-link"
+       class="google-button"
+       tabindex="0">
     <span class="icon"></span>
-    <span class="label" data-gas-action-subject-id="loginWithGmailButton">Register with Google</span>
+    <span class="label" data-gas-action-subject-id="loginWithGmailButton">Sign up with Google</span>
   </div>
+
 
 </form>
 

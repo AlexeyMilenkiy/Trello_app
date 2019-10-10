@@ -1,10 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { Subscription } from 'rxjs';
+import {AuthService as GoogleService, GoogleLoginProvider} from 'angularx-social-login';
+
 import { User } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth.service';
+import {SocialUser} from '@app/interfaces/social-user';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -21,7 +23,8 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   form: FormGroup;
 
-  constructor( private authService: AuthService,
+  constructor( private googleService: GoogleService,
+               private authService: AuthService,
                private router: Router) { }
 
   ngOnInit(): void {
@@ -61,6 +64,23 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
           }
         }
       ));
+  }
+
+  signInWithGoogle(): void {
+    this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
+      .then((user: SocialUser) => {
+
+        this.subscriptions.add(this.authService.socialAuth(user)
+          .subscribe(() => {
+              this.router.navigate(['/boards']);
+            },
+            (error) => {
+              if ((error.status !== 401) && (error.status !== 422)) {
+                this.isError = true;
+              }
+            }
+          ));
+      });
   }
 
   ngOnDestroy(): void {
