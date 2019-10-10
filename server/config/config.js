@@ -5,7 +5,7 @@ module.exports = {
     "password": process.env.PASSWORD,
     "database": process.env.DATABASE,
     "host": "127.0.0.1",
-    "dialect": "postgres",
+    "dialect": process.env.DIALECT,
     "define": {
       "timestamps": false
     }
@@ -15,7 +15,7 @@ module.exports = {
     "password": process.env.PASSWORD,
     "database": process.env.DATABASE,
     "host": "127.0.0.1",
-    "dialect": "postgres",
+    "dialect": process.env.DIALECT,
     "define": {
       "timestamps": false
     }
@@ -25,7 +25,7 @@ module.exports = {
     "password": process.env.PASSWORD,
     "database": process.env.DATABASE,
     "host": "127.0.0.1",
-    "dialect": "postgres",
+    "dialect": process.env.DIALECT,
     "define": {
       "timestamps": false
     }

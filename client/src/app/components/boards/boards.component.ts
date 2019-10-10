@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '@app/services/auth.service';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-boards',
@@ -9,15 +7,10 @@ import {Router} from '@angular/router';
 })
 export class BoardsComponent implements OnInit {
 
-  constructor(private authService: AuthService,
-              private router: Router) { }
+  constructor() { }
 
   ngOnInit() {
 
   }
 
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/']);
-  }
 }

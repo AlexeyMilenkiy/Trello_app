@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
@@ -15,7 +16,8 @@ export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router) {}
 
   register(user: User): Observable<AuthResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-up`, user)
@@ -82,6 +84,7 @@ export class AuthService {
 
   logout() {
     this.setStorage(null);
+    this.router.navigate(['/']);
   }
 
   setStorage(response: AuthResponse | null) {

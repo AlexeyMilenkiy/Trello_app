@@ -1,9 +1,20 @@
 <header class="main__header">
-  <a routerLink="" class="main__header__logo">
-    <img src="../../../assets/images/trello-logo-white.svg" width="150px" height="40px" alt="logo">
-  </a>
-  <div class="start__page__header__links">
-    <a routerLink="/login" class="start__page__header__links__login">Login</a>
-    <a routerLink="/register" class="start__page__header__links__register">Register</a>
+  <div class="main__header__links">
+    <a routerLink="/" class="main__header__links__home">
+      <i class="fa fa-home"></i>
+    </a>
+
+    <a routerLink="/boards" class="main__header__links__boards">
+      <img width="18px" height="18px" src="../../../assets/images/trello-mark-white.svg" alt="mark">
+      Boards
+    </a>
   </div>
+
+  <img class="main__header__logo" width="90px" height="40px" src="../../../assets/images/trello-logo-white.svg" alt="logo">
+
+  <div class="main__header__user">
+    <span class="main__header__user__name">{{name}}</span>
+    <button (click)="authService.logout()" class="main__header__user__logout">Log Out</button>
+  </div>
+
 </header>

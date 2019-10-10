@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from '@app/services/auth.service';
 
 @Component({
   selector: 'app-main-header',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainHeaderComponent implements OnInit {
 
-  constructor() { }
+  name: string;
+
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
+    this.name = localStorage.getItem('name');
   }
-
 }
