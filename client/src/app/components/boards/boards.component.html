@@ -6,6 +6,16 @@
     </span>
   </div>
   <div class="boards__list">
-    <div class="boards__list__create">Create new board</div>
+    <div (click)="create()"
+      class="boards__list__create">
+      Create new board
+    </div>
+    <ng-template>
+
+    </ng-template>
   </div>
+
+  <app-modal-create [isModal]="isCreate"
+                    (closed)="isCreate = $event">
+  </app-modal-create>
 </div>

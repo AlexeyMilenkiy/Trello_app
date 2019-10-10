@@ -1,0 +1,23 @@
+<div [style.visibility]="isModal ?  'visible': 'hidden'"
+     [style.opacity]="isModal ? '1' : '0'"
+     class="modal_wrapper">
+
+  <form class="modal-create" [formGroup]="form" (ngSubmit)="submit()">
+
+    <i class="fa fa-close" (click)="close()"></i>
+
+    <input formControlName="title"
+           class="modal-create__input"
+           type="text"
+           placeholder="Add board title">
+
+    <button [ngClass]="{disabled: form.invalid}"
+            [disabled]="form.invalid"
+            type="submit"
+            class="modal-create__btn">
+            Create board
+    </button>
+
+  </form>
+
+</div>

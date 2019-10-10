@@ -7,8 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardsComponent implements OnInit {
 
+  isCreate = false;
   constructor() { }
 
+  create() {
+    this.isCreate = true;
+  }
   ngOnInit() {
 
   }
