@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
     author_id: DataTypes.INTEGER
   },
    {
-     underscored : true
+     underscored : true,
+     tableName: 'Boards'
    });
   Board.associate = function(models) {
 

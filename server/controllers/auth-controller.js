@@ -15,7 +15,7 @@ module.exports = {
                 res.json({
                     name: data.name,
                     id: data.id,
-                    token: createToken({name, id})
+                    token: createToken({name: data.name, id: data.id})
                 });
             })
             .catch(() => {

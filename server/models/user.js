@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   },
   {
-    underscored: true
+    underscored: true,
+    tableName: 'Users',
   });
   User.associate = function(models) {
     User.hasMany(models.Board, {

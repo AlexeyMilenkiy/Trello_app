@@ -1,12 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import {AuthService as GoogleService, GoogleLoginProvider} from 'angularx-social-login';
+import { AuthService as GoogleService, GoogleLoginProvider } from 'angularx-social-login';
 
 import { User } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth.service';
-import {SocialUser} from '@app/interfaces/social-user';
+import { SocialUser } from '@app/interfaces/social-user';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -54,7 +54,8 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
     };
 
     this.subscriptions.add(this.authService.register(this.user)
-      .subscribe(() => {
+      .subscribe((res) => {
+        console.log(res);
           this.form.reset();
           this.router.navigate(['/boards']);
         },

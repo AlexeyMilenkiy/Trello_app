@@ -14,7 +14,11 @@ module.exports = {
       author_id: {
         type: Sequelize.INTEGER
       },
-    });
+    },
+        {
+          underscored : true,
+          tableName: 'Boards'
+        });
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Boards');

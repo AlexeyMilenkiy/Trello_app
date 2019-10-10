@@ -19,6 +19,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       }
+    }, {
+      underscored : true,
+      tableName: 'Users'
     });
   },
   down: (queryInterface, Sequelize) => {

@@ -13,7 +13,7 @@ import { SharedModule } from '@app/modules/shared.module';
 import { BoardsComponent } from '@components/boards/boards.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import { ModalCreateComponent } from './components/modal-create/modal-create.component';
+import { ModalCreateComponent } from '@components/modal-create/modal-create.component';
 
 @NgModule({
   declarations: [
