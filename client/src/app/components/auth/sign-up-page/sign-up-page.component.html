@@ -2,14 +2,15 @@
   <h1 class="auth__form__headline">Create a Trello Account</h1>
   <a routerLink="/login" class="auth__form__link">or sign in to your account</a>
 
-  <span class="warning" *ngIf="auth.error$ | async as error">
+  <span class="warning" *ngIf="authService.error$ | async as error">
     {{error}}
   </span>
 
   <label for="email" class="auth__form__label">Email</label>
   <input [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
           formControlName="email"
-          type="email" id="email"
+          type="email"
+          id="email"
           class="auth__form__input"
           name="email">
 
@@ -37,13 +38,12 @@
           class="auth__form__submit"
           [ngClass]="{disabled: form.invalid}"
           [disabled]="form.invalid">
-    Sign up</button>
+          Sign up</button>
 
   <div id="google-link" class="google-button" tabindex="0">
     <span class="icon"></span>
     <span class="label" data-gas-action-subject-id="loginWithGmailButton">Register with Google</span>
   </div>
-
 
 </form>
 

@@ -14,7 +14,7 @@ router.post('/sign-up', validate([
         .normalizeEmail()
         .isLength({ min: 6, max: 50 }),
     body('password').isLength({ min: 8, max: 50 })
-]), controller.register);
+]), controller.auth.registerUser);
 
 
 router.post('/sign-in', validate([
@@ -24,6 +24,6 @@ router.post('/sign-in', validate([
         .isLength({ min: 6, max: 50 }),
     body('password')
         .isLength({ min: 8, max: 50})
-]), controller.login);
+]), controller.auth.loginUser);
 
 module.exports = router;

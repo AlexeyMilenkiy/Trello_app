@@ -21,7 +21,7 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   form: FormGroup;
 
-  constructor( private auth: AuthService,
+  constructor( private authService: AuthService,
                private router: Router) { }
 
   ngOnInit(): void {
@@ -50,13 +50,13 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
       password: this.form.value.password,
     };
 
-    this.subscriptions.add(this.auth.register(this.user)
+    this.subscriptions.add(this.authService.register(this.user)
       .subscribe(() => {
           this.form.reset();
           this.router.navigate(['/boards']);
         },
         (error) => {
-          if (error.status !== 401) {
+          if (error.status !== (401 && 422)) {
             this.isError = true;
           }
         }

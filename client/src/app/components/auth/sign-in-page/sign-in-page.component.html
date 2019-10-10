@@ -1,23 +1,32 @@
-<form class="auth__form" >
+<form class="auth__form" [formGroup]="form" (ngSubmit)="submit()">
 
   <h1 class="auth__form__headline">Login to Trello</h1>
   <a routerLink="/sign-up" class="auth__form__link">or create an account</a>
 
-  <label for="email" class="auth__form__label">Email (or username)</label>
-  <input
-         type="email" id="email"
+  <span class="warning" *ngIf="authService.error$ | async as error">
+    {{error}}
+  </span>
+
+  <label for="email" class="auth__form__label">Email</label>
+  <input [ngClass]="{invalid: form.get('email').touched && form.get('email').invalid}"
+         formControlName="email"
+         type="email"
+         id="email"
          class="auth__form__input"
          name="email">
 
   <label for="pass" class="auth__form__label">Password</label>
-  <input
+  <input [ngClass]="{invalid: form.get('password').touched && form.get('password').invalid}"
+         formControlName="password"
          type="password"
          id="pass"
          class="auth__form__input"
          name="password">
 
   <button type="submit"
-          class="auth__form__submit">
+          class="auth__form__submit"
+          [ngClass]="{disabled: form.invalid}"
+          [disabled]="form.invalid">
           Log in</button>
 
   <div (click)="signInWithGoogle()"
@@ -27,3 +36,7 @@
   </div>
 
 </form>
+
+<app-modal [isModal]="isError"
+           [message]="'Server is not available! Please try again later'"
+           (closed)="isError = $event"></app-modal>

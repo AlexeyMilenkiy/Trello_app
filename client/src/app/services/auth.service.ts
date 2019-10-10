@@ -16,14 +16,15 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register(user: User): Observable<any> {
+  register(user: User): Observable<AuthResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-up`, user)
       .pipe(
+        tap(this.setStorage),
         catchError(this.checkError.bind(this))
       );
   }
 
-  login(user: User): Observable<any> {
+  login(user: User): Observable<AuthResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-in`, user)
       .pipe(
         tap(this.setStorage),
@@ -63,10 +64,9 @@ export class AuthService {
 
   setStorage(response: AuthResponse | null) {
     if (response) {
-      console.log(response);
-      // localStorage.setItem('authToken', response[2].token);
-      // localStorage.setItem('name', response[0]);
-      // localStorage.setItem('id', response[1]);
+      localStorage.setItem('name', response[0]);
+      localStorage.setItem('id', response[1]);
+      localStorage.setItem('authToken', response[2].token);
     } else {
       localStorage.clear();
     }
