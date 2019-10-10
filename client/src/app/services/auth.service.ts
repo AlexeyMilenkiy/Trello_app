@@ -78,10 +78,6 @@ export class AuthService {
     return localStorage.getItem('authToken');
   }
 
-  checkToken() {
-    return this.http.get(`${environment.baseUrl}check-token`);
-  }
-
   logout() {
     this.setStorage(null);
     this.router.navigate(['/']);

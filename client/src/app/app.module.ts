@@ -12,6 +12,7 @@ import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.c
 import { SharedModule } from '@app/modules/shared.module';
 import { BoardsComponent } from '@components/boards/boards.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
+import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
     StartHeaderComponent,
     LogoutPageComponent,
     BoardsComponent,
+    MainLayoutComponent,
   ],
   imports: [
     BrowserModule,
