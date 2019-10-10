@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 
 import { User } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth.service';
+import { SocialUser } from '@app/interfaces/social-user';
 
 @Component({
   selector: 'app-sign-in-page',
@@ -28,8 +29,19 @@ export class SignInPageComponent implements OnInit, OnDestroy {
 
   signInWithGoogle(): void {
     this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
-      .then(user => {
-        console.log(user)
+      .then((user: SocialUser) => {
+        console.log(user);
+
+        this.subscriptions.add(this.authService.socialAuth(user)
+          .subscribe(() => {
+              this.router.navigate(['/boards']);
+            },
+            (error) => {
+              if ((error.status !== 401) && (error.status !== 422)) {
+                this.isError = true;
+              }
+            }
+          ));
       });
   }
 
@@ -61,7 +73,7 @@ export class SignInPageComponent implements OnInit, OnDestroy {
           this.router.navigate(['/boards']);
         },
         (error) => {
-          if (error.status !== (401 && 422)) {
+          if ((error.status !== 401) && (error.status !== 422)) {
             this.isError = true;
           }
         }

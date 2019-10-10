@@ -10,6 +10,7 @@ import { MainHeaderComponent } from '@components/main-header/main-header.compone
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { SharedModule } from '@app/modules/shared.module';
+import { BoardsComponent } from './components/boards/boards.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SharedModule } from '@app/modules/shared.module';
     MainHeaderComponent,
     StartHeaderComponent,
     LogoutPageComponent,
+    BoardsComponent,
   ],
   imports: [
     BrowserModule,

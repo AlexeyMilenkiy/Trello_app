@@ -12,8 +12,11 @@ module.exports = {
 
         User.create({ ...user })
             .then(data => {
-                let activeUser = {name: data.name, id: data.id};
-                res.json([activeUser.name, activeUser.id, service.createToken(activeUser)]);
+                res.json({
+                    name: data.name,
+                    id: data.id,
+                    token: service.createToken({name, id})
+                });
             })
             .catch(() => {
                 res.status(401).send('email_registered');
@@ -30,8 +33,11 @@ module.exports = {
                 } else {
                     let isHash = checkHash(user.password, data.password);
                     if (isHash) {
-                        let activeUser = {name: data.name, id: data.id};
-                        res.json([activeUser.name, activeUser.id, service.createToken(activeUser)]);
+                        res.json({
+                                name: data.name,
+                                id: data.id,
+                                token: service.createToken({name, id})
+                        });
                     } else {
                         res.status(401).send('invalid_password');
                     }
@@ -41,6 +47,22 @@ module.exports = {
                 res.sendStatus(401);
             });
     },
-}
+
+    socialAuth (req, res) {
+        let user = req.body;
+
+        User.findOrCreate({where: {email: user.email, name: user.name}})
+            .then(data => {
+                res.json({
+                    name: data[0].name,
+                    id: data[0].id,
+                    token: user.token
+                });
+            })
+            .catch(() => {
+                res.sendStatus(401);
+            });
+    },
+};
 
 

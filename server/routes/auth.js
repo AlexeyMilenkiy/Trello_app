@@ -26,4 +26,15 @@ router.post('/sign-in', validate([
         .isLength({ min: 8, max: 50})
 ]), controller.auth.loginUser);
 
+router.post('/google-auth', validate([
+    body('email')
+        .isEmail()
+        .normalizeEmail()
+        .isLength({ min: 6, max: 50 }),
+    body('name')
+        .not().isEmpty()
+        .trim()
+        .isLength({ min: 2, max: 50 }),
+]), controller.auth.socialAuth);
+
 module.exports = router;

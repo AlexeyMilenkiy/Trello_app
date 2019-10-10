@@ -56,7 +56,7 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
           this.router.navigate(['/boards']);
         },
         (error) => {
-          if (error.status !== (401 && 422)) {
+          if ((error.status !== 401) && (error.status !== 422)) {
             this.isError = true;
           }
         }

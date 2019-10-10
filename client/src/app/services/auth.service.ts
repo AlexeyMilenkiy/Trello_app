@@ -6,6 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { AuthResponse } from '@app/interfaces/auth-response';
 import { User } from '@app/interfaces/user';
+import {SocialUser} from '@app/interfaces/social-user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,16 @@ export class AuthService {
 
   login(user: User): Observable<AuthResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-in`, user)
+      .pipe(
+        tap(this.setStorage),
+        catchError(this.checkError.bind(this))
+      );
+  }
+
+  socialAuth(user: SocialUser): Observable<AuthResponse> {
+    return this.http.post(`${environment.baseUrl}auth/google-auth`, {
+      email: user.email, name: user.name, token: user.authToken
+    })
       .pipe(
         tap(this.setStorage),
         catchError(this.checkError.bind(this))
@@ -64,9 +75,10 @@ export class AuthService {
 
   setStorage(response: AuthResponse | null) {
     if (response) {
-      localStorage.setItem('name', response[0]);
-      localStorage.setItem('id', response[1]);
-      localStorage.setItem('authToken', response[2].token);
+      console.log(response);
+      localStorage.setItem('name', response.name);
+      localStorage.setItem('id', `${response.id}`);
+      localStorage.setItem('authToken', response.token);
     } else {
       localStorage.clear();
     }
