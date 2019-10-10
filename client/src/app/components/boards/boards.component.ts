@@ -13,17 +13,7 @@ export class BoardsComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.authService.boards()
-      .subscribe((res) => {
-          console.log(res)
-        },
-        (error) => {
-          if(error.status === 401) {
-            this.authService.logout();
-            this.router.navigate(['/']);
-          }
-        }
-      );
+
   }
 
   logout() {

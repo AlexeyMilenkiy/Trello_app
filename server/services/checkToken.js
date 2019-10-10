@@ -9,7 +9,8 @@ const checkToken = (req, res, next) => {
         if(decoded) {
             next();
         } else {
-            res.status(401).send('token_invalid');
+            res.redirect('/');
+            // res.status(401).send('token_invalid');
         }
     });
 };

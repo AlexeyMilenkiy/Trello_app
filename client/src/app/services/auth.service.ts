@@ -6,7 +6,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
 import { AuthResponse } from '@app/interfaces/auth-response';
 import { User } from '@app/interfaces/user';
-import {SocialUser} from '@app/interfaces/social-user';
+import { SocialUser } from '@app/interfaces/social-user';
 
 @Injectable({
   providedIn: 'root'
@@ -76,8 +76,8 @@ export class AuthService {
     return localStorage.getItem('authToken');
   }
 
-  boards() {
-    return this.http.get(`${environment.baseUrl}boards`);
+  checkToken() {
+    return this.http.get(`${environment.baseUrl}check-token`);
   }
 
   logout() {
