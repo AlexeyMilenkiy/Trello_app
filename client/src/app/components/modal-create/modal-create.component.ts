@@ -9,7 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class ModalCreateComponent implements OnInit {
 
-  @Input() isModal: boolean;
+  @Input() isOpen: boolean;
   @Output() closed = new EventEmitter<boolean>();
   @Output() newBoard = new EventEmitter<string>();
 
