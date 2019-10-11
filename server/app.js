@@ -1,7 +1,6 @@
-const express = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
-
+const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('./config/logger');
