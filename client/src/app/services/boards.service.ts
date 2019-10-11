@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '@env/environment';
@@ -14,7 +14,17 @@ export class BoardsService {
 
   constructor(private http: HttpClient) { }
 
+  getId() {
+    return parseInt(localStorage.getItem('id'), 10);
+  }
+
   createBoard(board: Board): Observable<BoardResponse> {
     return this.http.post<BoardResponse>(`${environment.baseUrl}boards/create`, board);
+  }
+
+  getBoards(): Observable<BoardResponse[]> {
+    const id = this.getId();
+    const headers = new HttpHeaders().set('id', `${id}`);
+    return this.http.get<BoardResponse[]>(`${environment.baseUrl}boards/get-boards`, {headers});
   }
 }

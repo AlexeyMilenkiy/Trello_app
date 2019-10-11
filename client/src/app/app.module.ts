@@ -14,6 +14,7 @@ import { BoardsComponent } from '@components/boards/boards.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { ModalCreateComponent } from '@components/modal-create/modal-create.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ModalCreateComponent } from '@components/modal-create/modal-create.comp
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

@@ -6,16 +6,18 @@
     </span>
   </div>
   <div class="boards__list">
-    <div (click)="create()"
+    <div (click)="openModal()"
       class="boards__list__create">
       Create new board
     </div>
-    <ng-template>
-
-    </ng-template>
+      <div *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
+            class="boards__list__single">
+            {{board.title}}
+      </div>
   </div>
 
-  <app-modal-create [isModal]="isCreate"
-                    (closed)="isCreate = $event">
+  <app-modal-create [isModal]="isOpen"
+                    (closed)="isOpen = $event"
+                    (newBoard)="create($event)">
   </app-modal-create>
 </div>

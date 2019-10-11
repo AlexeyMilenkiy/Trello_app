@@ -8,17 +8,24 @@ module.exports = {
 
         Board.create({ title: board.title, author_id: board.id })
             .then(data => {
-                console.log(data)
                 res.json(data);
-                // res.json({
-                //     name: data.name,
-                //     id: data.id,
-                // });
             })
             .catch(() => {
                 res.status(400);
             });
     },
+
+    getBoards (req, res) {
+        let userId = req.headers.id;
+
+        Board.findAll({where: { author_id: userId }})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
+    }
 };
 
 
