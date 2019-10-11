@@ -6,7 +6,8 @@ import { NotFoundPageComponent } from '@components/pages/not-found-page/not-foun
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import {BoardsComponent} from '@components/boards/boards.component';
+import { BoardsComponent } from '@components/boards/boards.component';
+import { BoardComponent } from '@components/board/board.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
     children: [
       { path: 'boards', component: BoardsComponent},
+      { path: 'boards/:id', component: BoardComponent},
     ]},
 
   { path: 'logged-out', component: LogoutPageComponent, canActivate: [AuthGuard]},

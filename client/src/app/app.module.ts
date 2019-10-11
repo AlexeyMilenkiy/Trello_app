@@ -15,6 +15,8 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { ModalCreateComponent } from '@components/modal-create/modal-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BoardComponent } from './components/board/board.component';
+import { BoardHeaderComponent } from './components/board-header/board-header.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BoardsComponent,
     MainLayoutComponent,
     ModalCreateComponent,
+    BoardComponent,
+    BoardHeaderComponent,
   ],
   imports: [
     BrowserModule,
