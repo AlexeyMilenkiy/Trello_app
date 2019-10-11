@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Board } from '@app/interfaces/board';
@@ -20,7 +21,8 @@ export class BoardsComponent implements OnInit, OnDestroy {
   isError = false;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private boardsService: BoardsService) { }
+  constructor(private boardsService: BoardsService,
+              private router: Router) { }
 
   openModal() {
     this.isOpen = true;
@@ -32,6 +34,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
       .subscribe((board: Board) => {
           this.boards.push(board);
           this.isOpen = false;
+          this.router.navigate([`/boards/${board.id}`]);
         },
         () => {
           this.isOpen = false;
