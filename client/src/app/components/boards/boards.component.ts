@@ -44,7 +44,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.boardsService.getBoards()
       .subscribe((boards: Board[]) => {
           this.boards = [...boards];
-          this.isOpen = true;
+          this.isOpen = false;
         },
         () => {
           this.isOpen = false;
