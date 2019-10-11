@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'},
   { path: '', component: StartPageComponent, canActivate: [AuthGuard]},
 
-  { path: '', loadChildren: () => import('./modules/auth.module').then(m => m.AuthModule) },
+  { path: '', loadChildren: () => import('./modules/auth.module').then(m => m.AuthModule), canActivate: [AuthGuard] },
 
   { path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
     children: [

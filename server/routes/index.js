@@ -6,7 +6,7 @@ const boards = require('./boards');
 const checkToken = require('../services/checkToken');
 
 router.use('/auth', auth);
-router.use('/boards', boards);
+router.use('/boards', checkToken, boards);
 
 module.exports = router;
 
