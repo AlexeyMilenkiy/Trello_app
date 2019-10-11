@@ -54,10 +54,9 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
     };
 
     this.subscriptions.add(this.authService.register(this.user)
-      .subscribe((res) => {
-        console.log(res);
-          this.form.reset();
-          this.router.navigate(['/boards']);
+      .subscribe(() => {
+        this.form.reset();
+        this.router.navigate(['/boards']);
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
@@ -81,7 +80,8 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
               }
             }
           ));
-      });
+      })
+      .catch(() => this.isError = true);
   }
 
   ngOnDestroy(): void {

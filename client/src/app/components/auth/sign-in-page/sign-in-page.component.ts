@@ -76,7 +76,8 @@ export class SignInPageComponent implements OnInit, OnDestroy {
               }
             }
           ));
-      });
+      })
+      .catch(() => this.isError = true);
   }
 
   ngOnDestroy(): void {
