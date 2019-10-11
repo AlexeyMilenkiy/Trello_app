@@ -1,5 +1,5 @@
-<div [style.visibility]="isModal ?  'visible': 'hidden'"
-     [style.opacity]="isModal ? '1' : '0'"
+<div [style.visibility]="isOpen ?  'visible': 'hidden'"
+     [style.opacity]="isOpen ? '1' : '0'"
      class="modal_wrapper">
 
   <form class="modal-create" [formGroup]="form" (ngSubmit)="create()">

@@ -80,7 +80,7 @@ export class AuthService {
 
   logout() {
     this.setStorage(null);
-    this.router.navigate(['/']);
+    this.router.navigate(['/logged-out']);
   }
 
   setStorage(response: AuthResponse | null) {
