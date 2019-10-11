@@ -1,12 +1,15 @@
 <header class="main__header">
 
-
     <a routerLink="/boards" class="main__header__links__boards">
       <img width="18px" height="18px" src="../../../assets/images/trello-mark-white.svg" alt="mark">
       Boards
     </a>
 
-  <img class="main__header__logo" width="90px" height="40px" src="../../../assets/images/trello-logo-white.svg" alt="logo">
+  <img routerLink="/boards"
+       class="main__header__logo"
+       src="../../../assets/images/trello-logo-white.svg" alt="logo"
+       width="90px"
+       height="40px">
 
   <div class="main__header__user">
     <span class="main__header__user__name">{{name}}</span>

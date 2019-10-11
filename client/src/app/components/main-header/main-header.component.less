@@ -5,33 +5,38 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 
   &__logo {
-     opacity: .5;
+    opacity: .5;
+    outline: none;
+    position: absolute;
+    right: 46%;
+    transform: translateX(-50%);
 
      &:hover {
        opacity: .8;
        cursor: pointer;
      }
-   }
+  }
 
-    &__links__boards {
-      width: 100px;
-      height: 40px;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      font-family: Roboto, sans-serif;
-      font-weight: bold;
-      color: white;
-      font-size: 1.2em;
-      line-height: 1.3em;
-      text-decoration: none;
-      background-color: hsla(0, 0%, 100%, .3);
-      border-radius: 3px;
-      padding: 0 10px;
-      margin-left: 10px;
-    }
+  &__links__boards {
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 1.2em;
+    line-height: 1.3em;
+    text-decoration: none;
+    background-color: hsla(0, 0%, 100%, .3);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-left: 10px;
+  }
 
   &__user {
     height: 100%;
@@ -44,10 +49,6 @@
       font-size: 23px;
       font-weight: 400;
       color: white;
-      position: absolute;
-      min-width: 220px;
-      left: -100%;
-      transform: translateX(-50%);
     }
 
     &__logout {
