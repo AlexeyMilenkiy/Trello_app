@@ -64,15 +64,21 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    color: #5e6c84;
-    font-size: 20px;
     margin: 10px 0 5px;
 
+    &__text {
+      color: #5e6c84;
+      font-size: 20px;
+
+      &:hover {
+        color: #172b4d;
+        text-decoration: underline;
+        cursor: pointer;
+      }
+    }
 
     &:hover {
       background-color: rgba(9,30,66,.08);
-      color: #172b4d;
-      text-decoration: underline;
     }
 
     span {
