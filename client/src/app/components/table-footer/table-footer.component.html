@@ -1,4 +1,24 @@
 <div class="table__footer">
-  <span class="fas fa-plus"></span>
-  <span class="table__footer__text">Add another card</span>
+
+  <form class="add-card" [formGroup]="form" (ngSubmit)="create()">
+    <textarea placeholder="Enter a title for this card..."></textarea>
+
+    <div class="add-card__wrapper">
+
+      <button [ngClass]="{disabled: form.invalid}"
+              [disabled]="form.invalid"
+              type="submit"
+              class="add-card__btn">
+        Add Card
+      </button>
+      <i class="fa fa-close" (click)="close()"></i>
+
+    </div>
+  </form>
+
+  <div class="table__footer__wrapper">
+    <span class="fas fa-plus"></span>
+    <span class="table__footer__text">Add another card</span>
+  </div>
+
 </div>

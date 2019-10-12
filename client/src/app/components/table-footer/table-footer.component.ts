@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-table-footer',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./table-footer.component.less']
 })
 export class TableFooterComponent implements OnInit {
+  form: FormGroup;
 
   constructor() { }
 
