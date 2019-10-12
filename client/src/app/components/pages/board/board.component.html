@@ -1,7 +1,7 @@
 <div class="board">
   <app-board-header></app-board-header>
   <div class="board__main">
-    <div class="board__main__tables">
+    <div class="board__main__tables" cdkDropListGroup>
 
 
       <div class="table">
@@ -11,8 +11,11 @@
           <button>A-Z</button>
         </div>
 
-        <div class="table__cards">
-          <div class="card"> one task </div>
+        <div class="table__cards"
+             [cdkDropListData]="todo"
+             (cdkDropListDropped)="drop($event)"
+             cdkDropList >
+          <div  class="card" *ngFor="let item of todo"  cdkDrag >{{item}}</div>
         </div>
 
         <div class="table__footer">
@@ -29,8 +32,11 @@
           <button>A-Z</button>
         </div>
 
-        <div class="table__cards">
-<!--          <div class="card"> one task </div>-->
+        <div class="table__cards"
+             [cdkDropListData]="done"
+             (cdkDropListDropped)="drop($event)"
+             cdkDropList>
+          <div class="card" *ngFor="let item of done" cdkDrag>{{item}}</div>
         </div>
 
         <div class="table__footer">

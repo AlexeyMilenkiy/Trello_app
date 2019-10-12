@@ -17,6 +17,7 @@ import { ModalCreateComponent } from '@components/modal-create/modal-create.comp
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoardComponent } from './components/pages/board/board.component';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { BoardHeaderComponent } from './components/board-header/board-header.com
     AppRoutingModule,
     SharedModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DragDropModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
