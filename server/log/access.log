@@ -139,3 +139,4 @@
 ::1 - - [12/Oct/2019:12:23:17 +0000] "GET /api/v1/boards/get-boards HTTP/1.1" 200 82 "http://localhost:4200/boards" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
 ::1 - - [12/Oct/2019:12:24:22 +0000] "GET /api/v1/boards/get-boards HTTP/1.1" 200 82 "http://localhost:4200/boards" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
 ::1 - - [12/Oct/2019:12:24:30 +0000] "GET /api/v1/boards/get-boards HTTP/1.1" 200 82 "http://localhost:4200/boards" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
+::1 - - [12/Oct/2019:12:26:43 +0000] "GET /api/v1/boards/get-boards HTTP/1.1" 200 82 "http://localhost:4200/boards" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"

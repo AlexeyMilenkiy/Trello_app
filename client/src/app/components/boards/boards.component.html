@@ -27,4 +27,9 @@
                     (closed)="isOpen = $event"
                     (newBoard)="create($event)">
   </app-modal-create>
+
+  <app-modal-error [isModal]="isError"
+                   [message]="'Server is not available! Please try again later'"
+                   (closed)="isError = $event">
+  </app-modal-error>
 </div>
