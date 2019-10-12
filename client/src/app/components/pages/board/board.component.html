@@ -3,58 +3,9 @@
   <div class="board__main">
     <div class="board__main__tables" cdkDropListGroup>
 
-
-      <div class="table">
-
-        <div class="table__title">
-          <span>Todo</span>
-          <button>A-Z</button>
-        </div>
-
-        <div class="table__cards"
-             [cdkDropListData]="todo"
-             (cdkDropListDropped)="drop($event)"
-             cdkDropList >
-
-          <app-card *ngFor="let item of todo"
-                    [title]="item"
-                    cdkDrag>
-          </app-card>
-
-        </div>
-
-        <div class="table__footer">
-          <span class="fas fa-plus"></span>
-          <span class="table__footer__text">Add another card</span>
-        </div>
-
-      </div>
-
-      <div class="table">
-
-        <div class="table__title">
-          <span>Doing</span>
-          <button>A-Z</button>
-        </div>
-
-        <div class="table__cards"
-             [cdkDropListData]="done"
-             (cdkDropListDropped)="drop($event)"
-             cdkDropList>
-
-          <app-card *ngFor="let item of done"
-                    [title]="item"
-                    cdkDrag>
-          </app-card>
-
-        </div>
-
-        <div class="table__footer">
-          <span class="fas fa-plus"></span>
-          <span class="table__footer__text">Add another card</span>
-        </div>
-
-      </div>
+      <app-table [cardsArray]="todo" [headline]="'todo'"></app-table>
+      <app-table  [cardsArray]="doing" [headline]="'doing'"></app-table>
+      <app-table [cardsArray]="done" [headline]="'done'"></app-table>
 
     </div>
   </div>

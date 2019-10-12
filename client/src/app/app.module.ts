@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,11 +16,10 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { ModalCreateComponent } from '@components/modal-create/modal-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BoardComponent } from './components/pages/board/board.component';
-import { BoardHeaderComponent } from './components/board-header/board-header.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
-import { TableComponent } from './components/table/table.component';
-import { CardComponent } from './components/card/card.component';
+import { BoardComponent } from '@components/pages/board/board.component';
+import { BoardHeaderComponent } from '@components/board-header/board-header.component';
+import { TableComponent } from '@components/table/table.component';
+import { CardComponent } from '@components/card/card.component';
 
 @NgModule({
   declarations: [

@@ -8,6 +8,8 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class BoardComponent implements OnInit {
 
+  deafultTables = ['Todo', 'Doing', 'Done'];
+
   todo = [
     'Get to work',
     'Pick up groceries',
@@ -15,13 +17,17 @@ export class BoardComponent implements OnInit {
     'Fall asleep'
   ];
 
-  done = [
+  doing = [
     'Get up',
     'Brush teeth',
     'Take a shower',
     'Check e-mail',
     'Walk dog'
   ];
+
+  done = [];
+
+
 
   constructor() { }
 
@@ -35,8 +41,6 @@ export class BoardComponent implements OnInit {
         event.currentIndex);
     }
     console.log(event);
-    console.log(this.todo);
-    console.log(this.done);
   }
 
 

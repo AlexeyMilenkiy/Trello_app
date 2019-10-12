@@ -1,1 +1,25 @@
-<p>table works!</p>
+<div class="table">
+
+  <div class="table__title">
+    <span>{{headline}}</span>
+    <button>A-Z</button>
+  </div>
+
+  <div class="table__cards"
+       [cdkDropListData]="cardsArray"
+       (cdkDropListDropped)="drop($event)"
+       cdkDropList >
+
+    <app-card *ngFor="let item of cardsArray"
+              [title]="item"
+              cdkDrag>
+    </app-card>
+
+  </div>
+
+  <div class="table__footer">
+    <span class="fas fa-plus"></span>
+    <span class="table__footer__text">Add another card</span>
+  </div>
+
+</div>
