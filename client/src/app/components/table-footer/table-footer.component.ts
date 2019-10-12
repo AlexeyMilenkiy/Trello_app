@@ -8,10 +8,22 @@ import {FormGroup} from '@angular/forms';
 })
 export class TableFooterComponent implements OnInit {
   form: FormGroup;
+  isOpen = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  create() {
+
+  }
+
+  addCard() {
+    this.isOpen = true;
+  }
+
+  close() {
+    this.isOpen = false;
+  }
 }
