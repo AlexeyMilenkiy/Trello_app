@@ -20,6 +20,7 @@ import { BoardComponent } from '@components/pages/board/board.component';
 import { BoardHeaderComponent } from '@components/board-header/board-header.component';
 import { TableComponent } from '@components/table/table.component';
 import { CardComponent } from '@components/card/card.component';
+import { TableFooterComponent } from './components/table-footer/table-footer.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CardComponent } from '@components/card/card.component';
     BoardHeaderComponent,
     TableComponent,
     CardComponent,
+    TableFooterComponent,
   ],
   imports: [
     BrowserModule,

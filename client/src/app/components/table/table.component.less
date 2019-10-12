@@ -1,8 +1,5 @@
 .table {
   width: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   border-radius: 3px;
   height: auto;
   min-height: 32px;
@@ -11,6 +8,7 @@
 
   &__title {
     width: 90%;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,37 +34,5 @@
   &__cards {
     width: 100%;
     min-height: 30px;
-  }
-
-  &__footer {
-    width: 90%;
-    height: 35px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin: 10px 0 5px;
-
-    &__text {
-      color: #5e6c84;
-      font-size: 20px;
-
-      &:hover {
-        color: #172b4d;
-        text-decoration: underline;
-        cursor: pointer;
-      }
-    }
-
-    &:hover {
-      background-color: rgba(9,30,66,.08);
-    }
-
-    span {
-      font-family: fontawesome, sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: #5e6c84;
-      margin-right: 10px;
-    }
   }
 }

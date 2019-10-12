@@ -15,7 +15,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   protected tableTodo = 0;
   protected tableDoing = 1;
-  protected  tableDone = 2;
+  protected tableDone = 2;
 
   defaultCards = [
     [1, 2, 3, 4],
