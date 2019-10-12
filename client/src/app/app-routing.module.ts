@@ -6,8 +6,8 @@ import { NotFoundPageComponent } from '@components/pages/not-found-page/not-foun
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import { BoardsComponent } from '@components/boards/boards.component';
-import { BoardComponent } from '@components/board/board.component';
+import { BoardsComponent } from '@components/pages/boards/boards.component';
+import { BoardComponent } from '@components/pages/board/board.component';
 
 
 const routes: Routes = [

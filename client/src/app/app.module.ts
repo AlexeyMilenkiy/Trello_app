@@ -10,12 +10,12 @@ import { MainHeaderComponent } from '@components/main-header/main-header.compone
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
 import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { SharedModule } from '@app/modules/shared.module';
-import { BoardsComponent } from '@components/boards/boards.component';
+import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { ModalCreateComponent } from '@components/modal-create/modal-create.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BoardComponent } from './components/board/board.component';
+import { BoardComponent } from './components/pages/board/board.component';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
 
 @NgModule({
