@@ -18,6 +18,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoardComponent } from './components/pages/board/board.component';
 import { BoardHeaderComponent } from './components/board-header/board-header.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
+import { TableComponent } from './components/table/table.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
     ModalCreateComponent,
     BoardComponent,
     BoardHeaderComponent,
+    TableComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

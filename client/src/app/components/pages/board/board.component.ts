@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop,
-  CdkDragEnter, CdkDragExit, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
@@ -35,16 +34,11 @@ export class BoardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex);
     }
-
+    console.log(event);
     console.log(this.todo);
+    console.log(this.done);
   }
 
-  entered(event: CdkDragEnter<string[]>) {
-    console.log('Entered', event.item.data);
-  }
-  exited(event: CdkDragExit<string[]>) {
-    console.log('Exited', event.item.data);
-  }
 
   ngOnInit() {
   }
