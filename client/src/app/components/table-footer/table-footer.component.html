@@ -1,10 +1,15 @@
 <div class="table__footer">
 
-  <form class="add-card"
-        *ngIf="isOpen"
+  <form *ngIf="isOpen"
+        class="add-card"
         [formGroup]="form"
-        (ngSubmit)="create()">
-    <textarea placeholder="Enter a title for this card..."></textarea>
+        (ngSubmit)="addCard()">
+    <label>
+<textarea placeholder="Enter a title for this card..."
+          formControlName="title"
+          #text
+          tabindex="0"></textarea>
+    </label>
 
     <div class="add-card__wrapper">
 
@@ -12,10 +17,9 @@
               [disabled]="form.invalid"
               type="submit"
               class="add-card__btn">
-        Add Card
+              Add Card
       </button>
       <i class="fa fa-close" (click)="close()"></i>
-
     </div>
   </form>
 
@@ -23,7 +27,9 @@
         *ngIf="!isOpen">
     <span class="fas fa-plus"></span>
     <span class="table__footer__text"
-    (click)="addCard()">Add another card</span>
+          (click)="openForm()">
+          Add another card
+    </span>
   </div>
 
 </div>

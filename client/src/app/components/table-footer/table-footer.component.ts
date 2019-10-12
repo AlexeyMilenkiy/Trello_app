@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {FormGroup} from '@angular/forms';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-table-footer',
@@ -10,20 +10,30 @@ export class TableFooterComponent implements OnInit {
   form: FormGroup;
   isOpen = false;
 
+  @ViewChild('text', {static: false}) title: ElementRef;
+
   constructor() { }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      title: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(40)
+      ]),
+    });
   }
 
-  create() {
-
-  }
-
-  addCard() {
+  openForm() {
     this.isOpen = true;
   }
 
+  addCard() {
+
+  }
+
   close() {
+    this.form.reset();
     this.isOpen = false;
   }
 }

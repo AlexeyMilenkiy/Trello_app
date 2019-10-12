@@ -8,14 +8,14 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 export class BoardComponent implements OnInit, OnDestroy {
 
   protected tablesMap = {
-    0: 'Todo',
-    1: 'Doing',
-    2: 'Done',
+    1: 'Todo',
+    2: 'Doing',
+    3: 'Done',
   };
 
-  protected tableTodo = 0;
-  protected tableDoing = 1;
-  protected tableDone = 2;
+  protected tableTodo = 1;
+  protected tableDoing = 2;
+  protected tableDone = 3;
 
   defaultCards = [
     [1, 2, 3, 4],

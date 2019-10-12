@@ -8,8 +8,9 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class TableComponent implements OnInit{
 
-  @Input() cardsArray: Array<string>;
+  @Input() cardsArray: Array<any>;   ///ИСПРАВЬ!!!!!!!!!
   @Input() headline: string;
+  @Input() tableId: number;
 
 
   drop(event: CdkDragDrop<string[]>) {
@@ -24,7 +25,7 @@ export class TableComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    console.log(this.cardsArray);
+    console.log(this.cardsArray, this.tableId);
   }
 
 }

@@ -4,13 +4,10 @@
     <div class="board__main__tables" cdkDropListGroup>
 
       <app-table *ngFor="let cards of defaultCards; let i = index"
-                 [headline]="tablesMap[i]"
-                 [cardsArray]="cards">
+                 [headline]="tablesMap[i+1]"
+                 [cardsArray]="cards"
+                 [tableId]="i+1">
       </app-table>
-
-<!--      <app-table [cardsArray]="todo" [headline]="'todo'"></app-table>-->
-<!--      <app-table  [cardsArray]="doing" [headline]="'doing'"></app-table>-->
-<!--      <app-table [cardsArray]="done" [headline]="'done'"></app-table>-->
 
     </div>
   </div>
