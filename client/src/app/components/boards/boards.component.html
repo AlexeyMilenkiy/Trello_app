@@ -8,10 +8,6 @@
   </div>
 
   <div class="boards__list">
-    <div (click)="openModal()"
-      class="boards__list__create">
-      Create new board
-    </div>
 
     <div *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
          class="boards__list__single">
@@ -21,6 +17,12 @@
       <i (click)="remove(board.id); $event.stopPropagation()"
          class="fa fa-close" ></i>
     </div>
+
+    <div (click)="openModal()"
+         class="boards__list__create">
+      Create new board
+    </div>
+
   </div>
 
   <app-modal-create [isOpen]="isOpen"
