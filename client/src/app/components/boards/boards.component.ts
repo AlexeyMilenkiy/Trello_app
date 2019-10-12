@@ -2,8 +2,9 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { Board } from '@app/interfaces/board';
 import { BoardsService } from '@app/services/boards.service';
+import { BoardBeforeCreate } from '@app/interfaces/board-before-create';
+import { BoardResponse } from '@app/interfaces/board-response';
 
 @Component({
   selector: 'app-boards',
@@ -12,11 +13,11 @@ import { BoardsService } from '@app/services/boards.service';
 })
 export class BoardsComponent implements OnInit, OnDestroy {
 
-  board: Board = {
+  board: BoardBeforeCreate = {
     title: '',
-    id: this.boardsService.getId()
+    author_id: this.boardsService.getUserId()
   };
-  boards: Board[] = [];
+  boards: BoardResponse[] = [];
   isOpen = false;
   isError = false;
   subscriptions: Subscription = new Subscription();
@@ -31,7 +32,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
   create(title: string) {
     this.board.title = title;
     this.subscriptions.add(this.boardsService.createBoard(this.board)
-      .subscribe((board: Board) => {
+      .subscribe((board: BoardResponse) => {
           this.boards.push(board);
           this.isOpen = false;
           this.router.navigate([`/boards/${board.id}`]);
@@ -43,9 +44,22 @@ export class BoardsComponent implements OnInit, OnDestroy {
       ));
   }
 
+  remove(id: number) {
+    this.subscriptions.add(this.boardsService.removeBoard(id)
+      .subscribe(() => {
+          this.boards.filter(item => item.id !== id);
+          this.isOpen = false;
+        },
+        () => {
+          this.isOpen = false;
+          this.isError = true;
+        }
+      ));
+  }
+
   ngOnInit() {
     this.subscriptions.add(this.boardsService.getBoards()
-      .subscribe((boards: Board[]) => {
+      .subscribe((boards: BoardResponse[]) => {
           this.boards = [...boards];
           this.isOpen = false;
         },

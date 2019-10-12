@@ -5,7 +5,7 @@ const { body, header } = require('express-validator');
 const { validate } = require('../services/validator');
 
 router.post('/create', validate([
-    body('id')
+    body('author_id')
         .not().isEmpty()
         .isNumeric(),
     body('title')
@@ -15,7 +15,7 @@ router.post('/create', validate([
 ]), controller.boards.createBoard);
 
 router.get('/get-boards', validate([
-    header('id')
+    header('author_id')
         .not().isEmpty()
 ]), controller.boards.getBoards);
 

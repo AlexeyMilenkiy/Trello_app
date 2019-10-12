@@ -21,6 +21,8 @@ export class ModalCreateComponent implements OnInit {
     this.form = new FormGroup({
       title: new FormControl(null, [
         Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(40)
       ]),
     });
   }

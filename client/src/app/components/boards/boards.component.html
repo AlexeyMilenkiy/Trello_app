@@ -1,19 +1,25 @@
 <div class="boards">
+
   <div class="boards__headline">
     <span>
       <i class="fa fa-user" aria-hidden="true"></i>
       Personal Boards
     </span>
   </div>
+
   <div class="boards__list">
     <div (click)="openModal()"
       class="boards__list__create">
       Create new board
     </div>
-      <div *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
-            class="boards__list__single">
-            {{board.title}}
+
+    <div *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
+         class="boards__list__single">
+      <div>
+        {{board.title}}
       </div>
+      <i class="fa fa-close" (click)="remove(board.id)"></i>
+    </div>
   </div>
 
   <app-modal-create [isOpen]="isOpen"

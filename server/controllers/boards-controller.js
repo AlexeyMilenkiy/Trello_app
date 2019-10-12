@@ -6,7 +6,7 @@ module.exports = {
     createBoard (req, res) {
         let board = req.body;
 
-        Board.create({ title: board.title, author_id: board.id })
+        Board.create({ title: board.title, author_id: board.author_id })
             .then(data => {
                 res.json(data);
             })
@@ -16,7 +16,7 @@ module.exports = {
     },
 
     getBoards (req, res) {
-        let userId = req.headers.id;
+        let userId = req.headers.author_id;
 
         Board.findAll({where: { author_id: userId }})
             .then(data => {

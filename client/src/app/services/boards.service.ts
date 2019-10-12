@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '@env/environment';
-import { Board } from '@app/interfaces/board';
+import { BoardBeforeCreate } from '@app/interfaces/board-before-create';
 import { BoardResponse } from '@app/interfaces/board-response';
 
 @Injectable({
@@ -14,17 +14,21 @@ export class BoardsService {
 
   constructor(private http: HttpClient) { }
 
-  getId() {
+  getUserId() {
     return parseInt(localStorage.getItem('id'), 10);
   }
 
-  createBoard(board: Board): Observable<BoardResponse> {
+  createBoard(board: BoardBeforeCreate): Observable<BoardResponse> {
     return this.http.post<BoardResponse>(`${environment.baseUrl}boards/create`, board);
   }
 
+  removeBoard(id: number): Observable<any> {
+    return this.http.delete(`${environment.baseUrl}boards/remove-board`);
+  }
+
   getBoards(): Observable<BoardResponse[]> {
-    const id = this.getId();
-    const headers = new HttpHeaders().set('id', `${id}`);
+    const id = this.getUserId();
+    const headers = new HttpHeaders().set('author_id', `${id}`);
     return this.http.get<BoardResponse[]>(`${environment.baseUrl}boards/get-boards`, {headers});
   }
 }
