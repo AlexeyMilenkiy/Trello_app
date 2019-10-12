@@ -18,7 +18,8 @@
       <div>
         {{board.title}}
       </div>
-      <i class="fa fa-close" (click)="remove(board.id)"></i>
+      <i (click)="remove(board.id); $event.stopPropagation()"
+         class="fa fa-close" ></i>
     </div>
   </div>
 

@@ -4,6 +4,11 @@ const controller = require('../controllers');
 const { body, header } = require('express-validator');
 const { validate } = require('../services/validator');
 
+router.get('/get-boards', validate([
+    header('author_id')
+        .not().isEmpty()
+]), controller.boards.getBoards);
+
 router.post('/create', validate([
     body('author_id')
         .not().isEmpty()
@@ -14,9 +19,13 @@ router.post('/create', validate([
         .isLength({ min: 1, max: 50 }),
 ]), controller.boards.createBoard);
 
-router.get('/get-boards', validate([
-    header('author_id')
-        .not().isEmpty()
-]), controller.boards.getBoards);
+router.delete('/remove-board', controller.boards.removeBoard);
 
 module.exports = router;
+
+
+//
+// validate([
+//     header('board_id')
+//         .not().isEmpty()
+// ]),

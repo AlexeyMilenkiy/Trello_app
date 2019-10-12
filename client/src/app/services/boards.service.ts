@@ -23,7 +23,8 @@ export class BoardsService {
   }
 
   removeBoard(id: number): Observable<any> {
-    return this.http.delete(`${environment.baseUrl}boards/remove-board`);
+    const headers = new HttpHeaders().set('board_id', `${id}`);
+    return this.http.delete(`${environment.baseUrl}boards/remove-board`, {headers});
   }
 
   getBoards(): Observable<BoardResponse[]> {

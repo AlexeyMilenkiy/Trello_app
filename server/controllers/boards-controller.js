@@ -25,6 +25,18 @@ module.exports = {
             .catch(() => {
                 res.status(400);
             });
+    },
+
+    removeBoard (req, res) {
+        let boardId = req.headers.board_id;
+
+        Board.destroy({where: { id: boardId }})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
     }
 };
 

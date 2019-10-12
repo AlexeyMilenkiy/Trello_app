@@ -47,11 +47,9 @@ export class BoardsComponent implements OnInit, OnDestroy {
   remove(id: number) {
     this.subscriptions.add(this.boardsService.removeBoard(id)
       .subscribe(() => {
-          this.boards.filter(item => item.id !== id);
-          this.isOpen = false;
+          this.boards = this.boards.filter(item => item.id !== id);
         },
         () => {
-          this.isOpen = false;
           this.isError = true;
         }
       ));
