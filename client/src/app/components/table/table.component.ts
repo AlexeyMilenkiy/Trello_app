@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
 @Component({
@@ -6,7 +6,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent {
+export class TableComponent implements OnInit{
 
   @Input() cardsArray: Array<string>;
   @Input() headline: string;
@@ -21,7 +21,10 @@ export class TableComponent {
         event.previousIndex,
         event.currentIndex);
     }
-    console.log(event);
+  }
+
+  ngOnInit(): void {
+    console.log(this.cardsArray);
   }
 
 }

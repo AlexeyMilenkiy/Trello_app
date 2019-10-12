@@ -1,50 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.less']
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent implements OnInit, OnDestroy {
 
-  deafultTables = ['Todo', 'Doing', 'Done'];
+  protected tablesMap = {
+    0: 'Todo',
+    1: 'Doing',
+    2: 'Done',
+  };
 
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
+  protected tableTodo = 0;
+  protected tableDoing = 1;
+  protected  tableDone = 2;
+
+  defaultCards = [
+    [1, 2, 3, 4],
+    [10, 20, 30, 40],
+    []
   ];
-
-  doing = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
-
-  done = [];
-
-
 
   constructor() { }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-    console.log(event);
+  ngOnInit(): void {
+
   }
 
-
-  ngOnInit() {
+  ngOnDestroy(): void {
+    console.log(this.defaultCards);
   }
 
 }
