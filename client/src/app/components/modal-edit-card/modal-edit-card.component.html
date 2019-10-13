@@ -1,18 +1,22 @@
 <div [style.visibility]="isEdit ?  'visible': 'hidden'"
      [style.opacity]="isEdit ? '1' : '0'"
+     (click)="close($event)"
      class="modal__wrapper">
 
   <div class="modal__card">
 
     <div class="modal__card__header">
       <i class="fa fa-credit-card" aria-hidden="true"></i>
+
       <textarea
-           class="modal__card__title"
-      (change)="showTitle()"
-      [(ngModel)]="title">
-      </textarea>
-<!--      <textarea class="modal__card__title" [ngModel]="title"></textarea>-->
-      <i class="fa fa-times" aria-hidden="true"></i>
+          class="modal__card__title"
+          (change)="showTitle()"
+          [(ngModel)]="title"></textarea>
+
+      <i (click)="close($event)"
+         class="fa fa-times"
+         aria-hidden="true"></i>
+
     </div>
   </div>
 

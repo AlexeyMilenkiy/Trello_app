@@ -5,7 +5,11 @@ import {Component, Input} from '@angular/core';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.less']
 })
-export class CardComponent{
+export class CardComponent {
 
   @Input() title: string;
+  @Input() tableId: number;
+
+  isEdit = false;
+
 }

@@ -12,6 +12,7 @@
 
     <app-card *ngFor="let item of cardsArray"
               [title]="item"
+              [tableId]="tableId"
               cdkDrag>
     </app-card>
 
@@ -20,3 +21,5 @@
   <app-table-footer></app-table-footer>
 
 </div>
+
+

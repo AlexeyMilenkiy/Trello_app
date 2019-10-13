@@ -1,1 +1,5 @@
-<div class="card">{{title}}</div>
+<div class="card" (click)="isEdit = true">{{title}}</div>
+<app-modal-edit-card [isEdit]="isEdit"
+                     (closed)="isEdit = $event"
+                     (changed)="title = $event"
+                     [title]="title"></app-modal-edit-card>
