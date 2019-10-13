@@ -1,0 +1,24 @@
+<div [style.visibility]="isEdit ?  'visible': 'hidden'"
+     [style.opacity]="isEdit ? '1' : '0'"
+     class="modal__wrapper">
+
+  <div class="modal__card">
+
+    <div class="modal__card__header">
+      <i class="fa fa-credit-card" aria-hidden="true"></i>
+      <textarea
+           class="modal__card__title"
+      (change)="showTitle()"
+      [(ngModel)]="title">
+      </textarea>
+<!--      <textarea class="modal__card__title" [ngModel]="title"></textarea>-->
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+  </div>
+
+<!--  <div  class="modal__card__window">-->
+<!--    <button class="close_modal" (click)="close()">&#10006;</button>-->
+<!--    <span class="modal_text">{{message}}</span>-->
+<!--  </div>-->
+
+</div>

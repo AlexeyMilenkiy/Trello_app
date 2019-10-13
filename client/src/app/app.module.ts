@@ -21,6 +21,7 @@ import { BoardHeaderComponent } from '@components/board-header/board-header.comp
 import { TableComponent } from '@components/table/table.component';
 import { CardComponent } from '@components/card/card.component';
 import { TableFooterComponent } from './components/table-footer/table-footer.component';
+import { ModalEditCardComponent } from './components/modal-edit-card/modal-edit-card.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { TableFooterComponent } from './components/table-footer/table-footer.com
     TableComponent,
     CardComponent,
     TableFooterComponent,
+    ModalEditCardComponent,
   ],
   imports: [
     BrowserModule,
