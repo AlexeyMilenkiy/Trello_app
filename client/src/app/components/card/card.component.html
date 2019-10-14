@@ -2,6 +2,6 @@
 <app-modal-edit-card [isEdit]="isEdit"
                      (closed)="isEdit = $event"
                      (changedTitle)="title = $event"
-                     (changedDetails)="details = $event"
+                     (changedDetails)="showDetails($event)"
                      [title]="title"
-                     [details]="'text details'"></app-modal-edit-card>
+                     [details]="''"></app-modal-edit-card>

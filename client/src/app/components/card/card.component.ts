@@ -13,4 +13,7 @@ export class CardComponent {
 
   isEdit = false;
 
+  showDetails($event: string) {
+    console.log($event);
+  }
 }

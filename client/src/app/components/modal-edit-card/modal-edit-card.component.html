@@ -16,8 +16,7 @@
           (change)="changeTitle()"></textarea>
 
       <span (click)="close($event)"
-         class="modal__card__close"
-         aria-hidden="true"></span>
+         class="modal__card__close"></span>
 
     </div>
 
@@ -25,16 +24,38 @@
 
       <div class="modal__card__description__container">
         <span class="modal__card__description-icon"></span>
-        <span class="modal__card__description__headline">
-        Description
-      </span>
+        <span class="modal__card__description__headline">Description</span>
+        <button *ngIf="details.length && !isEditDescription"
+                (click)="isEditDescription = true"
+                class="modal__card__edit-btn">Edit</button>
       </div>
 
-      <textarea class="modal__card__description__text"
+
+      <div *ngIf="isEditDescription">
+
+        <textarea
+                class="modal__card__description__text"
                 placeholder="Add a more detailed description..."
-                (keydown.enter)="$event.target.blur()"
+                (blur)="isEditDescription = false"
                 [(ngModel)]="details"
-                (change)="changeDetails()"></textarea>
+                (change)="changeDetails()"
+                appAutoFocusDirective></textarea>
+
+        <div class="modal__card__description__btn-wrap">
+          <button type="submit" class="modal__card__description-save">Save</button>
+          <span (click)="isEditDescription = false"
+                class="modal__card__description-close"></span>
+        </div>
+
+      </div>
+
+      <p *ngIf="details.length && !isEditDescription"
+         (click)="isEditDescription = true"
+        class="modal__card__description__content">{{details}}</p>
+
+      <p *ngIf="!details.length && !isEditDescription"
+         (click)="isEditDescription = true"
+        class="modal__card__description__preview">Add a more detailed description...</p>
     </div>
   </div>
 

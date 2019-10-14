@@ -14,6 +14,8 @@ export class ModalEditCardComponent {
   @Output() changedTitle = new EventEmitter<string>();
   @Output() changedDetails = new EventEmitter<string>();
 
+  isEditDescription = true;
+
   changeTitle() {
     this.changedTitle.emit(this.title);
   }

@@ -10,8 +10,6 @@ export class TableFooterComponent implements OnInit {
   form: FormGroup;
   isOpen = false;
 
-  @ViewChild('text', {static: false}) title: ElementRef;
-
   constructor() { }
 
   ngOnInit() {

@@ -7,8 +7,8 @@
 
     <textarea placeholder="Enter a title for this card..."
               formControlName="title"
-              #text
-              tabindex="0"></textarea>
+              (blur)="close()"
+              appAutoFocusDirective></textarea>
 
     <div class="add-card__wrapper">
 
