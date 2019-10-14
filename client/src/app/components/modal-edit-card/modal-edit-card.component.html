@@ -12,8 +12,8 @@
           class="modal__card__title"
           (keydown.enter)="$event.target.blur()"
           (keydown.shift.enter)="$event.preventDefault()"
-          (change)="changeTitle()"
-          [(ngModel)]="title"></textarea>
+          [(ngModel)]="title"
+          (change)="changeTitle()"></textarea>
 
       <span (click)="close($event)"
          class="modal__card__close"
@@ -32,7 +32,9 @@
 
       <textarea class="modal__card__description__text"
                 placeholder="Add a more detailed description..."
-                [(ngModel)]="details"></textarea>
+                (keydown.enter)="$event.target.blur()"
+                [(ngModel)]="details"
+                (change)="changeDetails()"></textarea>
     </div>
   </div>
 
