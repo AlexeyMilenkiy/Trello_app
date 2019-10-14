@@ -25,10 +25,10 @@
 
   </div>
 
-  <app-modal-create [isOpen]="isOpen"
+  <app-modal-create-board [isOpen]="isOpen"
                     (closed)="isOpen = $event"
                     (newBoard)="create($event)">
-  </app-modal-create>
+  </app-modal-create-board>
 
   <app-modal-error [isModal]="isError"
                    [message]="'Server is not available! Please try again later'"

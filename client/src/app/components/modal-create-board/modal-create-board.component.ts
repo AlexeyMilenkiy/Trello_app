@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-modal-create',
-  templateUrl: './modal-create.component.html',
-  styleUrls: ['./modal-create.component.less']
+  selector: 'app-modal-create-board',
+  templateUrl: './modal-create-board.component.html',
+  styleUrls: ['./modal-create-board.component.less']
 })
 
-export class ModalCreateComponent implements OnInit {
+export class ModalCreateBoardComponent implements OnInit {
 
   @Input() isOpen: boolean;
   @Output() closed = new EventEmitter<boolean>();

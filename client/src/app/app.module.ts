@@ -14,7 +14,7 @@ import { SharedModule } from '@app/modules/shared.module';
 import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import { ModalCreateComponent } from '@components/modal-create/modal-create.component';
+import { ModalCreateBoardComponent } from '@components/modal-create-board/modal-create-board.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BoardComponent } from '@components/pages/board/board.component';
 import { BoardHeaderComponent } from '@components/board-header/board-header.component';
@@ -33,7 +33,7 @@ import { ModalEditCardComponent } from './components/modal-edit-card/modal-edit-
     LogoutPageComponent,
     BoardsComponent,
     MainLayoutComponent,
-    ModalCreateComponent,
+    ModalCreateBoardComponent,
     BoardComponent,
     BoardHeaderComponent,
     TableComponent,
