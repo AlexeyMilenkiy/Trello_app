@@ -22,4 +22,9 @@ export class ModalEditCardComponent {
       this.closed.emit(false);
     }
   }
+
+  onKeydown($event: KeyboardEvent) {
+    console.log($event);
+
+  }
 }
