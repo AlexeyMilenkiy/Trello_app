@@ -14,8 +14,8 @@
       <div>
         {{board.title}}
       </div>
-      <i (click)="remove(board.id); $event.stopPropagation()"
-         class="fa fa-close" ></i>
+      <span (click)="remove(board.id); $event.stopPropagation()"
+         class="boards__list-delete"></span>
     </div>
 
     <div (click)="openModal()"

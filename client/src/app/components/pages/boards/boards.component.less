@@ -63,13 +63,6 @@
       position: relative;
       outline: none;
 
-      i {
-        position: absolute;
-        transform: translateX(-50%);
-        top: 5px;
-        right: 0;
-      }
-
       div {
         word-wrap: break-word;
         overflow: hidden;
@@ -103,6 +96,19 @@
 
       &:hover {
         cursor: pointer;
+      }
+    }
+
+    &-delete {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      top: 20px;
+      right: 0;
+      font-family: Trello, sans-serif;
+      font-size: 23px;
+
+      &:before {
+        content: "\E918";
       }
     }
   }
