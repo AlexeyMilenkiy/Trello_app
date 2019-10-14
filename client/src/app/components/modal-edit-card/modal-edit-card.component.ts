@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-modal-edit-card',
   templateUrl: './modal-edit-card.component.html',
   styleUrls: ['./modal-edit-card.component.less']
 })
-export class ModalEditCardComponent {
+export class ModalEditCardComponent implements OnInit {
 
   @Input() isEdit: boolean;
   @Input() title: string;
@@ -14,7 +15,16 @@ export class ModalEditCardComponent {
   @Output() changedTitle = new EventEmitter<string>();
   @Output() changedDetails = new EventEmitter<string>();
 
-  isEditDescription = true;
+  isEditDescription = false;
+  form: FormGroup;
+
+  ngOnInit() {
+    this.form = new FormGroup({
+      descriptionText: new FormControl(null, [
+        Validators.maxLength(100)
+      ]),
+    });
+  }
 
   changeTitle() {
     this.changedTitle.emit(this.title);
@@ -29,5 +39,10 @@ export class ModalEditCardComponent {
     if ((className === 'modal__card__close') || (className === 'modal__wrapper')) {
       this.closed.emit(false);
     }
+  }
+
+  addDescription() {
+    this.isEditDescription = false;
+    this.changedDetails.emit(this.details);
   }
 }
