@@ -6,36 +6,34 @@
   <div class="modal__card">
 
     <div class="modal__card__header">
-      <i class="fa fa-credit-card" aria-hidden="true"></i>
+      <span class="modal__card__header__cardIcon"></span>
 
       <textarea
           class="modal__card__title"
           (keydown.enter)="$event.target.blur()"
           (keydown.shift.enter)="$event.preventDefault()"
-          (change)="showTitle()"
+          (change)="changeTitle()"
           [(ngModel)]="title"></textarea>
 
-      <i (click)="close($event)"
-         class="fa fa-times"
-         aria-hidden="true"></i>
+      <span (click)="close($event)"
+         class="modal__card__close"
+         aria-hidden="true"></span>
 
     </div>
 
     <div class="modal__card__description">
-      <h1>
+
+      <div class="modal__card__description__container">
+        <span class="modal__card__description-icon"></span>
+        <span class="modal__card__description__headline">
         Description
-      </h1>
+      </span>
+      </div>
 
-      <textarea>
-        Bladsad
-      </textarea>
-
+      <textarea class="modal__card__description__text"
+                placeholder="Add a more detailed description..."
+                [(ngModel)]="details"></textarea>
     </div>
   </div>
-
-<!--  <div  class="modal__card__window">-->
-<!--    <button class="close_modal" (click)="close()">&#10006;</button>-->
-<!--    <span class="modal_text">{{message}}</span>-->
-<!--  </div>-->
 
 </div>

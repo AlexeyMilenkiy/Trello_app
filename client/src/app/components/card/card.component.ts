@@ -8,6 +8,7 @@ import {Component, Input} from '@angular/core';
 export class CardComponent {
 
   @Input() title: string;
+  @Input() details: string;
   @Input() tableId: number;
 
   isEdit = false;

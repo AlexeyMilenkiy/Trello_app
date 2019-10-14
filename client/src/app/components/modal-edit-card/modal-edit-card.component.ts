@@ -9,22 +9,23 @@ export class ModalEditCardComponent {
 
   @Input() isEdit: boolean;
   @Input() title: string;
+  @Input() details: string;
   @Output() closed = new EventEmitter<boolean>();
-  @Output() changed = new EventEmitter<string>();
+  @Output() changedTitle = new EventEmitter<string>();
+  @Output() changedDetails = new EventEmitter<string>();
 
-  showTitle() {
-    this.changed.emit(this.title);
+  changeTitle() {
+    this.changedTitle.emit(this.title);
+  }
+
+  changeDetails() {
+    this.changedDetails.emit(this.details);
   }
 
   close(event) {
     const className = event.target.className;
-    if ((className === 'fa fa-times') || (className === 'modal__wrapper')) {
+    if ((className === 'modal__card__close') || (className === 'modal__wrapper')) {
       this.closed.emit(false);
     }
-  }
-
-  onKeydown($event: KeyboardEvent) {
-    console.log($event);
-
   }
 }
