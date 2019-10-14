@@ -4,12 +4,11 @@
         class="add-card"
         [formGroup]="form"
         (ngSubmit)="addCard()">
-    <label>
+
     <textarea placeholder="Enter a title for this card..."
               formControlName="title"
               #text
               tabindex="0"></textarea>
-    </label>
 
     <div class="add-card__wrapper">
 
@@ -19,13 +18,13 @@
               class="add-card__btn">
               Add Card
       </button>
-      <i class="fa fa-close" (click)="close()"></i>
+      <span class="add-card__close" (click)="close()"></span>
     </div>
   </form>
 
   <div class="table__footer__wrapper"
         *ngIf="!isOpen">
-    <span class="fas fa-plus"></span>
+    <span class="table__footer__plus"></span>
     <span class="table__footer__text"
           (click)="openForm()">
           Add another card

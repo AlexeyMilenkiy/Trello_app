@@ -17,8 +17,9 @@
   }
 
   &__text {
+    font-family: Roboto, sans-serif;
+    font-size: 19px;
     color: #5e6c84;
-    font-size: 20px;
 
     &:hover {
       color: #172b4d;
@@ -27,14 +28,16 @@
     }
   }
 
-  span {
-    font-family: fontawesome, sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    color: #5e6c84;
-    margin-right: 10px;
-  }
+  &__plus {
+    font-family: Trello, sans-serif;
+    font-size: 20px;
+    color: #6b778c;
+    margin-right: 8px;
 
+    &:before {
+      content: "\E901";
+    }
+  }
 }
 
 .add-card {
@@ -74,11 +77,15 @@
     outline: none;
   }
 
-  i {
-    font-size: 30px;
-    font-weight: 400;
-    color: #6b778c;
+  &__close {
+    font-family: Trello, sans-serif;
+    font-size: 25px;
     margin-left: 15px;
+    color: #6b778c;
+
+    &:before {
+      content: "\E918"
+    }
   }
 
   &__wrapper {

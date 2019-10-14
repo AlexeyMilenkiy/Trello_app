@@ -59,15 +59,17 @@
     outline: none;
   }
 
-  i {
-    width: 20px;
-    height: 20px;
+  &-close {
+    font-family: Trello, sans-serif;
     font-size: 23px;
-    color: white;
+    color: #fff;
     position: absolute;
+    top: 26px;
+    right: 2px;
     transform: translate(-50%, -50%);
-    right: 0;
-    top: 17%;
+    &:before {
+      content: "\E918";
+    }
   }
 }
 

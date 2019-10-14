@@ -4,7 +4,7 @@
 
   <form class="modal-create" [formGroup]="form" (ngSubmit)="create()">
 
-    <i class="fa fa-close" (click)="close()"></i>
+    <span class="modal-create-close" (click)="close()"></span>
 
     <input formControlName="title"
            class="modal-create__input"
