@@ -31,7 +31,8 @@ export class ModalEditCardComponent implements OnInit {
   }
 
   changeDetails() {
-    this.changedDetails.emit(this.details);
+    this.details = this.form.value.descriptionText;
+    this.changedDetails.emit(this.form.value.descriptionText);
   }
 
   close(event) {
