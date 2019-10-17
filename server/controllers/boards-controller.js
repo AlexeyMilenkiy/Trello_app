@@ -1,12 +1,13 @@
 const models = require('../models');
 const Board = models.Board;
+const Card = models.Card;
 
 module.exports = {
 
-    createBoard (req, res) {
+    createBoard(req, res) {
         let board = req.body;
 
-        Board.create({ title: board.title, author_id: board.author_id })
+        Board.create({title: board.title, author_id: board.author_id})
             .then(data => {
                 res.json(data);
             })
@@ -15,10 +16,10 @@ module.exports = {
             });
     },
 
-    getBoards (req, res) {
+    getBoards(req, res) {
         let userId = req.headers.author_id;
 
-        Board.findAll({where: { author_id: userId }})
+        Board.findAll({where: {author_id: userId}})
             .then(data => {
                 res.json(data);
             })
@@ -27,27 +28,30 @@ module.exports = {
             });
     },
 
-    getBoard (req, res) {
+    getBoard(req, res) {
         let boardId = req.headers.board_id;
 
         Board.findOne({
-                include: true
-            }, {
+            include: {
+                model: Card,
+                as: 'cards'
+            }
+        }, {
             where:
-                { id: boardId }
+                {id: boardId}
         })
-            .then(data => {
-                res.json(data);
+            .then((board) => {
+                res.json(board);
             })
             .catch(() => {
                 res.status(400);
             });
     },
 
-    removeBoard (req, res) {
+    removeBoard(req, res) {
         let boardId = req.headers.board_id;
 
-        Board.destroy({where: { id: boardId }})
+        Board.destroy({where: {id: boardId}})
             .then(data => {
                 res.json(data);
             })

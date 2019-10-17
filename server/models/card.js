@@ -15,5 +15,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'board_id',
     });
   };
+
   return Card;
 };

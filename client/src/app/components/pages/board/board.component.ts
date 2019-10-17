@@ -1,8 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
-import { BoardsService } from '@app/services/boards.service';
+import {BoardsService} from '@app/services/boards.service';
+import {BoardResponse} from '@app/interfaces/board-response';
 
 @Component({
   selector: 'app-board',
@@ -26,17 +27,19 @@ export class BoardComponent implements OnInit, OnDestroy {
     [],
     []
   ];
-
+  board: BoardResponse;
   subscriptions: Subscription = new Subscription();
 
   constructor(private activateRoute: ActivatedRoute,
-              private boardsService: BoardsService) { }
+              private boardsService: BoardsService) {
+  }
 
   ngOnInit(): void {
     const boardId = parseInt(this.activateRoute.snapshot.params.id, 10);
     this.subscriptions.add(this.boardsService.getBoard(boardId)
-      .subscribe((board) => {
-          console.log(board);
+      .subscribe((board: BoardResponse) => {
+          this.board = {...board};
+          console.log(this.board);
         },
         (error) => console.log(error)
       ));

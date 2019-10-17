@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Board.hasMany(models.Card, {
         foreignKey: 'id',
+        as: 'cards'
     });
   };
 
