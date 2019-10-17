@@ -30,6 +30,7 @@ module.exports = {
 
     getBoard(req, res) {
         let boardId = req.headers.board_id;
+        console.log(boardId);
 
         Board.findOne({
             include: {

@@ -1,9 +1,31 @@
 <div class="board__header">
   <div class="board__header__title">
-    <span class="board__header__text">{{title}}</span>
-    <input type="text">
+    <form *ngIf="editTitle"
+          [formGroup]="form"
+          (ngSubmit)="changeBoardTitle()">
+
+      <input type="text"
+             formControlName="boardTitle"
+             #titleInput
+             maxlength="200"
+             class="board__header__title__input"
+             [value]="title"
+             (blur)="blurField()"
+             appAutoFocusDirective
+             AutoSizeInput
+             [includePadding]="false">
+
+      {{form.get('boardTitle').invalid}}
+    </form>
+
+    <span *ngIf="!editTitle"
+          (click)="editTitle = true"
+          class="board__header__text">{{title}}</span>
+
     <div></div>
+
     <button class="board__header__btn">Shared</button>
+
   </div>
   <button class="board__header__btn">Delete board</button>
 </div>

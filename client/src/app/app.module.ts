@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AutoSizeInputModule } from 'ngx-autosize-input';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,8 +22,8 @@ import { BoardComponent } from '@components/pages/board/board.component';
 import { BoardHeaderComponent } from '@components/board-header/board-header.component';
 import { TableComponent } from '@components/table/table.component';
 import { CardComponent } from '@components/card/card.component';
-import { TableFooterComponent } from './components/table-footer/table-footer.component';
-import { ModalEditCardComponent } from './components/modal-edit-card/modal-edit-card.component';
+import { TableFooterComponent } from '@components/table-footer/table-footer.component';
+import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 import { AutoFocusDirectiveDirective } from './directives/auto-focus-directive.directive';
 
 @NgModule({
@@ -49,6 +51,7 @@ import { AutoFocusDirectiveDirective } from './directives/auto-focus-directive.d
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AutoSizeInputModule,
     DragDropModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
