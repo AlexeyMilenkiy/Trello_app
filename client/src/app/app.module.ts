@@ -2,8 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { AutoSizeInputModule } from 'ngx-autosize-input';
 
+import { AutoSizeInputModule } from 'ngx-autosize-input';
+import { AutosizeModule } from 'ngx-autosize';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -25,7 +26,8 @@ import { CardComponent } from '@components/card/card.component';
 import { TableFooterComponent } from '@components/table-footer/table-footer.component';
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 import { AutoFocusDirectiveDirective } from './directives/auto-focus-directive.directive';
-import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
+import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.component';
+
 
 @NgModule({
   declarations: [
@@ -54,6 +56,7 @@ import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.
     HttpClientModule,
     BrowserAnimationsModule,
     AutoSizeInputModule,
+    AutosizeModule,
     DragDropModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

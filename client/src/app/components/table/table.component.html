@@ -11,8 +11,8 @@
        cdkDropList>
 
     <app-card *ngFor="let item of cardsArray; let i = index"
-              [title]="item"
-              [description]="'bggbggv'"
+              [title]="item.title"
+              [description]="item.description"
               [tableId]="tableId"
               [index]="i"
               (indexDelete)="deleteCard($event)"
@@ -21,7 +21,7 @@
 
   </div>
 
-  <app-table-footer></app-table-footer>
+  <app-table-footer (newCard)="createCard($event)"></app-table-footer>
 
 </div>
 

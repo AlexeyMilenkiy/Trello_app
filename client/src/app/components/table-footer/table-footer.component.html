@@ -3,12 +3,17 @@
   <form *ngIf="isOpen"
         class="add-card"
         [formGroup]="form"
-        (ngSubmit)="addCard()">
+        (ngSubmit)="createCard()">
 
     <textarea placeholder="Enter a title for this card..."
-              formControlName="title"
-              (blur)="close()"
-              appAutoFocusDirective></textarea>
+              formControlName="titleCard"
+              maxlength="200"
+              (blur)="createCard()"
+              (keydown.enter)="form.invalid ? $event.preventDefault() : createCard()"
+              (keydown.shift.enter)="$event.preventDefault()"
+              appAutoFocusDirective
+              autosize
+              [minRows]="3"></textarea>
 
     <div class="add-card__wrapper">
 
@@ -26,8 +31,8 @@
         *ngIf="!isOpen">
     <span class="table__footer__plus"></span>
     <span class="table__footer__text"
-          (click)="openForm()">
-          Add another card
+          (click)="isOpen = true">
+          Add new card
     </span>
   </div>
 

@@ -31,12 +31,7 @@ module.exports = {
     getBoard(req, res) {
         let boardId = req.headers.board_id;
 
-        Board.findOne({ where: {id: boardId}},
-            {
-            include: {
-                model: Card,
-                as: 'cards'
-            }})
+        Board.findOne({where : {id : boardId}})
             .then((board) => {
                 if(board) {
                     res.json(board);

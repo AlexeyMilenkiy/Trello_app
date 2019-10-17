@@ -8,7 +8,8 @@
       <app-table *ngFor="let cards of defaultCards; let i = index"
                  [headline]="tablesMap[i+1]"
                  [cardsArray]="cards"
-                 [tableId]="i+1">
+                 [tableId]="i+1"
+                 [boardId]="board?.id">
       </app-table>
 
     </div>

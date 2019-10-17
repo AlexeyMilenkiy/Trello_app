@@ -25,7 +25,7 @@
       <div class="modal__card__description__container">
         <span class="modal__card__description-icon"></span>
         <span class="modal__card__description__headline">Description</span>
-        <button *ngIf="description.length && !isEditDescription"
+        <button *ngIf="description && !isEditDescription"
                 (click)="isEditDescription = true"
                 class="modal__card__edit-btn">Edit</button>
       </div>
@@ -53,13 +53,13 @@
 
       </form>
 
-      <p *ngIf="description.length && !isEditDescription"
+      <p *ngIf="description && !isEditDescription"
          (click)="isEditDescription = true"
         class="modal__card__description__content">
         {{description}}
       </p>
 
-      <p *ngIf="!description.length && !isEditDescription"
+      <p *ngIf="!description && !isEditDescription"
          (click)="isEditDescription = true"
         class="modal__card__description__preview">
         Add a more detailed description...

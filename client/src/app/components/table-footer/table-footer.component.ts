@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,6 +7,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./table-footer.component.less']
 })
 export class TableFooterComponent implements OnInit {
+
+  @Output() newCard = new EventEmitter<string>();
+
   form: FormGroup;
   isOpen = false;
 
@@ -14,20 +17,21 @@ export class TableFooterComponent implements OnInit {
 
   ngOnInit() {
     this.form = new FormGroup({
-      title: new FormControl(null, [
+      titleCard: new FormControl(null, [
         Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(40)
+        Validators.maxLength(200)
       ]),
     });
   }
 
-  openForm() {
-    this.isOpen = true;
-  }
-
-  addCard() {
-
+  createCard() {
+    if (this.form.invalid) {
+      return;
+    }
+    this.newCard.emit(this.form.value.titleCard);
+    this.form.reset();
+    this.isOpen = false;
   }
 
   close() {
