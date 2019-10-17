@@ -8,11 +8,14 @@
   <div class="table__cards"
        [cdkDropListData]="cardsArray"
        (cdkDropListDropped)="drop($event)"
-       cdkDropList >
+       cdkDropList>
 
-    <app-card *ngFor="let item of cardsArray"
+    <app-card *ngFor="let item of cardsArray; let i = index"
               [title]="item"
+              [description]="'bggbggv'"
               [tableId]="tableId"
+              [index]="i"
+              (indexDelete)="deleteCard($event)"
               cdkDrag>
     </app-card>
 

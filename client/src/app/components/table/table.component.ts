@@ -6,7 +6,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent implements OnInit {
+export class TableComponent {
 
   @Input() cardsArray: Array<any>;   ///ИСПРАВЬ!!!!!!!!!
   @Input() headline: string;
@@ -23,7 +23,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    console.log(this.cardsArray, this.tableId);
+  deleteCard(indexDel) {
+    this.cardsArray.splice(indexDel, 1);
   }
 }

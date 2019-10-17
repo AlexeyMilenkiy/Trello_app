@@ -25,41 +25,53 @@
       <div class="modal__card__description__container">
         <span class="modal__card__description-icon"></span>
         <span class="modal__card__description__headline">Description</span>
-        <button *ngIf="details.length && !isEditDescription"
+        <button *ngIf="description.length && !isEditDescription"
                 (click)="isEditDescription = true"
                 class="modal__card__edit-btn">Edit</button>
       </div>
 
-
       <form *ngIf="isEditDescription"
             [formGroup]="form"
-            (ngSubmit)="addDescription()">
+            (ngSubmit)="changeDescription()">
 
         <textarea
                 class="modal__card__description__text"
                 placeholder="Add a more detailed description..."
                 formControlName="descriptionText"
                 (blur)="isEditDescription = false"
-                (change)="changeDetails()"
+                (change)="changeDescription()"
+                [value]="description"
                 appAutoFocusDirective></textarea>
 
         <div class="modal__card__description__btn-wrap">
 
           <button type="submit" class="modal__card__description-save">Save</button>
-          <span (click)="changeDetails()"
-                class="modal__card__description-close"></span>
+          <span (click)="changeDescription()"
+                class="modal__card__description-close">
+          </span>
         </div>
 
       </form>
 
-      <p *ngIf="details.length && !isEditDescription"
+      <p *ngIf="description.length && !isEditDescription"
          (click)="isEditDescription = true"
-        class="modal__card__description__content">{{details}}</p>
+        class="modal__card__description__content">
+        {{description}}
+      </p>
 
-      <p *ngIf="!details.length && !isEditDescription"
+      <p *ngIf="!description.length && !isEditDescription"
          (click)="isEditDescription = true"
-        class="modal__card__description__preview">Add a more detailed description...</p>
+        class="modal__card__description__preview">
+        Add a more detailed description...
+      </p>
+
     </div>
+
+    <button (click)="deleteCard(index)"
+            class="modal__card__delete">
+            Delete card
+    </button>
+
   </div>
 
 </div>

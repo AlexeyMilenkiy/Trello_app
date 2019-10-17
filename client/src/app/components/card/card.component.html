@@ -1,11 +1,14 @@
-<div class="card" (click)="isEdit = true">
+<div class="card"
+     (click)="isEdit = true">
   {{title}}
-  <span *ngIf="details" class="card__description-icon"></span>
+  <span *ngIf="description" class="card__description-icon"></span>
 </div>
 
 <app-modal-edit-card [isEdit]="isEdit"
+                     [title]="title"
+                     [description]="description"
+                     [index]="index"
                      (closed)="isEdit = $event"
                      (changedTitle)="title = $event"
-                     (changedDetails)="details = $event"
-                     [title]="title"
-                     [details]="''"></app-modal-edit-card>
+                     (changedDescription)="description = $event"
+                     (deletedCard)="deleteCard($event)"></app-modal-edit-card>

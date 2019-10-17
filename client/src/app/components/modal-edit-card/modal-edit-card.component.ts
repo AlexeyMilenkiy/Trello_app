@@ -10,10 +10,12 @@ export class ModalEditCardComponent implements OnInit {
 
   @Input() isEdit: boolean;
   @Input() title: string;
-  @Input() details: string;
+  @Input() description: string;
+  @Input() index: number;
   @Output() closed = new EventEmitter<boolean>();
   @Output() changedTitle = new EventEmitter<string>();
-  @Output() changedDetails = new EventEmitter<string>();
+  @Output() changedDescription = new EventEmitter<string>();
+  @Output() deletedCard = new EventEmitter<any>();   //Исправить
 
   isEditDescription = false;
   form: FormGroup;
@@ -30,9 +32,9 @@ export class ModalEditCardComponent implements OnInit {
     this.changedTitle.emit(this.title);
   }
 
-  changeDetails() {
-    this.details = this.form.value.descriptionText;
-    this.changedDetails.emit(this.form.value.descriptionText);
+  changeDescription() {
+    this.description = this.form.value.descriptionText;
+    this.changedDescription.emit(this.form.value.descriptionText);
   }
 
   close(event) {
@@ -42,8 +44,7 @@ export class ModalEditCardComponent implements OnInit {
     }
   }
 
-  addDescription() {
-    this.isEditDescription = false;
-    this.changedDetails.emit(this.details);
+  deleteCard(index) {
+    this.deletedCard.emit(index);
   }
 }

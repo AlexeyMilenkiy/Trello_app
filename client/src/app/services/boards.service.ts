@@ -32,4 +32,6 @@ export class BoardsService {
     const headers = new HttpHeaders().set('author_id', `${id}`);
     return this.http.get<BoardResponse[]>(`${environment.baseUrl}boards/get-boards`, {headers});
   }
+
+
 }
