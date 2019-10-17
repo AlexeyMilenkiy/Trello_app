@@ -32,16 +32,14 @@ module.exports = {
         let boardId = req.headers.board_id;
         console.log(boardId);
 
-        Board.findOne({
+        Board.findOne({ where: {id: boardId}},
+            {
             include: {
                 model: Card,
                 as: 'cards'
-            }
-        }, {
-            where:
-                {id: boardId}
-        })
+            }})
             .then((board) => {
+                console.log(board);
                 res.json(board);
             })
             .catch(() => {
