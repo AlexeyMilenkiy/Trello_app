@@ -16,7 +16,7 @@ router.post('/create', validate([
     body('title')
         .not().isEmpty()
         .trim()
-        .isLength({ min: 1, max: 50 }),
+        .isLength({ min: 1, max: 200 }),
 ]), controller.boards.createBoard);
 
 router.delete('/remove-board', validate([
@@ -28,6 +28,16 @@ router.get('/get-board', validate([
     header('board_id')
         .not().isEmpty()
 ]), controller.boards.getBoard);
+
+router.put('/change-board-title', validate([
+    body('id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('title')
+        .not().isEmpty()
+        .trim()
+        .isLength({ min: 1, max: 200 }),
+]), controller.boards.changeBoardTitle);
 
 
 module.exports = router;

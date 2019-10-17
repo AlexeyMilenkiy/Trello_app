@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import {BoardsService} from '@app/services/boards.service';
-import {BoardResponse} from '@app/interfaces/board-response';
+import { BoardsService } from '@app/services/boards.service';
+import { BoardResponse } from '@app/interfaces/board-response';
 
 @Component({
   selector: 'app-board',
@@ -29,6 +29,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   ];
   board: BoardResponse;
   subscriptions: Subscription = new Subscription();
+  isError = false;
 
   constructor(private activateRoute: ActivatedRoute,
               private boardsService: BoardsService) {
@@ -41,9 +42,14 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.board = {...board};
           console.log(this.board);
         },
-        (error) => console.log(error)
+        (error) => {
+          if ((error.status !== 401) && (error.status !== 422)) {
+            this.isError = true;
+          }
+        }
       ));
   }
+
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

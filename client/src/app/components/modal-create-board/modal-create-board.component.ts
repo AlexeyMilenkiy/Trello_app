@@ -22,7 +22,7 @@ export class ModalCreateBoardComponent implements OnInit {
       title: new FormControl(null, [
         Validators.required,
         Validators.minLength(1),
-        Validators.maxLength(40)
+        Validators.maxLength(200)
       ]),
     });
   }

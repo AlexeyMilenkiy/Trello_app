@@ -30,7 +30,6 @@ module.exports = {
 
     getBoard(req, res) {
         let boardId = req.headers.board_id;
-        console.log(boardId);
 
         Board.findOne({ where: {id: boardId}},
             {
@@ -39,7 +38,6 @@ module.exports = {
                 as: 'cards'
             }})
             .then((board) => {
-                console.log(board);
                 res.json(board);
             })
             .catch(() => {
@@ -51,6 +49,20 @@ module.exports = {
         let boardId = req.headers.board_id;
 
         Board.destroy({where: {id: boardId}})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
+    },
+
+    changeBoardTitle(req, res) {
+        let boardId = req.body.id;
+        let title = req.body.title;
+
+        Board.update({title},
+            {where: {id: boardId}})
             .then(data => {
                 res.json(data);
             })

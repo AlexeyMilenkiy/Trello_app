@@ -11,7 +11,10 @@ export class ModalErrorComponent {
   @Input() message: string;
   @Output() closed = new EventEmitter<boolean>();
 
-  close() {
-    this.closed.emit(false);
+  close(event) {
+    const className = event.target.className;
+    if ((className === 'modal_wrapper') || (className === 'close_modal')) {
+      this.closed.emit(false);
+    }
   }
 }

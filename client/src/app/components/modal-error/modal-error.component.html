@@ -1,8 +1,9 @@
 <div [style.visibility]="isModal ?  'visible': 'hidden'"
      [style.opacity]="isModal ? '1' : '0'"
+     (click)="close($event)"
      class="modal_wrapper">
   <div  class="modal_window">
-    <button class="close_modal" (click)="close()">&#10006;</button>
+    <span class="close_modal" (click)="close($event)"></span>
     <span class="modal_text">{{message}}</span>
   </div>
 </div>
