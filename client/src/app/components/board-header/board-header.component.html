@@ -19,8 +19,6 @@
           (click)="editTitle = true"
           class="board__header__text">{{title}}</span>
 
-<!--    <div></div>-->
-
     <button class="board__header__btn" id="shared">Shared</button>
 
   </div>
@@ -28,7 +26,7 @@
 </div>
 <app-modal-confirm [isModal]="isDelete"
                    (confirmed)="deleteBoard()"
-                   (closed)="isDelete = false">
+                   (closed)="isDelete = $event">
 </app-modal-confirm>
 
 <app-modal-error [isModal]="isError"
