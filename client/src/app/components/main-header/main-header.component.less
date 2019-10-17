@@ -36,6 +36,11 @@
     border-radius: 3px;
     padding: 0 10px;
     margin-left: 10px;
+
+    &:hover {
+      cursor: pointer;
+      background-color: hsla(0,0%,100%,.2);
+    }
   }
 
   &__user {
@@ -49,6 +54,10 @@
       font-size: 23px;
       font-weight: 400;
       color: white;
+
+      &:hover {
+        cursor: default;
+      }
     }
 
     &__logout {
@@ -67,6 +76,7 @@
 
       &:hover {
         cursor: pointer;
+        background-color: hsla(0,0%,100%,.2);
       }
     }
   }
