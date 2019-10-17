@@ -15,6 +15,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   form: FormGroup;
   editTitle = false;
   subscriptions: Subscription = new Subscription();
+  isError = false;
 
   constructor(private boardsService: BoardsService) { }
 
@@ -33,14 +34,16 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       this.editTitle = false;
       return;
     }
-    this.title = this.form.value.boardTitle;
-    this.editTitle = false;
-
     this.subscriptions.add(this.boardsService.changeBoardTitle(this.title, this.boardId)
-      .subscribe((res) => {
-          console.log(res);
+      .subscribe(() => {
+          this.title = this.form.value.boardTitle;
+          this.editTitle = false;
         },
-        (error) => console.log(error)
+        (error) => {
+          if ((error.status !== 401) && (error.status !== 422)) {
+            this.isError = true;
+          }
+        }
       ));
   }
 
