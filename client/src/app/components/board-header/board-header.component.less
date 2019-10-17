@@ -18,12 +18,14 @@
     justify-content: flex-start;
     align-items: center;
 
-    div {
-      height: 20px;
-      width: 1px;
-      border-left: 1px solid hsla(0,0%,100%,.24);
-      margin: 0 20px;
-    }
+    //div {
+    //  height: 20px;
+    //  width: 1px;
+    //  border-left: 1px solid hsla(0,0%,100%,.24);
+    //  margin: 0 20px;
+    //}
+
+
 
     &__input {
       background-color: #fff;
@@ -78,6 +80,23 @@
       background-color: hsla(0,0%,100%,.32);
       cursor: pointer;
     }
+  }
+}
+
+#shared {
+  position: relative;
+  margin-left: 40px;
+
+  &:before {
+    content: '';
+    position: absolute;
+    transform: translateX(-50%);
+    height: 20px;
+    left: -45px;
+    top: 10px;
+    width: 0.5px;
+    background: hsla(0,0%,100%,.24);
+    margin: 0 20px;
   }
 }
 
