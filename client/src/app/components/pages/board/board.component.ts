@@ -50,7 +50,6 @@ export class BoardComponent implements OnInit, OnDestroy {
       ));
   }
 
-
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }

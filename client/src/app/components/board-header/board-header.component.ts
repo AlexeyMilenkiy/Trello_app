@@ -30,7 +30,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   }
 
   changeBoardTitle() {
-    if (this.form.invalid) {
+    if (this.form.invalid || (this.form.value.boardTitle === this.title)) {
       this.editTitle = false;
       return;
     }
