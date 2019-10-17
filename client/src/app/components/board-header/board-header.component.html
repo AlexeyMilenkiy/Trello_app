@@ -24,5 +24,14 @@
     <button class="board__header__btn">Shared</button>
 
   </div>
-  <button class="board__header__btn">Delete board</button>
+  <button class="board__header__btn" (click)="isDelete = true">Delete board</button>
 </div>
+<app-modal-confirm [isModal]="isDelete"
+                   (confirmed)="deleteBoard()"
+                   (closed)="isDelete = false">
+</app-modal-confirm>
+
+<app-modal-error [isModal]="isError"
+                 [message]="'Server is not available! Please try again later'"
+                 (closed)="isError = $event">
+</app-modal-error>

@@ -38,7 +38,11 @@ module.exports = {
                 as: 'cards'
             }})
             .then((board) => {
-                res.json(board);
+                if(board) {
+                    res.json(board);
+                } else {
+                    res.sendStatus(404);
+                }
             })
             .catch(() => {
                 res.status(400);

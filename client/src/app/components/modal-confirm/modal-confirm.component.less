@@ -10,11 +10,12 @@
 .modal_window {
   position: absolute;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
   align-items: center;
   transform: translate(-50%, -50%);
   width: 300px;
-  height: 300px;
+  height: 200px;
   top: 50%;
   left: 50%;
   background-color: #ebecf0;
@@ -23,23 +24,35 @@
   border-radius: 10px;
 }
 .modal_text {
-  font-family: Roboto, sans-serif;
-  font-size: 1.5em;
+  font-size: 30px;
   line-height: 2em;
   text-align: center;
 }
-.close_modal{
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  height: 30px;
-  width: 30px;
-  border: none;
-  outline: none;
-  font-family: Trello, sans-serif;
-  font-size: 25px;
 
-  &:before {
-    content: "\E918";
+.modal_btn_wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+
+  button {
+    width: auto;
+    padding: 10px;
+    font-size: 24px;
+    color: white;
+    border-radius: 7px;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  #no {
+    background-color: #cf513d;
+  }
+
+  #yes {
+    background-color: #5aac44;
   }
 }
+

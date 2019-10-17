@@ -25,6 +25,7 @@ import { CardComponent } from '@components/card/card.component';
 import { TableFooterComponent } from '@components/table-footer/table-footer.component';
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 import { AutoFocusDirectiveDirective } from './directives/auto-focus-directive.directive';
+import { ModalConfirmComponent } from './components/modal-confirm/modal-confirm.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { AutoFocusDirectiveDirective } from './directives/auto-focus-directive.d
     TableFooterComponent,
     ModalEditCardComponent,
     AutoFocusDirectiveDirective,
+    ModalConfirmComponent,
   ],
   imports: [
     BrowserModule,

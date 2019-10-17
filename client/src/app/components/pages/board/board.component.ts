@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { BoardsService } from '@app/services/boards.service';
@@ -32,7 +32,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   isError = false;
 
   constructor(private activateRoute: ActivatedRoute,
-              private boardsService: BoardsService) {
+              private boardsService: BoardsService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -43,7 +44,9 @@ export class BoardComponent implements OnInit, OnDestroy {
           console.log(this.board);
         },
         (error) => {
-          if ((error.status !== 401) && (error.status !== 422)) {
+          if (error.status === 404) {
+            this.router.navigate(['not-found']);
+          } else if ((error.status !== 401) && (error.status !== 422)) {
             this.isError = true;
           }
         }

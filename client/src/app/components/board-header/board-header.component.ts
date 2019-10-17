@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {BoardsService} from '@app/services/boards.service';
 import {Subscription} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-board-header',
@@ -16,8 +17,10 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   editTitle = false;
   subscriptions: Subscription = new Subscription();
   isError = false;
+  isDelete = false;
 
-  constructor(private boardsService: BoardsService) { }
+  constructor(private boardsService: BoardsService,
+              private router: Router) { }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -38,6 +41,20 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       .subscribe(() => {
           this.title = this.form.value.boardTitle;
           this.editTitle = false;
+        },
+        (error) => {
+          if ((error.status !== 401) && (error.status !== 422)) {
+            this.isError = true;
+          }
+        }
+      ));
+  }
+
+  deleteBoard() {
+    this.isDelete = false;
+    this.subscriptions.add(this.boardsService.removeBoard(this.boardId)
+      .subscribe(() => {
+        this.router.navigate(['/boards']);
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
