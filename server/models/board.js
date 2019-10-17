@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
   Board.associate = function(models) {
 
     Board.belongsTo(models.User, {
-      foreignKey: 'author_id',
+        foreignKey: 'author_id',
+    });
+
+    Board.hasMany(models.Card, {
+        foreignKey: 'id',
     });
   };
 

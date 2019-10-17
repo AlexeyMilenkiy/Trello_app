@@ -33,5 +33,8 @@ export class BoardsService {
     return this.http.get<BoardResponse[]>(`${environment.baseUrl}boards/get-boards`, {headers});
   }
 
-
+  getBoard(id: number): Observable<any> {
+    const headers = new HttpHeaders().set('board_id', `${id}`);
+    return this.http.get(`${environment.baseUrl}boards/get-board`, {headers});
+  }
 }

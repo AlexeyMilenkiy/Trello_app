@@ -27,6 +27,23 @@ module.exports = {
             });
     },
 
+    getBoard (req, res) {
+        let boardId = req.headers.board_id;
+
+        Board.findOne({
+                include: true
+            }, {
+            where:
+                { id: boardId }
+        })
+            .then(data => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
+    },
+
     removeBoard (req, res) {
         let boardId = req.headers.board_id;
 

@@ -19,13 +19,17 @@ router.post('/create', validate([
         .isLength({ min: 1, max: 50 }),
 ]), controller.boards.createBoard);
 
-router.delete('/remove-board', controller.boards.removeBoard);
+router.delete('/remove-board', validate([
+    header('board_id')
+        .not().isEmpty()
+]), controller.boards.removeBoard);
+
+router.get('/get-board', validate([
+    header('board_id')
+        .not().isEmpty()
+]), controller.boards.getBoard);
+
 
 module.exports = router;
 
 
-//
-// validate([
-//     header('board_id')
-//         .not().isEmpty()
-// ]),
