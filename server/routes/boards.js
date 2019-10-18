@@ -39,7 +39,4 @@ router.put('/change-board-title', validate([
         .isLength({ min: 1, max: 200 }),
 ]), controller.boards.changeBoardTitle);
 
-
 module.exports = router;
-
-

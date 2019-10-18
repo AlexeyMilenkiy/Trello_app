@@ -4,11 +4,21 @@ const controller = require('../controllers');
 const { body, header } = require('express-validator');
 const { validate } = require('../services/validator');
 
-
-router.post('/create', controller.cards.createCard);
-
-router.get('/get-cards', controller.cards.getCards);
-
+router.post('/create',validate([
+    body('board_id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('table_id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('position')
+        .not().isEmpty()
+        .isNumeric(),
+    body('title')
+        .not().isEmpty()
+        .trim()
+        .isLength({ min: 1, max: 200 }),
+]),controller.cards.createCard);
 
 module.exports = router;
 

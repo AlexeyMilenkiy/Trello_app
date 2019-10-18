@@ -1,4 +1,4 @@
-import {Component, DoCheck, Input, IterableDiffers, KeyValueDiffers} from '@angular/core';
+import {Component, DoCheck, Input, IterableDiffers, KeyValueDiffers, OnDestroy} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -12,7 +12,7 @@ import { CardResponse } from '@app/interfaces/card-response';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent implements DoCheck {
+export class TableComponent implements OnDestroy, DoCheck {
 
   @Input() cardsArray: CardResponse[];
   @Input() headline: string;
@@ -35,7 +35,7 @@ export class TableComponent implements DoCheck {
     this.iterableDiffer = this.iterableDiffers.find([]).create(null);
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<CardResponse[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -50,7 +50,7 @@ export class TableComponent implements DoCheck {
     this.cardsArray.splice(indexDel, 1);
   }
 
-  setPositionCard() {
+  setPositionNewCard() {
     if (this.cardsArray.length === 0) {
       return this.defaultPositionCard;
     } else {
@@ -61,19 +61,16 @@ export class TableComponent implements DoCheck {
   }
 
   createCard(title: string) {
-    const position = this.setPositionCard();
+    const position = this.setPositionNewCard();
     this.card = {
       board_id: this.boardId,
       table_id: this.tableId,
       position,
       title
     };
-
     this.subscriptions.add(this.cardsService.createCard(this.card)
       .subscribe((card: CardResponse) => {
-          console.log(card);
           this.cardsArray.push(card);
-          console.log(this.cardsArray);
         },
         (error) => console.log(error)
       ));
@@ -81,12 +78,12 @@ export class TableComponent implements DoCheck {
 
   ngDoCheck() {
     const changes = this.iterableDiffer.diff(this.cardsArray);
-
-    console.log(changes);
-
     if (changes) {
       this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
     }
   }
 
+  ngOnDestroy(): void  {
+    this.subscriptions.unsubscribe();
+  }
 }

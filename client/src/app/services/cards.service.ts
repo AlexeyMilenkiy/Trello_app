@@ -14,7 +14,7 @@ export class CardsService {
   constructor(private http: HttpClient) { }
 
   createCard(card: CardBeforeCreate): Observable<CardResponse> {
-    return this.http.post<CardResponse>(`${environment.baseUrl}cards/create`, {card});
+    return this.http.post<CardResponse>(`${environment.baseUrl}cards/create`, {...card});
   }
 
   getCards(tableId: number, boardId: number): Observable<CardResponse[]> {
