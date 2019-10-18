@@ -35,26 +35,29 @@ export class BoardComponent implements OnInit, OnDestroy {
               private router: Router) {
   }
 
+  separateCardsArray() {
+    this.board.cards.forEach((card: CardResponse) => {
+      card.position = Number(card.position); /// changed string to number
+      switch (card.table_id) {
+        case 1:
+          this.cardsArray[0].push(card);
+          break;
+        case 2:
+          this.cardsArray[1].push(card);
+          break;
+        case 3:
+          this.cardsArray[2].push(card);
+      }
+    });
+  }
+
   ngOnInit(): void {
     this.boardId = parseInt(this.activateRoute.snapshot.params.id, 10);
 
     this.subscriptions.add(this.boardsService.getBoard(this.boardId)
       .subscribe((board: BoardResponse) => {
           this.board = {...board};
-          console.log(this.board);
-
-          this.board.cards.forEach((card: CardResponse) => {
-            switch (card.table_id) {
-              case 1:
-                this.cardsArray[0].push(card);
-                break;
-              case 2:
-                this.cardsArray[1].push(card);
-                break;
-              case 3:
-                this.cardsArray[2].push(card);
-            }
-          });
+          this.separateCardsArray();
         },
         (error) => {
           if (error.status === 404) {

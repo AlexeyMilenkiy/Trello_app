@@ -12,7 +12,7 @@ import {CardResponse} from '@app/interfaces/card-response';
 })
 export class TableComponent implements OnInit {
 
-  @Input() cardsArray: Array<any>;   /// ИСПРАВЬ!!!!!!!!!
+  @Input() cardsArray: CardResponse[];
   @Input() headline: string;
   @Input() tableId: number;
   @Input() boardId: number;
@@ -73,14 +73,9 @@ export class TableComponent implements OnInit {
       ));
   }
 
-  ngOnInit(): void {
-    // this.subscriptions.add(this.cardsService.getCards(this.tableId, this.boardId)
-    //   .subscribe((cards: CardResponse[]) => {
-    //       console.log(cards);
-    //       this.cardsArray = [...cards];
-    //       console.log(this.cardsArray);
-    //     },
-    //     (error) => console.log(error)
-    //   ));
+  ngOnInit() {
+    console.log(this.cardsArray)
+    this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
+    console.log(this.cardsArray)
   }
 }
