@@ -38,6 +38,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       return;
     }
     this.subscriptions.add(this.boardsService.changeBoardTitle(this.title, this.boardId)
+
       .subscribe(() => {
           this.title = this.form.value.boardTitle;
           this.editTitle = false;

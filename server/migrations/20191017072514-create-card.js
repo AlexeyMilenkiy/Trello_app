@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       position: {
-        type: Sequelize.NUMERIC
+        type: Sequelize.DECIMAL
       },
     });
   },

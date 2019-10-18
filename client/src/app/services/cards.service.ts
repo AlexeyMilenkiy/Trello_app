@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '@env/environment';
@@ -15,5 +15,11 @@ export class CardsService {
 
   createCard(card: CardBeforeCreate): Observable<CardResponse> {
     return this.http.post<CardResponse>(`${environment.baseUrl}cards/create`, {card});
+  }
+
+  getCards(tableId: number, boardId: number): Observable<CardResponse[]> {
+    let headers = new HttpHeaders().set('board_id', `${boardId}`);
+    headers = headers.set('table_id', `${tableId}`);
+    return this.http.get<CardResponse[]>(`${environment.baseUrl}cards/get-cards`, {headers});
   }
 }

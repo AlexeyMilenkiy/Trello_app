@@ -7,6 +7,7 @@ const { validate } = require('../services/validator');
 
 router.post('/create', controller.cards.createCard);
 
+router.get('/get-cards', controller.cards.getCards);
 
 
 module.exports = router;

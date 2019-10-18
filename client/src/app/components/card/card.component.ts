@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CardResponse} from '@app/interfaces/card-response';
 
 @Component({
   selector: 'app-card',
@@ -7,20 +8,12 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class CardComponent {
 
-  @Input() title: string;
-  @Input() description: string;
-  @Input() tableId: number;
-  @Input() index: number;
+  @Input() card: CardResponse;
   @Output() indexDelete = new EventEmitter<number>();
 
   isEdit = false;
 
   showDetails($event: string) {
     console.log($event);
-  }
-
-  deleteCard(index: number) {
-    console.log(index);
-    this.indexDelete.emit(index);
   }
 }

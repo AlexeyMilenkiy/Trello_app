@@ -7,7 +7,8 @@ module.exports = {
         let card = req.body.card;
 
         Card.create({...card})
-            .then(data => {
+            .then((data) => {
+                data.position = Number(data.position);
                 res.json(data);
             })
             .catch((err) => {
@@ -15,6 +16,23 @@ module.exports = {
                 res.status(400);
             });
     },
+
+    getCards(req, res) {
+        let tableId = req.headers.table_id;
+        let boardId = req.headers.board_id;
+
+        Card.findAll({where: {
+                table_id : tableId,
+                board_id: boardId
+            }})
+            .then((cards) => {
+                res.json(cards);
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(404);
+        })
+    }
 };
 
 

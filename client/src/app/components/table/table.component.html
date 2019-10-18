@@ -10,11 +10,8 @@
        (cdkDropListDropped)="drop($event)"
        cdkDropList>
 
-    <app-card *ngFor="let item of cardsArray; let i = index"
-              [title]="item.title"
-              [description]="item.description"
-              [tableId]="tableId"
-              [index]="i"
+    <app-card *ngFor="let card of cardsArray; let i = index"
+              [card]="card"
               (indexDelete)="deleteCard($event)"
               cdkDrag>
     </app-card>

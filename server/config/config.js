@@ -6,6 +6,7 @@ module.exports = {
     "database": process.env.DATABASE,
     "host": "127.0.0.1",
     "dialect": process.env.DIALECT,
+    "dialectOptions": {"decimalNumbers": true},
     "define": {
       "timestamps": false
     }
@@ -16,6 +17,7 @@ module.exports = {
     "database": process.env.DATABASE,
     "host": "127.0.0.1",
     "dialect": process.env.DIALECT,
+    "dialectOptions": {"decimalNumbers": true},
     "define": {
       "timestamps": false
     }
@@ -26,6 +28,7 @@ module.exports = {
     "database": process.env.DATABASE,
     "host": "127.0.0.1",
     "dialect": process.env.DIALECT,
+    "dialectOptions": {"decimalNumbers": true},
     "define": {
       "timestamps": false
     }

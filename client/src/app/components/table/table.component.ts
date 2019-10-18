@@ -10,7 +10,7 @@ import {CardResponse} from '@app/interfaces/card-response';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
 
   @Input() cardsArray: Array<any>;   /// ИСПРАВЬ!!!!!!!!!
   @Input() headline: string;
@@ -25,7 +25,7 @@ export class TableComponent {
   };
 
   subscriptions: Subscription = new Subscription();
-  protected firstPositionCard = 65535;
+  protected defaultPositionCard = 65535;
 
   constructor(private cardsService: CardsService) {}
 
@@ -44,11 +44,22 @@ export class TableComponent {
     this.cardsArray.splice(indexDel, 1);
   }
 
+  setPositionCard() {
+    if (this.cardsArray.length === 0) {
+      return this.defaultPositionCard;
+    } else {
+      return (
+        this.cardsArray[this.cardsArray.length - 1].position + this.defaultPositionCard + 1
+      );
+    }
+  }
+
   createCard(title: string) {
+    const position = this.setPositionCard();
     this.card = {
       board_id: this.boardId,
       table_id: this.tableId,
-      position: this.firstPositionCard,
+      position,
       title
     };
 
@@ -60,5 +71,16 @@ export class TableComponent {
         },
         (error) => console.log(error)
       ));
+  }
+
+  ngOnInit(): void {
+    // this.subscriptions.add(this.cardsService.getCards(this.tableId, this.boardId)
+    //   .subscribe((cards: CardResponse[]) => {
+    //       console.log(cards);
+    //       this.cardsArray = [...cards];
+    //       console.log(this.cardsArray);
+    //     },
+    //     (error) => console.log(error)
+    //   ));
   }
 }

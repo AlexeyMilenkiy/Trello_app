@@ -1,7 +1,7 @@
 const models = require('../models');
 const Board = models.Board;
 const Card = models.Card;
-
+const Op = models.Sequelize.Op;
 module.exports = {
 
     createBoard(req, res) {
@@ -31,7 +31,21 @@ module.exports = {
     getBoard(req, res) {
         let boardId = req.headers.board_id;
 
-        Board.findOne({where : {id : boardId}})
+        Board.findOne({
+            where: {
+              id: {
+                  [Op.eq]:boardId}
+            },
+            include: [{
+                model: Card,
+                as: 'cards',
+                where: {
+                    board_id: {
+                        [Op.eq]:boardId
+                    }
+                }
+            }]
+        })
             .then((board) => {
                 if(board) {
                     res.json(board);
@@ -39,7 +53,8 @@ module.exports = {
                     res.sendStatus(404);
                 }
             })
-            .catch(() => {
+            .catch((err) => {
+                console.log(err);
                 res.status(400);
             });
     },

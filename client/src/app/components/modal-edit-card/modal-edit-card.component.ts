@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
@@ -13,12 +13,17 @@ export class ModalEditCardComponent implements OnInit {
   @Input() description: string;
   @Input() index: number;
   @Output() closed = new EventEmitter<boolean>();
-  @Output() changedTitle = new EventEmitter<string>();
+  // @Output() changedTitle = new EventEmitter<string>();
   @Output() changedDescription = new EventEmitter<string>();
   @Output() deletedCard = new EventEmitter<any>();   //Исправить
 
   isEditDescription = false;
   form: FormGroup;
+  private element: any;
+
+  constructor(private el: ElementRef) {
+    this.element = el.nativeElement;
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -29,12 +34,13 @@ export class ModalEditCardComponent implements OnInit {
   }
 
   changeTitle() {
-    this.changedTitle.emit(this.title);
+    // this.title = this.form.v
+    // this.changedTitle.emit(this.title);
   }
 
   changeDescription() {
     this.description = this.form.value.descriptionText;
-    this.changedDescription.emit(this.form.value.descriptionText);
+    // this.changedDescription.emit(this.form.value.descriptionText);
   }
 
   close(event) {
@@ -44,7 +50,7 @@ export class ModalEditCardComponent implements OnInit {
     }
   }
 
-  deleteCard(index) {
-    this.deletedCard.emit(index);
+  deleteCard() {
+    this.element.remove();
   }
 }

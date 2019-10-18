@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     description: DataTypes.STRING,
     board_id: DataTypes.INTEGER,
     table_id: DataTypes.INTEGER,
-    position: DataTypes.NUMERIC
+    position: DataTypes.DECIMAL
   }, {  underscored : true,
         tableName: 'Cards'
   });
