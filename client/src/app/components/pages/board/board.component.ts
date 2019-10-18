@@ -58,6 +58,23 @@ export class BoardComponent implements OnInit, OnDestroy {
       .subscribe((board: BoardResponse) => {
           this.board = {...board};
           this.separateCardsArray();
+
+          setTimeout(() => {
+            const card = {
+              board_id: 1,
+              description: null,
+              id: 10,
+              position: 4234234,
+              table_id: 1,
+              title: '123423333333333333'};
+
+            this.cardsArray[0].push(card);
+          }, 4000);
+
+          setTimeout(() => {
+
+            this.cardsArray[0][0].title = '00000000' ;
+          }, 7000);
         },
         (error) => {
           if (error.status === 404) {

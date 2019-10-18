@@ -82,6 +82,8 @@ export class TableComponent implements DoCheck {
   ngDoCheck() {
     const changes = this.iterableDiffer.diff(this.cardsArray);
 
+    console.log(changes);
+
     if (changes) {
       this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
     }

@@ -43,8 +43,9 @@ module.exports = {
                     board_id: {
                         [Op.eq]:boardId
                     }
-                }
-            }]
+                },
+                required: false
+            }],
         })
             .then((board) => {
                 if(board) {
