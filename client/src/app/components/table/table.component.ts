@@ -1,16 +1,18 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import {CardBeforeCreate} from '@app/interfaces/cardBeforeCreate';
-import {CardsService} from '@app/services/cards.service';
-import {Subscription} from 'rxjs';
-import {CardResponse} from '@app/interfaces/card-response';
+import {Component, DoCheck, Input, IterableDiffers, KeyValueDiffers} from '@angular/core';
+import { Subscription } from 'rxjs';
+
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+
+import { CardBeforeCreate } from '@app/interfaces/cardBeforeCreate';
+import { CardsService } from '@app/services/cards.service';
+import { CardResponse } from '@app/interfaces/card-response';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent implements OnInit {
+export class TableComponent implements DoCheck {
 
   @Input() cardsArray: CardResponse[];
   @Input() headline: string;
@@ -23,11 +25,15 @@ export class TableComponent implements OnInit {
     position: 0,
     title: ''
   };
-
+  iterableDiffer: any;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
 
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardsService,
+              private iterableDiffers: IterableDiffers) {
+
+    this.iterableDiffer = this.iterableDiffers.find([]).create(null);
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -73,9 +79,12 @@ export class TableComponent implements OnInit {
       ));
   }
 
-  ngOnInit() {
-    console.log(this.cardsArray)
-    this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
-    console.log(this.cardsArray)
+  ngDoCheck() {
+    const changes = this.iterableDiffer.diff(this.cardsArray);
+
+    if (changes) {
+      this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
+    }
   }
+
 }
