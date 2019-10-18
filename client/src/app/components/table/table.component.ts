@@ -6,6 +6,7 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { CardBeforeCreate } from '@app/interfaces/cardBeforeCreate';
 import { CardsService } from '@app/services/cards.service';
 import { CardResponse } from '@app/interfaces/card-response';
+import {debug} from 'util';
 
 @Component({
   selector: 'app-table',
@@ -25,6 +26,7 @@ export class TableComponent implements OnDestroy, DoCheck {
     position: 0,
     title: ''
   };
+
   iterableDiffer: any;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
@@ -36,6 +38,7 @@ export class TableComponent implements OnDestroy, DoCheck {
   }
 
   drop(event: CdkDragDrop<CardResponse[]>) {
+    console.log(event.item.data.position);
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -44,6 +47,9 @@ export class TableComponent implements OnDestroy, DoCheck {
         event.previousIndex,
         event.currentIndex);
     }
+    console.log(this.cardsArray)
+    event.item.data.position = this.setPositionDropCard(event);
+    console.log(this.cardsArray)
   }
 
   deleteCard(indexDel) {
@@ -51,17 +57,33 @@ export class TableComponent implements OnDestroy, DoCheck {
   }
 
   setPositionNewCard() {
+    // console.log(this.cardsArray[this.cardsArray.length - 1].position)
+    // debugger
     if (this.cardsArray.length === 0) {
       return this.defaultPositionCard;
     } else {
       return (
-        this.cardsArray[this.cardsArray.length - 1].position + this.defaultPositionCard + 1
+        (this.cardsArray[this.cardsArray.length - 1].position) + this.defaultPositionCard + 1
       );
+    }
+  }
+
+  setPositionDropCard(event) {
+    const newIndex = event.currentIndex;
+    const oldIndex = event.previousIndex;
+    // debugger
+    if (newIndex === oldIndex) {
+      return;
+    } else if (newIndex === 0 || (newIndex - 1 === 0)) {
+      return this.cardsArray[0].position / 2;
+    } else {
+      return (((this.cardsArray[newIndex - 1].position) + (this.cardsArray[newIndex + 1].position) / 2));
     }
   }
 
   createCard(title: string) {
     const position = this.setPositionNewCard();
+    console.log('position', position);
     this.card = {
       board_id: this.boardId,
       table_id: this.tableId,

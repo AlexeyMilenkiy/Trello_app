@@ -12,6 +12,7 @@
 
     <app-card class="card"
               *ngFor="let card of cardsArray; let i = index"
+              [cdkDragData]="card"
               [card]="card"
               (indexDelete)="deleteCard($event)"
               cdkDrag>

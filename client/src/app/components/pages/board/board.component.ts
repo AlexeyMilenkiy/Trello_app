@@ -36,6 +36,9 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   separateCardsArray() {
+    // this.cardsArray[0] = this.board.cards.filter((card: CardResponse) => card.table_id === 1);
+    // this.cardsArray[1] = this.board.cards.filter((card: CardResponse) => card.table_id === 2);
+    // this.cardsArray[2] = this.board.cards.filter((card: CardResponse) => card.table_id === 3);
     this.board.cards.forEach((card: CardResponse) => {
       card.position = Number(card.position); /// changed string to number
       switch (card.table_id) {
