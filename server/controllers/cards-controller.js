@@ -1,5 +1,6 @@
 const models = require('../models');
 const Card = models.Card;
+const Op = models.Sequelize.Op;
 
 module.exports = {
 
@@ -16,6 +17,22 @@ module.exports = {
             });
     },
 
+    updateCard(req, res) {
+        let card = req.body;
+
+        Card.update(
+            {...card},
+            { where: {
+                id: {
+                    [Op.eq]:card.id
+                }
+            }
+            })
+            .then((data) => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
+    }
 };
-
-

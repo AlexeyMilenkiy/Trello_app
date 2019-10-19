@@ -43,13 +43,13 @@ export class BoardComponent implements OnInit, OnDestroy {
       card.position = Number(card.position); /// changed string to number
       switch (card.table_id) {
         case 1:
-          this.cardsArray[0].push(card);
+          this.cardsArray[0] = [...this.cardsArray[0], card];
           break;
         case 2:
-          this.cardsArray[1].push(card);
+          this.cardsArray[1] = [...this.cardsArray[1], card];
           break;
         case 3:
-          this.cardsArray[2].push(card);
+          this.cardsArray[2] = [...this.cardsArray[2], card];
       }
     });
   }
@@ -63,7 +63,8 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.separateCardsArray();
         },
         (error) => {
-          if (error.status === 404) {
+        console.log(error);
+          if ((error.status === 404) || (error.status === 0)) {
               this.router.navigate(['not-found']);
           } else if ((error.status !== 401) && (error.status !== 422)) {
               this.isError = true;

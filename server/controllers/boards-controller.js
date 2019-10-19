@@ -2,6 +2,7 @@ const models = require('../models');
 const Board = models.Board;
 const Card = models.Card;
 const Op = models.Sequelize.Op;
+
 module.exports = {
 
     createBoard(req, res) {
@@ -34,7 +35,8 @@ module.exports = {
         Board.findOne({
             where: {
               id: {
-                  [Op.eq]:boardId}
+                  [Op.eq]:boardId
+              }
             },
             include: [{
                 model: Card,

@@ -20,6 +20,33 @@ router.post('/create',validate([
         .isLength({ min: 1, max: 200 }),
 ]),controller.cards.createCard);
 
+router.put('/update',validate([
+    body('id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('board_id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('table_id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('position')
+        .not().isEmpty()
+        .isNumeric(),
+    body('title')
+        .not().isEmpty()
+        .trim()
+        .isLength({ min: 1, max: 200 }),
+    body('description')
+        .if(body('description')
+            .exists({
+            checkNull: true,
+        }))
+        .not().isEmpty()
+        .trim()
+        .isLength({ min: 1, max: 200 }), //изменить длину
+]),controller.cards.updateCard);
+
 module.exports = router;
 
 

@@ -9,7 +9,8 @@
                  [headline]="tablesMap[i+1]"
                  [cardsArray]="cards"
                  [tableId]="i+1"
-                 [boardId]="boardId">
+                 [boardId]="boardId"
+                 (error)="isError = $event">
       </app-table>
 
     </div>

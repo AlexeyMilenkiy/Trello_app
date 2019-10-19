@@ -1,4 +1,4 @@
-import {Component, DoCheck, Input, IterableDiffers, KeyValueDiffers, OnDestroy} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -6,19 +6,19 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { CardBeforeCreate } from '@app/interfaces/cardBeforeCreate';
 import { CardsService } from '@app/services/cards.service';
 import { CardResponse } from '@app/interfaces/card-response';
-import {debug} from 'util';
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent implements OnDestroy, DoCheck {
+export class TableComponent implements OnDestroy, OnChanges {
 
   @Input() cardsArray: CardResponse[];
   @Input() headline: string;
   @Input() tableId: number;
   @Input() boardId: number;
+  @Output() error = new EventEmitter<boolean>();
 
   card: CardBeforeCreate = {
     board_id: 0,
@@ -27,29 +27,35 @@ export class TableComponent implements OnDestroy, DoCheck {
     title: ''
   };
 
-  iterableDiffer: any;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
 
-  constructor(private cardsService: CardsService,
-              private iterableDiffers: IterableDiffers) {
-
-    this.iterableDiffer = this.iterableDiffers.find([]).create(null);
-  }
+  constructor(private cardsService: CardsService) {}
 
   drop(event: CdkDragDrop<CardResponse[]>) {
-    console.log(event.item.data.position);
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
+      event.item.data.table_id = this.tableId;
       transferArrayItem(event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex);
     }
-    console.log(this.cardsArray)
     event.item.data.position = this.setPositionDropCard(event);
-    console.log(this.cardsArray)
+
+    this.subscriptions.add(this.cardsService.updateCard(event.item.data)
+      .subscribe(() => {
+          console.log(this.cardsArray);
+        },
+        (error) => {
+        console.log(error.status)
+        if ((error.status === 400) || (error.status === 0)) {
+          this.error.emit(true);
+          }
+        }
+      ));
   }
 
   deleteCard(indexDel) {
@@ -57,8 +63,6 @@ export class TableComponent implements OnDestroy, DoCheck {
   }
 
   setPositionNewCard() {
-    // console.log(this.cardsArray[this.cardsArray.length - 1].position)
-    // debugger
     if (this.cardsArray.length === 0) {
       return this.defaultPositionCard;
     } else {
@@ -68,28 +72,32 @@ export class TableComponent implements OnDestroy, DoCheck {
     }
   }
 
-  setPositionDropCard(event) {
+  setPositionDropCard(event: CdkDragDrop<CardResponse[]>) {
     const newIndex = event.currentIndex;
     const oldIndex = event.previousIndex;
-    // debugger
-    if (newIndex === oldIndex) {
-      return;
-    } else if (newIndex === 0 || (newIndex - 1 === 0)) {
-      return this.cardsArray[0].position / 2;
+
+    if (event.container.data.length === 1) {
+      return this.defaultPositionCard;
+    } else if ((newIndex === oldIndex) && (event.previousContainer === event.container)) {
+      return this.cardsArray[oldIndex].position;
+    } else if (newIndex === 0) {
+      return this.cardsArray[1].position / 2;
+    } else if (newIndex === (this.cardsArray.length - 1)) {
+      return (this.cardsArray[newIndex - 1].position) + this.defaultPositionCard + 1;
     } else {
-      return (((this.cardsArray[newIndex - 1].position) + (this.cardsArray[newIndex + 1].position) / 2));
+      return (((this.cardsArray[newIndex - 1].position + this.cardsArray[newIndex + 1].position) / 2));
     }
   }
 
   createCard(title: string) {
     const position = this.setPositionNewCard();
-    console.log('position', position);
     this.card = {
       board_id: this.boardId,
       table_id: this.tableId,
       position,
       title
     };
+
     this.subscriptions.add(this.cardsService.createCard(this.card)
       .subscribe((card: CardResponse) => {
           this.cardsArray.push(card);
@@ -98,9 +106,8 @@ export class TableComponent implements OnDestroy, DoCheck {
       ));
   }
 
-  ngDoCheck() {
-    const changes = this.iterableDiffer.diff(this.cardsArray);
-    if (changes) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.cardsArray.currentValue.length !== 0) {
       this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
     }
   }
