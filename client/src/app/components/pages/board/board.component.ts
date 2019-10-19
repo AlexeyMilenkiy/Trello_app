@@ -63,7 +63,6 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.separateCardsArray();
         },
         (error) => {
-        console.log(error);
           if ((error.status === 404) || (error.status === 0)) {
               this.router.navigate(['not-found']);
           } else if ((error.status !== 401) && (error.status !== 422)) {

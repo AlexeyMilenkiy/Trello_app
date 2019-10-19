@@ -18,7 +18,7 @@ export class TableComponent implements OnDestroy, OnChanges {
   @Input() headline: string;
   @Input() tableId: number;
   @Input() boardId: number;
-  @Output() error = new EventEmitter<boolean>();
+  @Output() serverError = new EventEmitter<boolean>();
 
   card: CardBeforeCreate = {
     board_id: 0,
@@ -46,13 +46,10 @@ export class TableComponent implements OnDestroy, OnChanges {
     event.item.data.position = this.setPositionDropCard(event);
 
     this.subscriptions.add(this.cardsService.updateCard(event.item.data)
-      .subscribe(() => {
-          console.log(this.cardsArray);
-        },
+      .subscribe(() => {},
         (error) => {
-        console.log(error.status)
         if ((error.status === 400) || (error.status === 0)) {
-          this.error.emit(true);
+          this.serverError.emit(true);
           }
         }
       ));
@@ -102,7 +99,11 @@ export class TableComponent implements OnDestroy, OnChanges {
       .subscribe((card: CardResponse) => {
           this.cardsArray.push(card);
         },
-        (error) => console.log(error)
+        (error) => {
+          if ((error.status === 400) || (error.status === 0)) {
+            this.serverError.emit(true);
+          }
+        }
       ));
   }
 
