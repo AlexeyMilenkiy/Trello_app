@@ -26,11 +26,11 @@ export class TableComponent implements OnDestroy, OnChanges {
     position: 0,
     title: ''
   };
-
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
 
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardsService) {
+  }
 
   drop(event: CdkDragDrop<CardResponse[]>) {
 
@@ -46,10 +46,11 @@ export class TableComponent implements OnDestroy, OnChanges {
     event.item.data.position = this.setPositionDropCard(event);
 
     this.subscriptions.add(this.cardsService.updateCard(event.item.data)
-      .subscribe(() => {},
+      .subscribe(() => {
+        },
         (error) => {
-        if ((error.status === 400) || (error.status === 0)) {
-          this.serverError.emit(true);
+          if ((error.status === 400) || (error.status === 0)) {
+            this.serverError.emit(true);
           }
         }
       ));
@@ -107,13 +108,18 @@ export class TableComponent implements OnDestroy, OnChanges {
       ));
   }
 
+  sortCardsByName() {
+    this.cardsArray.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.cardsArray.currentValue.length !== 0) {
       this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
     }
   }
 
-  ngOnDestroy(): void  {
+  ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 }
+

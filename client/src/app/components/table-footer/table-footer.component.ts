@@ -27,6 +27,7 @@ export class TableFooterComponent implements OnInit {
 
   createCard() {
     if (this.form.invalid) {
+      this.isOpen = false;
       return;
     }
     this.newCard.emit(this.form.value.titleCard);

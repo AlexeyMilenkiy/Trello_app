@@ -12,8 +12,14 @@ export class CardComponent {
   @Output() indexDelete = new EventEmitter<number>();
 
   isEdit = false;
+  color: any;
 
-  showDetails($event: string) {
+  changeTitle() {
+    console.log('click');
+    this.card.title = 'blablalbla';
+  }
+
+  showDetails($event) {
     console.log($event);
   }
 }
