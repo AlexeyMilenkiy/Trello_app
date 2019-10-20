@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges} from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, IterableChangeRecord, IterableDiffers, OnDestroy, Output} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -12,7 +12,7 @@ import { CardResponse } from '@app/interfaces/card-response';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent implements OnDestroy, OnChanges {
+export class TableComponent implements OnDestroy, DoCheck {
 
   @Input() cardsArray: CardResponse[];
   @Input() headline: string;
@@ -26,10 +26,14 @@ export class TableComponent implements OnDestroy, OnChanges {
     position: 0,
     title: ''
   };
+
+  iterableDiffer: any;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
 
-  constructor(private cardsService: CardsService) {
+  constructor(private cardsService: CardsService,
+              private iterableDiffers: IterableDiffers) {
+    this.iterableDiffer = this.iterableDiffers.find([]).create(null);
   }
 
   drop(event: CdkDragDrop<CardResponse[]>) {
@@ -54,10 +58,6 @@ export class TableComponent implements OnDestroy, OnChanges {
           }
         }
       ));
-  }
-
-  deleteCard(indexDel) {
-    this.cardsArray.splice(indexDel, 1);
   }
 
   setPositionNewCard() {
@@ -87,6 +87,7 @@ export class TableComponent implements OnDestroy, OnChanges {
     }
   }
 
+
   createCard(title: string) {
     const position = this.setPositionNewCard();
     this.card = {
@@ -112,9 +113,23 @@ export class TableComponent implements OnDestroy, OnChanges {
     this.cardsArray.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.cardsArray.currentValue.length !== 0) {
-      this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
+  ngDoCheck() {
+    const changes = this.iterableDiffer.diff(this.cardsArray);
+    if (changes) {
+      changes.forEachMovedItem((elem: IterableChangeRecord<CardResponse>) => {
+        console.log(elem);
+        const newIndex = elem.currentIndex;
+
+        if (newIndex === 0) {
+            return;
+          } else if (newIndex === (this.cardsArray.length - 1)) {
+            elem.item.position = (this.cardsArray[newIndex - 1].position) + this.defaultPositionCard + 1;
+          } else {
+            elem.item.position = (((this.cardsArray[newIndex - 1].position + this.cardsArray[newIndex + 1].position) / 2));
+          }
+
+        console.log(this.cardsArray);
+      });
     }
   }
 
@@ -122,4 +137,3 @@ export class TableComponent implements OnDestroy, OnChanges {
     this.subscriptions.unsubscribe();
   }
 }
-

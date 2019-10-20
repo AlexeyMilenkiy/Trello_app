@@ -5,7 +5,8 @@
   <div class="board__main">
     <div class="board__main__tables" cdkDropListGroup>
 
-      <app-table *ngFor="let cards of cardsArray; let i = index"
+      <app-table class="table__wrapper"
+                 *ngFor="let cards of cardsArray; let i = index"
                  [headline]="tablesMap[i+1]"
                  [cardsArray]="cards"
                  [tableId]="i+1"

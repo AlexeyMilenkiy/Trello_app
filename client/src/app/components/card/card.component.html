@@ -1,6 +1,7 @@
 <div class="card__wrapper"
-     [ngClass]="color"
-     (mouseover)="color='yellow'"
+     [ngClass]=""
+     (mouseover)="$event"
+     (mouseleave)="color=''"
      (click)="changeTitle()">
   <span>{{card.title}}</span>
   <span *ngIf="card.description" class="card__description-icon"></span>

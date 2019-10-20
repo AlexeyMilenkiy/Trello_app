@@ -1,10 +1,12 @@
 .table {
-  width: 300px;
+  max-height: 100%;
   border-radius: 3px;
-  height: auto;
-  min-height: 32px;
+  position: relative;
+  min-height: 100px;
   background-color: #ebecf0;
-  margin-right: 10px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 
   &__title {
     width: 90%;
@@ -12,7 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
+    min-height: 45px;
 
     span {
       font-family: Roboto, sans-serif;
@@ -40,7 +42,10 @@
 
   &__cards {
     width: 100%;
-    min-height: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    flex: 1 1 auto;
+    flex-direction: column;
   }
 }
 
@@ -67,6 +72,11 @@
   &:active {
     cursor: grabbing;
   }
+
+  &:hover {
+    background: #f4f5f7;
+    border-bottom-color: rgba(9,30,66,.25);
+  }
 }
 
 .cdk-drag-placeholder {
@@ -76,15 +86,10 @@
   box-shadow: none;
 }
 
-.cdk-drag-preview {
-  //opacity: 0;
-  //position: relative;
-}
 
-.drag-card{
-  transform: rotate(30deg);
-  width: 200px;
-  height: 20px;
+.content {
+  width: 100px;
+  height: 30px;
   background: red;
-  z-index: 10000;
+  margin: 10px 0;
 }

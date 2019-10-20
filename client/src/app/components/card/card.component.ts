@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CardResponse} from '@app/interfaces/card-response';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CardResponse } from '@app/interfaces/card-response';
 
 @Component({
   selector: 'app-card',
@@ -15,8 +15,9 @@ export class CardComponent {
   color: any;
 
   changeTitle() {
-    console.log('click');
-    this.card.title = 'blablalbla';
+    // console.log('click');
+    // this.card.title = 'blablalbla';
+    // this.card.description = 'wewewewewe';
   }
 
   showDetails($event) {
