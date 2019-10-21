@@ -44,8 +44,14 @@ router.put('/update',validate([
         }))
         .not().isEmpty()
         .trim()
-        .isLength({ min: 1, max: 200 }), //изменить длину
+        .isLength({ min: 1, max: 400 }), //изменить длину
 ]),controller.cards.updateCard);
+
+router.delete('/delete',validate([
+    header('card_id')
+        .not().isEmpty()
+        .isNumeric(),
+]),controller.cards.deleteCard);
 
 module.exports = router;
 

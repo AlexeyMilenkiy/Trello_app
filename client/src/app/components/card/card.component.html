@@ -5,7 +5,7 @@
   <span class="card__container">
     {{card.title}}
     <span [style.display]="isShowEditTitleIcon ? 'block':'none'"
-          (click)="openEditorTitle($event); $event.preventDefault()"
+          (click)="openEditorTitle($event)"
           class="card__menu"></span>
   </span>
 

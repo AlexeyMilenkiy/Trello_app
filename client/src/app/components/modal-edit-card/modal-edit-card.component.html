@@ -8,12 +8,18 @@
     <div class="modal__card__header">
       <span class="modal__card__header__cardIcon"></span>
 
-      <textarea
-          class="modal__card__title"
-          (keydown.enter)="$event.target.blur()"
-          (keydown.shift.enter)="$event.preventDefault()"
-          [value]="editableCard.title"
-          (change)="changeTitle()"></textarea>
+      <form [formGroup]="formTitle"
+            (ngSubmit)="changeTitle()">
+
+        <textarea class="modal__card__title"
+                  maxlength="200"
+                  #titleCard
+                  formControlName="titleText"
+                  autosize
+                  (keydown.enter)="$event.preventDefault(); $event.target.blur()"
+                  (keydown.shift.enter)="$event.preventDefault()"
+                  (blur)="blurOnTitle(titleCard)"></textarea>
+      </form>
 
       <span (click)="close($event)"
          class="modal__card__close"></span>
@@ -31,15 +37,15 @@
       </div>
 
       <form *ngIf="isEditDescription"
-            [formGroup]="form"
+            [formGroup]="formDescription"
             (ngSubmit)="changeDescription()">
 
         <textarea
                 class="modal__card__description__text"
                 placeholder="Add a more detailed description..."
                 formControlName="descriptionText"
-                (blur)="isEditDescription = false"
-                (change)="changeDescription()"
+                maxlength="400"
+                (blur)="changeDescription()"
                 appAutoFocusDirective></textarea>
 
         <div class="modal__card__description__btn-wrap">

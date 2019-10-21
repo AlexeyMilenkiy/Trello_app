@@ -34,5 +34,23 @@ module.exports = {
             .catch(() => {
                 res.status(400);
             });
+    },
+
+    deleteCard(req, res) {
+        let cardId = req.headers.card_id;
+
+        Card.destroy(
+            { where: {
+                id: {
+                    [Op.eq]: cardId
+                }
+            }
+            })
+            .then((data) => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
     }
 };

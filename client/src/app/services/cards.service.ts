@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 import { environment } from '@env/environment';
 import { CardResponse } from '@app/interfaces/card-response';
 import { CardBeforeCreate } from '@app/interfaces/cardBeforeCreate';
 
-class EmitEvent {
-}
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +15,14 @@ export class CardsService {
 
   constructor(private http: HttpClient) { }
 
-  sendDeletingCard(event: EmitEvent) {
-    this.subject.next(event);
+  sendDeletingCard(card: CardResponse) {
+    this.deleteCard(card)
+      .subscribe(() => {
+        this.subject.next(card);
+      },
+        (error) => {
+        console.log('error from service', error);
+        });
   }
 
   getDeletingCard(): Observable<any> {
@@ -31,5 +35,10 @@ export class CardsService {
 
   updateCard(card: CardResponse): Observable<CardResponse> {
     return this.http.put<CardResponse>(`${environment.baseUrl}cards/update`, {...card});
+  }
+
+  deleteCard(card: CardResponse): Observable<any> {
+    const headers = new HttpHeaders().set('card_id', `${card.id}`);
+    return this.http.delete(`${environment.baseUrl}cards/delete`, {headers});
   }
 }

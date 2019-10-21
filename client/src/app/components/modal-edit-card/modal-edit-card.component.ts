@@ -1,15 +1,18 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
 
 import { CardResponse } from '@app/interfaces/card-response';
 import { CardsService } from '@app/services/cards.service';
+
 
 @Component({
   selector: 'app-modal-edit-card',
   templateUrl: './modal-edit-card.component.html',
   styleUrls: ['./modal-edit-card.component.less']
 })
-export class ModalEditCardComponent implements OnInit, OnChanges {
+export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() isEdit: boolean;
   @Input() card: CardResponse;
@@ -25,26 +28,71 @@ export class ModalEditCardComponent implements OnInit, OnChanges {
   };
 
   isEditDescription = false;
-  form: FormGroup;
+  formTitle: FormGroup;
+  formDescription: FormGroup;
+  subscriptions: Subscription = new Subscription();
 
   constructor(private cardsService: CardsService) {}
 
-  ngOnInit() {
-      this.form = new FormGroup({
-        descriptionText: new FormControl(null, [
-          Validators.maxLength(100)
-        ]),
-      });
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.card.currentValue) {
+      this.editableCard = changes.card.currentValue;
+      this.formTitle.setValue({titleText : this.editableCard.title});
+    }
   }
 
-  changeTitle() {
-    // this.title = this.form.v
-    // this.changedTitle.emit(this.title);
+  ngOnInit() {
+    this.formTitle = new FormGroup({
+      titleText: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(1),
+        Validators.maxLength(200)
+      ]),
+    });
+    this.formDescription = new FormGroup({
+        descriptionText: new FormControl(null, [
+          Validators.maxLength(200)
+        ]),
+    });
+  }
+
+  blurOnTitle(elem: HTMLTextAreaElement) {
+    if (this.formTitle.invalid || !this.formTitle.value.titleText.trim()) {
+      elem.focus();
+    } else {
+      this.changeTitle();
+    }
   }
 
   changeDescription() {
-    this.card.description = this.form.value.descriptionText;
-    // this.changedDescription.emit(this.form.value.descriptionText);
+    this.isEditDescription = false;
+    if (this.editableCard.description !== this.formDescription.value.descriptionText.trim()) {
+      this.card.description = this.formDescription.value.descriptionText;
+
+      this.subscriptions.add(this.cardsService.updateCard(this.card)
+        .subscribe(() => {},
+          (error) => {
+            if ((error.status !== 401) && (error.status !== 422)) {
+              // this.isError = true;
+            }
+          }
+        ));
+    }
+  }
+
+  changeTitle() {
+    if (this.editableCard.title !== this.formTitle.value.titleText.trim()) {
+      this.card.title = this.formTitle.value.titleText;
+
+      this.subscriptions.add(this.cardsService.updateCard(this.card)
+        .subscribe(() => {},
+          (error) => {
+            if ((error.status !== 401) && (error.status !== 422)) {
+              // this.isError = true;
+            }
+          }
+        ));
+    }
   }
 
   close(event) {
@@ -55,12 +103,11 @@ export class ModalEditCardComponent implements OnInit, OnChanges {
   }
 
   deleteCard() {
-    this.cardsService.sendDeletingCard(this.card);
-    }
+    this.cardsService.sendDeletingCard(this.editableCard);
+    this.isClose.emit(false);
+  }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.card.currentValue) {
-      this.editableCard = changes.card.currentValue;
-      }
-    }
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+  }
 }
