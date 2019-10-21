@@ -28,7 +28,7 @@ export class ModalCreateBoardComponent implements OnInit {
   }
 
   create() {
-    if (this.form.invalid) {
+    if (this.form.invalid || !this.form.value.title.trim().length) {
       return;
     }
     this.title = this.form.value.title;

@@ -2,12 +2,12 @@
      (click)="openEditModal($event)"
      (mouseenter)="isShowEditTitleIcon = true"
      (mouseleave)="isShowEditTitleIcon = false">
-  <div class="card__container">
+  <span class="card__container">
     {{card.title}}
     <span [style.display]="isShowEditTitleIcon ? 'block':'none'"
           (click)="openEditorTitle($event)"
           class="card__menu"></span>
-  </div>
+  </span>
 
   <span *ngIf="card.description" class="card__description-icon"></span>
 </div>
@@ -39,9 +39,9 @@
 
 </div>
 
-<app-modal-edit-card [isEdit]="isCardEditModal"
+<app-modal-edit-card [isEdit]="isShowCardEditModal"
                      [card]="card"
-                     (closed)="isCardEditModal = $event">
+                     (closed)="isShowCardEditModal = $event">
 </app-modal-edit-card>
 
 <app-modal-error [isModal]="isError"

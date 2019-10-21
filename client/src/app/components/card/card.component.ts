@@ -15,7 +15,7 @@ export class CardComponent implements OnInit, OnDestroy {
 
   @Input() card: CardResponse;
 
-  isCardEditModal = false;
+  isShowCardEditModal = false;
   isShowEditTitleIcon = false;
   isOpenEditTitle = false;
   isError = false;
@@ -37,9 +37,10 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   openEditModal(event) {
-    if (event.target.className === 'card__container') {
-      this.isCardEditModal = true;
+    if (event.target.className === 'card__menu') {
+      return;
     }
+    this.isShowCardEditModal = true;
   }
 
   changeCardTitle() {
@@ -52,10 +53,12 @@ export class CardComponent implements OnInit, OnDestroy {
       .subscribe(() =>  {
           this.isOpenEditTitle = false;
         },
-        () => {
+        (error) => {
+        if ((error.status !== 401) && (error.status !== 422)) {
           this.card.title = oldTitle;
           this.isOpenEditTitle = false;
           this.isError = true;
+        }
         }));
   }
 
