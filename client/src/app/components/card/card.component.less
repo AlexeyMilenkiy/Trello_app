@@ -7,6 +7,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
+    margin-left: 10px;
   }
 }
 .card__description-icon {
@@ -21,18 +23,18 @@
 }
 
 .card__menu {
-  display: none;
   font-family: Trello, sans-serif;
-  font-size: 20px;
+  font-size: 23px;
   background-color: #f4f5f7;
   background-clip: padding-box;
   background-origin: padding-box;
   border-radius: 3px;
-  opacity: .8;
-  padding: 4px;
+  opacity: 0.8;
+  padding: 5px;
   right: 2px;
   top: 2px;
   color: #42526e;
+  margin-right: 3px;
 
   &:hover {
     background-color: #ebecf0;
@@ -71,23 +73,23 @@
       margin-bottom: 5px;
       outline: none;
     }
-
-    &__btn {
-      background-color: #5aac44;
-      box-shadow: none;
-      border: none;
-      color: #fff;
-      border-radius: 4px;
-      width: 90px;
-      height: 40px;
-      font-family: Roboto, sans-serif;
-      font-size: 18px;
-      padding: 0;
-      font-weight: 400;
-      align-self: flex-start;
-      outline: none;
-    }
   }
+}
+
+.form__btn {
+  background-color: #5aac44;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  width: 90px;
+  height: 40px;
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
+  padding: 0;
+  font-weight: 400;
+  align-self: flex-start;
+  outline: none;
 }
 
 .form__close {

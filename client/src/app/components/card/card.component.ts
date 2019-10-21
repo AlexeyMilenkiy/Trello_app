@@ -37,7 +37,7 @@ export class CardComponent implements OnInit{
   }
 
   close(ev) {
-    if (ev.className === 'form__container' || ev.className === 'form__close') {
+    if ((ev.target.className === 'form__container') || (ev.target.className === 'form__close')) {
       this.isOpenEditTitle = false;
     }
   }
