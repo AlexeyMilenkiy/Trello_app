@@ -49,6 +49,6 @@ export class ModalEditCardComponent implements OnInit {
   }
 
   deleteCard() {
-    this.cardsService.sendDeleteCard(this.card);
+    this.cardsService.sendDeletingCard(this.card);
     }
 }

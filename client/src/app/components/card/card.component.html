@@ -1,7 +1,8 @@
 <div class="card__wrapper"
-     (click)="openEditModal($event)"
+     [routerLink]="['cards', card.id]"
      (mouseenter)="isShowEditTitleIcon = true"
      (mouseleave)="isShowEditTitleIcon = false">
+
   <span class="card__container">
     {{card.title}}
     <span [style.display]="isShowEditTitleIcon ? 'block':'none'"
@@ -38,11 +39,6 @@
   <span class="form__close" (click)="closeEditorTitle($event)"></span>
 
 </div>
-
-<app-modal-edit-card [isEdit]="isShowCardEditModal"
-                     [card]="card"
-                     (closed)="isShowCardEditModal = $event">
-</app-modal-edit-card>
 
 <app-modal-error [isModal]="isError"
                  [message]="'Sorry, failed to change title! Please try again later'"

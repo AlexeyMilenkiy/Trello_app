@@ -19,7 +19,8 @@ const routes: Routes = [
   { path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
     children: [
       { path: 'boards', component: BoardsComponent},
-      { path: 'boards/:id', component: BoardComponent},
+      { path: 'boards/:board_id', component: BoardComponent},
+      { path: 'boards/:board_id/cards/:card_id', component: BoardComponent},
     ]},
 
   { path: 'logged-out', component: LogoutPageComponent, canActivate: [AuthGuard]},

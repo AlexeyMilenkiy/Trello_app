@@ -55,7 +55,8 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.boardId = parseInt(this.activateRoute.snapshot.params.id, 10);
+    console.log(this.activateRoute.snapshot.params);
+    this.boardId = parseInt(this.activateRoute.snapshot.params.board_id, 10);
 
     this.subscriptions.add(this.boardsService.getBoard(this.boardId)
       .subscribe((board: BoardResponse) => {
