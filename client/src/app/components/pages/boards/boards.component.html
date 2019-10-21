@@ -26,8 +26,8 @@
   </div>
 
   <app-modal-create-board [isOpen]="isOpen"
-                    (closed)="isOpen = $event"
-                    (newBoard)="create($event)">
+                          (closed)="isOpen = $event"
+                          (newBoard)="create($event)">
   </app-modal-create-board>
 
   <app-modal-error [isModal]="isError"

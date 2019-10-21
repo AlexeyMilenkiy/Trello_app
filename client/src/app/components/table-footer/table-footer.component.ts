@@ -26,7 +26,7 @@ export class TableFooterComponent implements OnInit {
   }
 
   createCard() {
-    if (this.form.invalid) {
+    if (this.form.invalid || !this.form.value.titleCard.trim().length) {
       this.isOpen = false;
       return;
     }

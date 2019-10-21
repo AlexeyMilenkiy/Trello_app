@@ -18,7 +18,6 @@ export class TableComponent implements OnDestroy, OnChanges {
   @Input() headline: string;
   @Input() tableId: number;
   @Input() boardId: number;
-  @Output() serverError = new EventEmitter<boolean>();
 
   card: CardBeforeCreate = {
     board_id: 0,
@@ -27,6 +26,7 @@ export class TableComponent implements OnDestroy, OnChanges {
     title: ''
   };
 
+  isError = false;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
 
@@ -59,7 +59,7 @@ export class TableComponent implements OnDestroy, OnChanges {
         },
         (error) => {
           if ((error.status === 400) || (error.status === 0)) {
-            this.serverError.emit(true);
+            this.isError = true;
           }
         }
       ));
@@ -108,7 +108,7 @@ export class TableComponent implements OnDestroy, OnChanges {
         },
         (error) => {
           if ((error.status === 400) || (error.status === 0)) {
-            this.serverError.emit(true);
+            this.isError = true;
           }
         }
       ));

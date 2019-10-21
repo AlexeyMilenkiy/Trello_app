@@ -18,11 +18,12 @@
 
   <form class="form"
         [formGroup]="form"
+        (ngSubmit)="changeCardTitle()"
         [ngStyle]="{'top' : top+'px', 'left' : right+'px'}">
 
     <textarea formControlName="titleCard"
               maxlength="200"
-              (keydown.enter)="form.invalid ? $event.preventDefault() : createCard()"
+              (keydown.enter)="form.invalid ? $event.preventDefault() : changeCardTitle()"
               (keydown.shift.enter)="$event.preventDefault()"
               appAutoFocusDirective
               autosize
@@ -42,3 +43,8 @@
                      [card]="card"
                      (closed)="isCardEditModal = $event">
 </app-modal-edit-card>
+
+<app-modal-error [isModal]="isError"
+                 [message]="'Sorry, failed to change title! Please try again later'"
+                 (closed)="isError = $event">
+</app-modal-error>
