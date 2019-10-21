@@ -2,7 +2,8 @@
 
   <div class="table__title">
     <span>{{headline}}</span>
-    <button (click)="sortCardsByName()">Sort by Name</button>
+    <button [disabled]="cardsArray.length === ( 1 || 0 )"
+            (click)="sortCardsByName()">Sort by Name</button>
   </div>
 
   <div class="table__cards"

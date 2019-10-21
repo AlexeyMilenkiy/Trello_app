@@ -2,15 +2,16 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-
-  div{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 100%;
-    margin-left: 10px;
-  }
 }
+.card__container{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding-left: 10px;
+  box-sizing: border-box;
+}
+
 .card__description-icon {
   font-family: Trello, sans-serif;
   font-size: 18px;
@@ -90,6 +91,7 @@
   font-weight: 400;
   align-self: flex-start;
   outline: none;
+  cursor: pointer;
 }
 
 .form__close {

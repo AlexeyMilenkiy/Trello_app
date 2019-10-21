@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { CardResponse } from '@app/interfaces/card-response';
 
@@ -8,21 +8,20 @@ import { CardResponse } from '@app/interfaces/card-response';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.less']
 })
-export class CardComponent implements OnInit{
+export class CardComponent implements OnInit {
 
   @Input() card: CardResponse;
-  @Output() indexDelete = new EventEmitter<number>();
 
-  isEdit = false;
-  isShowMenu = false;
+  isCardEditModal = false;
+  isShowEditTitleIcon = false;
   isOpenEditTitle = false;
   top: 0;
   right: 0;
   form: FormGroup;
 
   openEditModal(event) {
-    if (event.target.className === 'card__wrapper') {
-      this.isEdit = true;
+    if (event.target.className === 'card__container') {
+      this.isCardEditModal = true;
     }
   }
 
@@ -30,21 +29,21 @@ export class CardComponent implements OnInit{
 
   }
 
-  openEditor(ev) {
-    this.top = ev.path[3].offsetTop;
-    this.right = ev.path[3].offsetLeft;
+  openEditorTitle(event) {
+    this.top = event.path[3].offsetTop;
+    this.right = event.path[3].offsetLeft;
     this.isOpenEditTitle = true;
   }
 
-  close(ev) {
-    if ((ev.target.className === 'form__container') || (ev.target.className === 'form__close')) {
+  closeEditorTitle(event) {
+    if ((event.target.className === 'form__container') || (event.target.className === 'form__close')) {
       this.isOpenEditTitle = false;
     }
   }
 
   ngOnInit() {
     this.form = new FormGroup({
-      titleCard: new FormControl(null, [
+      titleCard: new FormControl(this.card.title, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(200)
