@@ -1,12 +1,11 @@
 <div class="card__wrapper"
-     [routerLink]="['cards', card.id]"
      (mouseenter)="isShowEditTitleIcon = true"
      (mouseleave)="isShowEditTitleIcon = false">
 
   <span class="card__container">
     {{card.title}}
     <span [style.display]="isShowEditTitleIcon ? 'block':'none'"
-          (click)="openEditorTitle($event)"
+          (click)="openEditorTitle($event); $event.preventDefault()"
           class="card__menu"></span>
   </span>
 

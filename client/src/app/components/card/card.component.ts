@@ -15,7 +15,6 @@ export class CardComponent implements OnInit, OnDestroy {
 
   @Input() card: CardResponse;
 
-  isShowCardEditModal = false;
   isShowEditTitleIcon = false;
   isOpenEditTitle = false;
   isError = false;
@@ -34,13 +33,6 @@ export class CardComponent implements OnInit, OnDestroy {
         Validators.maxLength(200)
       ]),
     });
-  }
-
-  openEditModal(event) {
-    if (event.target.className === 'card__menu') {
-      return;
-    }
-    this.isShowCardEditModal = true;
   }
 
   changeCardTitle() {
@@ -63,6 +55,7 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   openEditorTitle(event) {
+    event.preventDefault();
     this.top = event.path[3].offsetTop;
     this.right = event.path[3].offsetLeft;
     this.isOpenEditTitle = true;
@@ -77,4 +70,5 @@ export class CardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
+
 }

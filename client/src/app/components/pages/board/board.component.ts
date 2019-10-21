@@ -26,7 +26,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   ];
 
   boardId = 0;
+  cardId = 0;
   board: BoardResponse;
+  editCard: CardResponse;
+  isOpenEditCardModal = false;
   subscriptions: Subscription = new Subscription();
   isError = false;
 
@@ -36,9 +39,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   separateCardsArray() {
-    // this.cardsArray[0] = this.board.cards.filter((card: CardResponse) => card.table_id === 1);
-    // this.cardsArray[1] = this.board.cards.filter((card: CardResponse) => card.table_id === 2);
-    // this.cardsArray[2] = this.board.cards.filter((card: CardResponse) => card.table_id === 3);
     this.board.cards.forEach((card: CardResponse) => {
       card.position = Number(card.position); /// changed string to number
       switch (card.table_id) {
@@ -55,13 +55,18 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.activateRoute.snapshot.params);
+    this.cardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
     this.boardId = parseInt(this.activateRoute.snapshot.params.board_id, 10);
+    this.isOpenEditCardModal = false;
 
     this.subscriptions.add(this.boardsService.getBoard(this.boardId)
       .subscribe((board: BoardResponse) => {
-          this.board = {...board};
-          this.separateCardsArray();
+        this.board = {...board};
+        if (this.cardId) {
+            this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardId);
+            this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
+        }
+        this.separateCardsArray();
         },
         (error) => {
           if ((error.status === 404) || (error.status === 0)) {
@@ -75,5 +80,10 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  closeEditModal(event: boolean) {
+    this.isOpenEditCardModal = event;
+    this.router.navigate(['/boards', this.boardId]);
   }
 }
