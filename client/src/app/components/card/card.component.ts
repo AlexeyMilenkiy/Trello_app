@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -11,7 +11,7 @@ import { CardsService } from '@app/services/cards.service';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.less']
 })
-export class CardComponent implements OnInit {
+export class CardComponent implements OnInit, OnDestroy {
 
   @Input() card: CardResponse;
 
@@ -50,12 +50,10 @@ export class CardComponent implements OnInit {
     this.card.title = this.form.value.titleCard;
     this.subscriptions.add(this.cardsService.updateCard(this.card)
       .subscribe(() =>  {
-          this.form.reset();
           this.isOpenEditTitle = false;
         },
         () => {
           this.card.title = oldTitle;
-          this.form.reset();
           this.isOpenEditTitle = false;
           this.isError = true;
         }));
@@ -71,5 +69,9 @@ export class CardComponent implements OnInit {
     if ((event.target.className === 'form__container') || (event.target.className === 'form__close')) {
       this.isOpenEditTitle = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
