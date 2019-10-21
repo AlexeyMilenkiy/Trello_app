@@ -1,5 +1,7 @@
 import {Component, ElementRef, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CardResponse} from '@app/interfaces/card-response';
+import {CardsService} from '@app/services/cards.service';
 
 @Component({
   selector: 'app-modal-edit-card',
@@ -9,19 +11,15 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class ModalEditCardComponent implements OnInit {
 
   @Input() isEdit: boolean;
-  @Input() title: string;
-  @Input() description: string;
-  @Input() index: number;
+  @Input() card: CardResponse;
   @Output() closed = new EventEmitter<boolean>();
-  // @Output() changedTitle = new EventEmitter<string>();
-  @Output() changedDescription = new EventEmitter<string>();
-  @Output() deletedCard = new EventEmitter<any>();   //Исправить
 
   isEditDescription = false;
   form: FormGroup;
   private element: any;
 
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef,
+              private cardsService: CardsService) {
     this.element = el.nativeElement;
   }
 
@@ -39,7 +37,7 @@ export class ModalEditCardComponent implements OnInit {
   }
 
   changeDescription() {
-    this.description = this.form.value.descriptionText;
+    this.card.description = this.form.value.descriptionText;
     // this.changedDescription.emit(this.form.value.descriptionText);
   }
 
@@ -51,6 +49,6 @@ export class ModalEditCardComponent implements OnInit {
   }
 
   deleteCard() {
-    this.element.remove();
-  }
+    this.cardsService.sendDeleteCard(this.card);
+    }
 }

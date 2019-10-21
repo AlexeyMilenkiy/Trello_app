@@ -1,9 +1,47 @@
 <div class="card__wrapper"
-     [ngClass]=""
-     (mouseover)="$event"
-     (mouseleave)="color=''"
-     (click)="changeTitle()">
-  <span>{{card.title}}</span>
+     (click)="openEditModal($event)"
+     (mouseenter)="isShowMenu = true"
+     (mouseleave)="isShowMenu = false">
+  <div>
+    {{card.title}}
+    <span [style.display]="isShowMenu ? 'block':'none'"
+          (click)="openEditor($event)"
+          class="card__menu"></span>
+  </div>
+
   <span *ngIf="card.description" class="card__description-icon"></span>
 </div>
 
+<div class="form__container"
+     *ngIf="isOpenEditTitle"
+     (click)="close($event)">
+
+  <form class="form"
+        [formGroup]="form"
+        [ngStyle]="{'top' : top+'px', 'left' : right+'px'}">
+
+    <textarea placeholder="Enter a title for this card..."
+              formControlName="titleCard"
+              maxlength="200"
+              (blur)="createCard()"
+              (keydown.enter)="form.invalid ? $event.preventDefault() : createCard()"
+              (keydown.shift.enter)="$event.preventDefault()"
+              appAutoFocusDirective
+              autosize
+              [minRows]="3"></textarea>
+
+
+      <button [ngClass]="{disabled: form.invalid}"
+              [disabled]="form.invalid"
+              type="submit"
+              class="form__btn">Save</button>
+  </form>
+
+  <span class="form__close" (click)="close($event)"></span>
+
+</div>
+
+<app-modal-edit-card [isEdit]="isEdit"
+                     [card]="card"
+                     (closed)="isEdit = $event">
+</app-modal-edit-card>

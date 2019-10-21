@@ -12,7 +12,7 @@
           class="modal__card__title"
           (keydown.enter)="$event.target.blur()"
           (keydown.shift.enter)="$event.preventDefault()"
-          [(ngModel)]="title"
+          [(ngModel)]="card.title"
           (change)="changeTitle()"></textarea>
 
       <span (click)="close($event)"
@@ -25,7 +25,7 @@
       <div class="modal__card__description__container">
         <span class="modal__card__description-icon"></span>
         <span class="modal__card__description__headline">Description</span>
-        <button *ngIf="description && !isEditDescription"
+        <button *ngIf="card.description && !isEditDescription"
                 (click)="isEditDescription = true"
                 class="modal__card__edit-btn">Edit</button>
       </div>
@@ -40,7 +40,7 @@
                 formControlName="descriptionText"
                 (blur)="isEditDescription = false"
                 (change)="changeDescription()"
-                [value]="description"
+                [value]="card.description"
                 appAutoFocusDirective></textarea>
 
         <div class="modal__card__description__btn-wrap">
@@ -53,13 +53,13 @@
 
       </form>
 
-      <p *ngIf="description && !isEditDescription"
+      <p *ngIf="card.description && !isEditDescription"
          (click)="isEditDescription = true"
         class="modal__card__description__content">
-        {{description}}
+        {{card.description}}
       </p>
 
-      <p *ngIf="!description && !isEditDescription"
+      <p *ngIf="!card.description && !isEditDescription"
          (click)="isEditDescription = true"
         class="modal__card__description__preview">
         Add a more detailed description...
