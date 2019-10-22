@@ -24,7 +24,7 @@ export class BoardsService {
 
     this.changeBoardShareLink(boardId, shareLink)
       .subscribe(
-        () => this.subject.next(`${environment.baseClientUrl}boards/${shareLink}`),
+        () => this.subject.next(`${environment.baseClientUrl}boards/shared/${shareLink}`),
         () => this.subject.next('Sorry server is unavailable'));
   }
 
