@@ -95,12 +95,12 @@
 }
 
 .invite__board__block {
-  width: 304px;
-  height: 200px;
+  width: 350px;
+  min-height: 120px;
   position: absolute;
   background: #fff;
   border-radius: 3px;
-  box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+  box-shadow: 0 8px 16px -4px rgba(9, 30, 66, .25), 0 0 0 1px rgba(9, 30, 66, .08);
   z-index: 100;
   display: flex;
   flex-direction: column;
@@ -109,7 +109,7 @@
   &__title {
     width: 90%;
     height: 50px;
-    border-bottom: 1px solid rgba(9,30,66,.13);
+    border-bottom: 1px solid rgba(9, 30, 66, .13);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,6 +145,7 @@
     width: 90%;
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     &-text {
       color: #172b4d;
@@ -158,8 +159,68 @@
     }
 
     &__link {
+      color: #0079bf;
       font-family: Roboto, sans-serif;
       font-size: 18px;
+      text-decoration: underline;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    p {
+      color: #5e6c84;
+      font-family: Roboto, sans-serif;
+      font-size: 16px;
+      margin: 5px 0 0 0;
+    }
+  }
+
+  &__url {
+    width: 90%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+
+    &-input {
+      background-color: #fafbfc;
+      box-shadow: inset 0 0 0 2px #ebecf0;
+      border: none;
+      color: #172b4d;
+      box-sizing: border-box;
+      -webkit-appearance: none;
+      border-radius: 3px;
+      display: block;
+      line-height: 20px;
+      padding: 8px 12px;
+      width: 240px;
+      height: 35px;
+      font-size: 18px;
+      transition-property: background-color,border-color,box-shadow;
+      transition-duration: 85ms;
+      transition-timing-function: ease;
+    }
+
+    &-btn {
+      background-color: #5aac44;
+      box-shadow: none;
+      border: none;
+      color: #fff;
+      border-radius: 4px;
+      font-family: Roboto, sans-serif;
+      font-size: 18px;
+      height: 35px;
+      padding: 0 10px;
+      font-weight: 400;
+      outline: none;
+
+      &:hover {
+        cursor: pointer;
+        background-color: #61bd4f;
+      }
     }
   }
 }

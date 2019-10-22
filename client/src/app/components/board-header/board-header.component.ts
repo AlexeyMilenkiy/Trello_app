@@ -21,6 +21,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   top: number;
   left: number;
   isOpenInviteBlock = false;
+  isCreateLink = false;
 
   constructor(private boardsService: BoardsService,
               private router: Router) { }
@@ -80,5 +81,9 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  generateLink() {
+    this.isCreateLink = !this.isCreateLink;
   }
 }
