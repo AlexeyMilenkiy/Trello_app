@@ -43,7 +43,7 @@ router.put('/update',validate([
             checkNull: true,
         }))
         .trim()
-        .isLength({ min: 0, max: 400 }), //изменить длину
+        .isLength({ min: 0, max: 400 }),
 ]),controller.cards.updateCard);
 
 router.delete('/delete',validate([

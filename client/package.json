@@ -25,6 +25,7 @@
     "ngx-autosize": "^1.6.4",
     "ngx-autosize-input": "^2.3.6",
     "rxjs": "~6.4.0",
+    "ts-md5": "^1.2.7",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
   },

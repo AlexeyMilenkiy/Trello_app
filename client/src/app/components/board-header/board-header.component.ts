@@ -1,8 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {BoardsService} from '@app/services/boards.service';
-import {Subscription} from 'rxjs';
-import {Router} from '@angular/router';
+import { Component, Input, OnDestroy, OnInit} from '@angular/core';
+import { FormControl, FormGroup, Validators} from '@angular/forms';
+
+import { Subscription} from 'rxjs';
+
+import { BoardsService} from '@app/services/boards.service';
+import { Router} from '@angular/router';
 
 @Component({
   selector: 'app-board-header',
@@ -22,6 +24,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   left: number;
   isOpenInviteBlock = false;
   isCreateLink = false;
+  hashLink: string | Int32Array = 'Loading...';
 
   constructor(private boardsService: BoardsService,
               private router: Router) { }
@@ -73,7 +76,6 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   }
 
   openInviteBlock(event) {
-    console.log(event);
     this.top = event.path[0].offsetTop + 45;
     this.left = event.path[0].offsetLeft;
     this.isOpenInviteBlock = true;
@@ -84,6 +86,14 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   }
 
   generateLink() {
-    this.isCreateLink = !this.isCreateLink;
+    if (!this.isCreateLink) {
+      this.isCreateLink = true;
+      this.boardsService.createHashLink(this.title, this.boardId);
+      this.subscriptions.add(this.boardsService.getHashLink()
+        .subscribe((hashLink: string) => {
+          this.hashLink = hashLink;
+        })
+      );
+    }
   }
 }

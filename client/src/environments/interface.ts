@@ -1,4 +1,5 @@
 export interface Environment {
-  baseUrl: string,
-  production: boolean,
+  production: boolean;
+  baseUrl: string;
+  baseClientUrl: string;
 }

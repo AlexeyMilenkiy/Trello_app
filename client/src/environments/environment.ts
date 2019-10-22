@@ -6,7 +6,8 @@ import {Environment} from './interface';
 
 export const environment: Environment = {
   production: false,
-  baseUrl: 'http://localhost:3000/api/v1/'
+  baseUrl: 'http://localhost:3000/api/v1/',
+  baseClientUrl: 'http://localhost:4200/',
 };
 
 /*

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+
+import {Observable, Subject} from 'rxjs';
+import { Md5 } from 'ts-md5/dist/md5';
 
 import { environment } from '@env/environment';
 import { BoardBeforeCreate } from '@app/interfaces/board-before-create';
@@ -12,7 +14,23 @@ import { BoardResponse } from '@app/interfaces/board-response';
 
 export class BoardsService {
 
+  private subject = new Subject();
+
   constructor(private http: HttpClient) { }
+
+  createHashLink(boardTitle: string, boardId: number) {
+    const md5 = new Md5();
+    const shareLink = md5.appendStr(`${boardTitle}${boardId}`).end();
+
+    this.changeBoardShareLink(boardId, shareLink)
+      .subscribe(
+        () => this.subject.next(`${environment.baseClientUrl}boards/${shareLink}`),
+        () => this.subject.next('Sorry server is unavailable'));
+  }
+
+  getHashLink(): Observable<any> {
+    return this.subject.asObservable();
+  }
 
   getUserId() {
     return parseInt(localStorage.getItem('id'), 10);
@@ -27,6 +45,12 @@ export class BoardsService {
     return this.http.delete(`${environment.baseUrl}boards/remove-board`, {headers});
   }
 
+  changeBoardShareLink(id: number, shareLink: string | Int32Array | null): Observable<number[]> {
+    return (
+      this.http.put<number[]>(`${environment.baseUrl}boards/change-board-link`, {id, shareLink})
+    );
+  }
+
   getBoards(): Observable<BoardResponse[]> {
     const id = this.getUserId();
     const headers = new HttpHeaders().set('author_id', `${id}`);
@@ -38,7 +62,7 @@ export class BoardsService {
     return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-board`, {headers});
   }
 
-  changeBoardTitle(title: string, id: number) {
-    return this.http.put(`${environment.baseUrl}boards/change-board-title`, {title, id});
+  changeBoardTitle(title: string, id: number): Observable<number[]> {
+    return this.http.put<number[]>(`${environment.baseUrl}boards/change-board-title`, {title, id});
   }
 }

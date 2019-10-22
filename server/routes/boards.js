@@ -39,4 +39,16 @@ router.put('/change-board-title', validate([
         .isLength({ min: 1, max: 200 }),
 ]), controller.boards.changeBoardTitle);
 
+router.put('/change-board-link', validate([
+    body('id')
+        .not().isEmpty()
+        .isNumeric(),
+    body('shareLink')
+        .if(body('shareLink')
+            .exists({
+                checkNull: true,
+            }))
+        .isHash("md5")
+]), controller.boards.changeBoardLink);
+
 module.exports = router;

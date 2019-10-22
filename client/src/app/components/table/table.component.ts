@@ -33,13 +33,13 @@ export class TableComponent implements OnDestroy, OnChanges {
 
   constructor(private cardsService: CardsService) {
     this.subscriptions.add(this.cardsService.getDeletingCard()
-      .subscribe((card: CardResponse) =>  {
+      .subscribe((card: CardResponse) => {
+        console.log(card);
         if (this.tableId === card.table_id) {
-          console.log('deleted card from array');
           this.cardsArray = this.cardsArray.filter(item => item.id !== card.id);
         }
-      },
-        (error) => console.log(error)));
+      })
+    );
   }
 
   drop(event: CdkDragDrop<CardResponse[]>) {
@@ -128,5 +128,4 @@ export class TableComponent implements OnDestroy, OnChanges {
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
-
 }

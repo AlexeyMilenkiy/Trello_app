@@ -86,6 +86,20 @@ module.exports = {
             .catch(() => {
                 res.status(400);
             });
+    },
+
+    changeBoardLink(req, res) {
+        let boardId = req.body.id;
+        let shareLink = req.body.shareLink;
+
+        Board.update({share_hash: shareLink},
+            {where: {id: boardId}})
+            .then(data => {
+                res.json(data);
+            })
+            .catch(() => {
+                res.status(400);
+            });
     }
 };
 

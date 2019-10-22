@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 import { Observable, Subject } from 'rxjs';
 
 import { environment } from '@env/environment';
@@ -17,12 +18,9 @@ export class CardsService {
 
   sendDeletingCard(card: CardResponse) {
     this.deleteCard(card)
-      .subscribe(() => {
-        this.subject.next(card);
-      },
-        (error) => {
-        console.log('error from service', error);
-        });
+      .subscribe(
+        () => this.subject.next(card),
+        (err) => this.subject.next(err));
   }
 
   getDeletingCard(): Observable<any> {
