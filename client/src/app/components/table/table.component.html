@@ -13,8 +13,10 @@
 
     <app-card class="card"
               *ngFor="let card of cardsArray; let i = index"
-              [cdkDragData]="card"
               [card]="card"
+              [cdkDragData]="card"
+              [cdkDragDisabled]="dragDisabled"
+              (isOpenEditor)="dragDisabled = $event"
               cdkDrag>
     </app-card>
 

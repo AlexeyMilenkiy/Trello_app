@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
@@ -26,6 +26,7 @@ export class TableComponent implements OnDestroy, OnChanges {
     title: ''
   };
 
+  dragDisabled = false;
   isError = false;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;

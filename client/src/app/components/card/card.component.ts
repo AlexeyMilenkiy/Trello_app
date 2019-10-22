@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -14,6 +14,7 @@ import { CardsService } from '@app/services/cards.service';
 export class CardComponent implements OnInit, OnDestroy {
 
   @Input() card: CardResponse;
+  @Output() isOpenEditor = new EventEmitter<boolean>();
 
   isShowEditTitleIcon = false;
   isOpenEditTitle = false;
@@ -55,6 +56,8 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   openEditorTitle(event) {
+    event.stopPropagation();
+    this.isOpenEditor.emit(true);
     this.top = event.path[3].offsetTop;
     this.right = event.path[3].offsetLeft;
     this.isOpenEditTitle = true;
@@ -69,5 +72,4 @@ export class CardComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
-
 }

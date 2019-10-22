@@ -1,5 +1,4 @@
-<div [style.visibility]="isEdit ?  'visible': 'hidden'"
-     [style.opacity]="isEdit ? '1' : '0'"
+<div [style.display]="isEdit ? 'block': 'none'"
      (click)="close($event)"
      class="modal__wrapper">
 
@@ -16,6 +15,7 @@
                   #titleCard
                   formControlName="titleText"
                   autosize
+                  [minRows]="3"
                   (keydown.enter)="$event.preventDefault(); $event.target.blur()"
                   (keydown.shift.enter)="$event.preventDefault()"
                   (blur)="blurOnTitle(titleCard)"></textarea>
