@@ -47,9 +47,11 @@
            class="invite__board__block__url">
         <input class="invite__board__block__url-input"
                type="text"
+               #hashLinkInput
                [value]="hashLink"
                readonly>
-        <button class="invite__board__block__url-btn">{{'Copy'}}</button>
+        <button class="invite__board__block__url-btn"
+                (click)="copyInputMessage(hashLinkInput)">{{textInButton}}</button>
       </div>
 
     </div>

@@ -24,6 +24,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   left: number;
   isOpenInviteBlock = false;
   isCreateLink = false;
+  textInButton = 'Copy';
   hashLink: string | Int32Array = 'Loading...';
 
   constructor(private boardsService: BoardsService,
@@ -94,6 +95,23 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
           this.hashLink = hashLink;
         })
       );
+    } else {
+      this.isCreateLink = false;
+      this.subscriptions.add(this.boardsService.changeBoardShareLink(this.boardId, null)
+        .subscribe(() => {
+          this.hashLink = 'Loading...';
+        })
+        // обработать ошибку
+      );
     }
+  }
+
+  copyInputMessage(inputElement) {
+    inputElement.select();
+    document.execCommand('copy');
+    this.textInButton = 'Copied!';
+    setTimeout(() => {
+      this.textInButton = 'Copy';
+    }, 2000);
   }
 }

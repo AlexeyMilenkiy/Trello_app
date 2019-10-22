@@ -25,7 +25,7 @@ import { TableComponent } from '@components/table/table.component';
 import { CardComponent } from '@components/card/card.component';
 import { TableFooterComponent } from '@components/table-footer/table-footer.component';
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
-import { AutoFocusDirectiveDirective } from './directives/auto-focus-directive.directive';
+import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.component';
 
 
@@ -46,7 +46,7 @@ import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.c
     CardComponent,
     TableFooterComponent,
     ModalEditCardComponent,
-    AutoFocusDirectiveDirective,
+    AutoFocusDirective,
     ModalConfirmComponent,
   ],
   imports: [
