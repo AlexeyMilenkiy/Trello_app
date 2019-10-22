@@ -61,7 +61,11 @@ export class BoardComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.boardsService.getBoard(this.boardId)
       .subscribe((board: BoardResponse) => {
+        if (board.author_id !== this.boardsService.getUserId()) {
+          this.router.navigate(['boards']);
+        }
         this.board = {...board};
+
         if (this.cardId) {
             this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardId);
             this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
