@@ -19,7 +19,27 @@
           (click)="editTitle = true"
           class="board__header__text">{{title}}</span>
 
-    <button class="board__header__btn" id="shared">Shared</button>
+    <button class="board__header__btn"
+            id="invite"
+            (click)="openInviteBlock($event)">Invite</button>
+
+    <div *ngIf="isOpenInviteBlock"
+         class="invite__board__block"
+         [ngStyle]="{'top' : top+'px', 'left' : left+'px'}">
+
+      <div class="invite__board__block__title">
+        <span class="invite__board__block__headline">Invite To Board</span>
+        <span class="invite__board__block__close" (click)="isOpenInviteBlock = false"></span>
+      </div>
+      <div class="invite__board__block__actions">
+                <span class="invite__board__block__actions-text">
+                  <img src="../../../assets/images/icon-link.svg" alt="link"
+                       width="18px"
+                       height="13px">Invite with Link</span>
+                <a href="#" class="invite__board__block__actions__link">{{'Create'}} link</a>
+      </div>
+
+    </div>
 
   </div>
   <button class="board__header__btn" (click)="isDelete = true">Delete board</button>

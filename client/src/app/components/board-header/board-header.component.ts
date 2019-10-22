@@ -18,6 +18,9 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   isError = false;
   isDelete = false;
+  top: number;
+  left: number;
+  isOpenInviteBlock = false;
 
   constructor(private boardsService: BoardsService,
               private router: Router) { }
@@ -40,7 +43,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       this.editTitle = false;
       return;
     }
-    this.subscriptions.add(this.boardsService.changeBoardTitle(this.title, this.boardId)
+    this.subscriptions.add(this.boardsService.changeBoardTitle(this.form.value.boardTitle, this.boardId)
 
       .subscribe(() => {
           this.title = this.form.value.boardTitle;
@@ -66,6 +69,13 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
           }
         }
       ));
+  }
+
+  openInviteBlock(event) {
+    console.log(event);
+    this.top = event.path[0].offsetTop + 45;
+    this.left = event.path[0].offsetLeft;
+    this.isOpenInviteBlock = true;
   }
 
   ngOnDestroy(): void {

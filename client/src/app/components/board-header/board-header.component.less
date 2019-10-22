@@ -6,6 +6,7 @@
   align-items: center;
   padding: 0 10px;
   box-sizing: border-box;
+  position: relative;
 
   form {
     display: flex;
@@ -17,15 +18,6 @@
     width: calc(100% - 150px);
     justify-content: flex-start;
     align-items: center;
-
-    //div {
-    //  height: 20px;
-    //  width: 1px;
-    //  border-left: 1px solid hsla(0,0%,100%,.24);
-    //  margin: 0 20px;
-    //}
-
-
 
     &__input {
       background-color: #fff;
@@ -84,7 +76,7 @@
   }
 }
 
-#shared {
+#invite {
   position: relative;
   margin-left: 40px;
   outline: none;
@@ -102,6 +94,72 @@
   }
 }
 
-.invalid{
-  border-color: red;
+.invite__board__block {
+  width: 304px;
+  height: 200px;
+  position: absolute;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__title {
+    width: 90%;
+    height: 50px;
+    border-bottom: 1px solid rgba(9,30,66,.13);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  &__headline {
+    font-family: Roboto, sans-serif;
+    color: #5e6c84;
+    font-size: 18px;
+  }
+
+  &__close {
+    font-family: Trello, sans-serif;
+    font-size: 18px;
+    color: #6b778c;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 25px;
+    right: 5px;
+
+    &:hover {
+      cursor: pointer;
+      color: #172b4d;
+    }
+
+    &:before {
+      content: "\E918"
+    }
+  }
+
+  &__actions {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+
+    &-text {
+      color: #172b4d;
+      font-weight: 700;
+      font-family: Roboto, sans-serif;
+      font-size: 18px;
+
+      img {
+        margin-right: 5px;
+      }
+    }
+
+    &__link {
+      font-family: Roboto, sans-serif;
+      font-size: 18px;
+    }
+  }
 }
