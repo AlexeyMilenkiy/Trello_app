@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivate {
           return true;
         }
         break;
-      case '/accept-board' :
+      case '/accept-page' :
         if (token) {
           this.router.navigate(['/boards']);
         } else {

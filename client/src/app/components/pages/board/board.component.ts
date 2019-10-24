@@ -79,7 +79,7 @@ export class BoardComponent implements OnInit, OnDestroy {
                 this.router.navigate(['not-found']);
                 break;
               case 401 :
-                this.router.navigate(['accept-board']);
+                this.router.navigate(['accept-page']);
                 break;
               default :
                 this.isError = true;

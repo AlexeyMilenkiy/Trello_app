@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { CardResponse } from '@app/interfaces/card-response';
 import { CardsService } from '@app/services/cards.service';
+import { BoardsService } from '@app/services/boards.service';
 
 
 @Component({
@@ -35,7 +36,8 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   formDescription: FormGroup;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardsService,
+              private boardsService: BoardsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.card  && changes.card.currentValue) {
@@ -48,7 +50,7 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnInit() {
-    this.userId = this.cardsService.getUserId();
+    this.userId = this.boardsService.getUserId();
     this.formTitle = new FormGroup({
       titleText: new FormControl(null, [
         Validators.required,

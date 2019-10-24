@@ -1,10 +1,11 @@
 import { Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { Router} from '@angular/router';
 
 import { Subscription} from 'rxjs';
 
 import { BoardsService} from '@app/services/boards.service';
-import { Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-board-header',

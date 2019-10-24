@@ -1,34 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from '@app/guards/auth.guard';
+
 import { StartPageComponent } from '@components/pages/start-page/start-page.component';
 import { NotFoundPageComponent } from '@components/pages/not-found-page/not-found-page.component';
-import { AuthGuard } from '@app/guards/auth.guard';
-import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import { BoardsComponent } from '@components/pages/boards/boards.component';
-import { BoardComponent } from '@components/pages/board/board.component';
-import { AcceptBoardComponent } from '@components/pages/accept-board/accept-board.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'},
   { path: '', component: StartPageComponent, canActivate: [AuthGuard]},
 
-  { path: '', loadChildren: () => import('./modules/auth.module').then(m => m.AuthModule), canActivate: [AuthGuard] },
+  { path: '', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)},
+  { path: '', loadChildren: () => import('./modules/boards/boards.module').then(m => m.BoardsModule)},
 
-  { path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
-    children: [
-      { path: 'boards', component: BoardsComponent},
-      { path: 'boards/:board_id', component: BoardComponent},
-      { path: 'boards/:board_id/cards/:card_id', component: BoardComponent},
-    ]},
-  { path: '', component: MainLayoutComponent,
-    children: [
-      { path: 'shared/:share_hash', component: BoardComponent},
-      { path: 'shared/:share_hash/cards/:card_id', component: BoardComponent},
-    ]
-  },
-  { path: 'accept-board', component: AcceptBoardComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundPageComponent},
 ];
 

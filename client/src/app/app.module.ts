@@ -1,53 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { DragDropModule } from '@angular/cdk/drag-drop';
-
-import { AutoSizeInputModule } from 'ngx-autosize-input';
-import { AutosizeModule } from 'ngx-autosize';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from '@app/modules/shared.module';
+
+import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { AppComponent } from './app.component';
 import { StartPageComponent } from '@components/pages/start-page/start-page.component';
 import { NotFoundPageComponent } from '@components/pages/not-found-page/not-found-page.component';
-import { MainHeaderComponent } from '@components/main-header/main-header.component';
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
-import { SharedModule } from '@app/modules/shared.module';
-import { BoardsComponent } from '@components/pages/boards/boards.component';
-import { AuthInterceptor } from '@app/services/auth.interceptor';
-import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import { ModalCreateBoardComponent } from '@components/modal-create-board/modal-create-board.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BoardComponent } from '@components/pages/board/board.component';
-import { BoardHeaderComponent } from '@components/board-header/board-header.component';
-import { TableComponent } from '@components/table/table.component';
-import { CardComponent } from '@components/card/card.component';
-import { TableFooterComponent } from '@components/table-footer/table-footer.component';
-import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
-import { AutoFocusDirective } from './directives/auto-focus.directive';
-import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.component';
-import { AcceptBoardComponent } from '@components/pages/accept-board/accept-board.component';
+import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
-    NotFoundPageComponent,
-    MainHeaderComponent,
     StartHeaderComponent,
-    BoardsComponent,
-    MainLayoutComponent,
-    ModalCreateBoardComponent,
-    BoardComponent,
-    BoardHeaderComponent,
-    TableComponent,
-    CardComponent,
-    TableFooterComponent,
-    ModalEditCardComponent,
-    AutoFocusDirective,
-    ModalConfirmComponent,
-    AcceptBoardComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,9 +27,6 @@ import { AcceptBoardComponent } from '@components/pages/accept-board/accept-boar
     SharedModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    AutoSizeInputModule,
-    AutosizeModule,
-    DragDropModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
