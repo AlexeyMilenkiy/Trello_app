@@ -20,6 +20,6 @@ export class MainHeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/logged-out']);
+    this.router.navigate(['/']);
   }
 }

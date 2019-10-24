@@ -3,11 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { StartPageComponent } from '@components/pages/start-page/start-page.component';
 import { NotFoundPageComponent } from '@components/pages/not-found-page/not-found-page.component';
-import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { AuthGuard } from '@app/guards/auth.guard';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { BoardComponent } from '@components/pages/board/board.component';
+import { AcceptBoardComponent } from '@components/pages/accept-board/accept-board.component';
 
 
 const routes: Routes = [
@@ -28,7 +28,7 @@ const routes: Routes = [
       { path: 'shared/:share_hash/cards/:card_id', component: BoardComponent},
     ]
   },
-  { path: 'logged-out', component: LogoutPageComponent, canActivate: [AuthGuard]},
+  { path: 'accept-board', component: AcceptBoardComponent, canActivate: [AuthGuard]},
   { path: '**', component: NotFoundPageComponent},
 ];
 

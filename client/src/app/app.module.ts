@@ -12,7 +12,6 @@ import { StartPageComponent } from '@components/pages/start-page/start-page.comp
 import { NotFoundPageComponent } from '@components/pages/not-found-page/not-found-page.component';
 import { MainHeaderComponent } from '@components/main-header/main-header.component';
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
-import { LogoutPageComponent } from '@components/pages/logout-page/logout-page.component';
 import { SharedModule } from '@app/modules/shared.module';
 import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { AuthInterceptor } from '@app/services/auth.interceptor';
@@ -27,6 +26,7 @@ import { TableFooterComponent } from '@components/table-footer/table-footer.comp
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 import { AutoFocusDirective } from './directives/auto-focus.directive';
 import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.component';
+import { AcceptBoardComponent } from '@components/pages/accept-board/accept-board.component';
 
 
 @NgModule({
@@ -36,7 +36,6 @@ import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.c
     NotFoundPageComponent,
     MainHeaderComponent,
     StartHeaderComponent,
-    LogoutPageComponent,
     BoardsComponent,
     MainLayoutComponent,
     ModalCreateBoardComponent,
@@ -48,6 +47,7 @@ import { ModalConfirmComponent } from '@components/modal-confirm/modal-confirm.c
     ModalEditCardComponent,
     AutoFocusDirective,
     ModalConfirmComponent,
+    AcceptBoardComponent,
   ],
   imports: [
     BrowserModule,

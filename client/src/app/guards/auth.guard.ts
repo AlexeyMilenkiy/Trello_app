@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '@app/services/auth.service';
@@ -7,7 +7,7 @@ import { AuthService } from '@app/services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
@@ -42,6 +42,13 @@ export class AuthGuard implements CanActivate, CanActivateChild {
           return true;
         }
         break;
+      case '/accept-board' :
+        if (token) {
+          this.router.navigate(['/boards']);
+        } else {
+          return true;
+        }
+        break;
       default:
         if (!token) {
           this.router.navigate(['/']);
@@ -50,11 +57,4 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         }
     }
   }
-
-  canActivateChild(
-    childRoute: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    return true;
-  }
-
 }
