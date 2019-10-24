@@ -16,6 +16,10 @@ export class CardsService {
 
   constructor(private http: HttpClient) { }
 
+  getUserId() {
+    return parseInt(localStorage.getItem('id'), 10);
+  }
+
   sendDeletingCard(card: CardResponse) {
     this.deleteCard(card)
       .subscribe(

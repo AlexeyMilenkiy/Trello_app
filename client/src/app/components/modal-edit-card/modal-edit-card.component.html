@@ -72,7 +72,8 @@
 
     </div>
 
-    <button (click)="deleteCard()"
+    <button *ngIf="userId === authorId"
+            (click)="deleteCard()"
             class="modal__card__delete">
             Delete card
     </button>

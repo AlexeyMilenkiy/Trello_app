@@ -1,6 +1,6 @@
 <div class="board">
-  <app-board-header [title]="board?.title"
-                    [boardId]="boardId">
+  <app-board-header [title]="board.title"
+                    [boardId]="board.id">
   </app-board-header>
   <div class="board__main">
     <div class="board__main__tables" cdkDropListGroup>
@@ -10,7 +10,7 @@
                  [headline]="tablesMap[i+1]"
                  [cardsArray]="cards"
                  [tableId]="i+1"
-                 [boardId]="boardId">
+                 [boardId]="board.id">
       </app-table>
 
     </div>
@@ -23,6 +23,7 @@
 
   <app-modal-edit-card [isEdit]="isOpenEditCardModal"
                        [card]="editCard"
+                       [authorId]="board.author_id"
                        (isClose)="closeEditModal($event)">
   </app-modal-edit-card>
 

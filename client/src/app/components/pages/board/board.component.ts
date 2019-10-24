@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 
-import { BoardsService } from '@app/services/boards.service';
-import { BoardResponse } from '@app/interfaces/board-response';
-import { CardResponse } from '@app/interfaces/card-response';
+import {BoardsService} from '@app/services/boards.service';
+import {BoardResponse} from '@app/interfaces/board-response';
+import {CardResponse} from '@app/interfaces/card-response';
 
 @Component({
   selector: 'app-board',
@@ -25,9 +25,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     []  // Done cards
   ];
 
-  boardId = 0;
-  cardId = 0;
-  board: BoardResponse;
+  boardIdFromUrl = 0;
+  cardIdFromUrl = 0;
+  board: BoardResponse = {author_id: 0, cards: [], id: 0, title: ''};
   editCard: CardResponse;
   isOpenEditCardModal = false;
   subscriptions: Subscription = new Subscription();
@@ -55,58 +55,60 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.cardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
-    this.boardId = parseInt(this.activateRoute.snapshot.params.board_id, 10);
+    this.cardIdFromUrl = parseInt(this.activateRoute.snapshot.params.card_id, 10);
+    this.boardIdFromUrl = parseInt(this.activateRoute.snapshot.params.board_id, 10);
     const shareHash = this.activateRoute.snapshot.params.share_hash;
 
     if (shareHash) {
       this.subscriptions.add(this.boardsService.getShareBoard(shareHash)
         .subscribe((board: BoardResponse) => {
-          // console.log(board);
             this.board = {...board};
-            this.boardId = this.board.id;
-            if (this.cardId) {
-              this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardId);
+            this.boardIdFromUrl = this.board.id;
+
+            if (this.cardIdFromUrl) {
+              this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardIdFromUrl);
               this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
             }
             this.separateCardsArray();
           },
           (error) => {
-          switch (error.status) {
-            case 404 || 0 || 422:
-              this.router.navigate(['not-found']);
-              break;
-            case 401 :
-              this.router.navigate(['accept-board']);
-              break;
-            default :
-              this.isError = true;
-          }
-        })
+            switch (error.status) {
+              case 404 || 0 || 422:
+                this.router.navigate(['not-found']);
+                break;
+              case 401 :
+                this.router.navigate(['accept-board']);
+                break;
+              default :
+                this.isError = true;
+            }
+          })
       );
-    } else {this.subscriptions.add(this.boardsService.getBoard(this.boardId)
-      .subscribe((board: BoardResponse) => {
-        if (board.author_id !== this.boardsService.getUserId()) {
-          this.router.navigate(['boards']);
-        }
-        this.board = {...board};
+    } else {
+      this.subscriptions.add(this.boardsService.getBoard(this.boardIdFromUrl)
+        .subscribe((board: BoardResponse) => {
+            if (board.author_id !== this.boardsService.getUserId()) {
+              this.router.navigate(['boards']);
+            }
+            this.board = {...board};
 
-        if (this.cardId) {
-            this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardId);
-            this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
-        }
-        this.separateCardsArray();
-        },
-        (error) => {
-          if ((error.status === 404) || (error.status === 0)) {
+            if (this.cardIdFromUrl) {
+              this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardIdFromUrl);
+              this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
+            }
+            this.separateCardsArray();
+          },
+          (error) => {
+            if ((error.status === 404) || (error.status === 0)) {
               this.router.navigate(['not-found']);
-          } else if ((error.status !== 401) && (error.status !== 422)) {
+            } else if ((error.status !== 401) && (error.status !== 422)) {
               this.isError = true;
+            }
           }
-        }
-      )
-    );
-  }}
+        )
+      );
+    }
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
@@ -114,6 +116,6 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   closeEditModal(event: boolean) {
     this.isOpenEditCardModal = event;
-    this.router.navigate(['/boards', this.boardId]);
+    this.router.navigate(['/boards', this.boardIdFromUrl]);
   }
 }

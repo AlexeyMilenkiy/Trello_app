@@ -16,6 +16,7 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() isEdit: boolean;
   @Input() card: CardResponse;
+  @Input() authorId: number;
   @Output() isClose = new EventEmitter<boolean>();
 
   private editableCard: CardResponse = {
@@ -27,6 +28,7 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
     title: ''
   };
 
+  userId: number;
   ref: ComponentRef<any>;
   isEditDescription = false;
   formTitle: FormGroup;
@@ -36,14 +38,17 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   constructor(private cardsService: CardsService) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.card.currentValue) {
-      this.editableCard = changes.card.currentValue;
-      this.formTitle.setValue({titleText : this.editableCard.title});
-      this.formDescription.setValue({descriptionText : this.editableCard.description});
+    if (changes.card  && changes.card.currentValue) {
+      if (changes.card.currentValue) {
+        this.editableCard = changes.card.currentValue;
+        this.formTitle.setValue({titleText : this.editableCard.title});
+        this.formDescription.setValue({descriptionText : this.editableCard.description});
+      }
     }
   }
 
   ngOnInit() {
+    this.userId = this.cardsService.getUserId();
     this.formTitle = new FormGroup({
       titleText: new FormControl(null, [
         Validators.required,

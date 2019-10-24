@@ -43,7 +43,7 @@ module.exports = {
                 as: 'cards',
                 where: {
                     board_id: {
-                        [Op.eq]:boardId
+                        [Op.eq]: boardId
                     }
                 },
                 required: false
@@ -68,7 +68,7 @@ module.exports = {
         Board.findOne({
             where: {
               share_hash: {
-                  [Op.eq]:shareHash
+                  [Op.eq]: shareHash
               }
             },
             include: [{
