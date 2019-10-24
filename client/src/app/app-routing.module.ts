@@ -21,6 +21,8 @@ const routes: Routes = [
       { path: 'boards', component: BoardsComponent},
       { path: 'boards/:board_id', component: BoardComponent},
       { path: 'boards/:board_id/cards/:card_id', component: BoardComponent},
+      { path: 'shared/:share_hash', component: BoardComponent},
+      { path: 'shared/:share_hash/cards/:card_id', component: BoardComponent},
     ]},
 
   { path: 'logged-out', component: LogoutPageComponent, canActivate: [AuthGuard]},

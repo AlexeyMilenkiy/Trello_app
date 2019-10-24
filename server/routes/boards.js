@@ -29,6 +29,11 @@ router.get('/get-board', validate([
         .not().isEmpty()
 ]), controller.boards.getBoard);
 
+router.get('/get-share-board', validate([
+    header('share_hash')
+        .isHash("md5")
+]), controller.boards.getShareBoard);
+
 router.put('/change-board-title', validate([
     body('id')
         .not().isEmpty()

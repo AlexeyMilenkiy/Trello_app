@@ -62,6 +62,39 @@ module.exports = {
             });
     },
 
+    getShareBoard(req, res) {
+        let shareHash = req.headers.share_hash;
+
+        Board.findOne({
+            where: {
+              share_hash: {
+                  [Op.eq]:shareHash
+              }
+            },
+            include: [{
+                model: Card,
+                as: 'cards',
+                where: {
+                    board_id: {
+                        [Op.col] : 'Board.id'
+                    }
+                },
+                required: false,
+            }],
+        })
+            .then((board) => {
+                if(board) {
+                    res.json(board);
+                } else {
+                    res.sendStatus(404);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                res.status(400);
+            });
+    },
+
     removeBoard(req, res) {
         let boardId = req.headers.board_id;
 

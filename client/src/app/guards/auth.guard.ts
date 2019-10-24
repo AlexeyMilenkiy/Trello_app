@@ -42,6 +42,8 @@ export class AuthGuard implements CanActivate {
           return true;
         }
         break;
+      case '/shared' :
+          return true;
       default:
         if (!token) {
           this.router.navigate(['/']);

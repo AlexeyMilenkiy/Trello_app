@@ -57,9 +57,34 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
     this.boardId = parseInt(this.activateRoute.snapshot.params.board_id, 10);
-    this.isOpenEditCardModal = false;
+    const shareHash = this.activateRoute.snapshot.params.share_hash;
 
-    this.subscriptions.add(this.boardsService.getBoard(this.boardId)
+    if (shareHash) {
+      this.subscriptions.add(this.boardsService.getShareBoard(shareHash)
+        .subscribe((board: BoardResponse) => {
+          // console.log(board);
+            this.board = {...board};
+            this.boardId = this.board.id;
+            if (this.cardId) {
+              this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardId);
+              this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
+            }
+            this.separateCardsArray();
+          },
+          (error) => {
+          switch (error.status) {
+            case 404 || 0 || 422:
+              this.router.navigate(['not-found']);
+              break;
+            case 401 :
+              this.router.navigate(['accept-board']);
+              break;
+            default :
+              this.isError = true;
+          }
+        })
+      );
+    } else {this.subscriptions.add(this.boardsService.getBoard(this.boardId)
       .subscribe((board: BoardResponse) => {
         if (board.author_id !== this.boardsService.getUserId()) {
           this.router.navigate(['boards']);
@@ -79,8 +104,9 @@ export class BoardComponent implements OnInit, OnDestroy {
               this.isError = true;
           }
         }
-      ));
-  }
+      )
+    );
+  }}
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();

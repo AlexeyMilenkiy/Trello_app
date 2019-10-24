@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {Observable, Subject} from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { environment } from '@env/environment';
@@ -24,7 +24,7 @@ export class BoardsService {
 
     this.changeBoardShareLink(boardId, shareLink)
       .subscribe(
-        () => this.subject.next(`${environment.baseClientUrl}boards/shared/${shareLink}`),
+        () => this.subject.next(`${environment.baseClientUrl}shared/${shareLink}`),
         () => this.subject.next('Sorry server is unavailable'));
   }
 
@@ -61,6 +61,10 @@ export class BoardsService {
     const headers = new HttpHeaders().set('board_id', `${id}`);
     return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-board`, {headers});
   }
+
+  getShareBoard(shareHash: string): Observable<BoardResponse> {
+    const headers = new HttpHeaders().set('share_hash', shareHash);
+    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {headers});  }
 
   changeBoardTitle(title: string, id: number): Observable<number[]> {
     return this.http.put<number[]>(`${environment.baseUrl}boards/change-board-title`, {title, id});
