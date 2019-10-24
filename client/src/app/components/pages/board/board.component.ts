@@ -1,10 +1,11 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {BoardsService} from '@app/services/boards.service';
-import {BoardResponse} from '@app/interfaces/board-response';
-import {CardResponse} from '@app/interfaces/card-response';
+import { Subscription } from 'rxjs';
+
+import { BoardsService } from '@app/services/boards.service';
+import { BoardResponse } from '@app/interfaces/board-response';
+import { CardResponse } from '@app/interfaces/card-response';
 
 @Component({
   selector: 'app-board',
@@ -27,6 +28,7 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   boardIdFromUrl = 0;
   cardIdFromUrl = 0;
+  shareHash = '';
   board: BoardResponse = {author_id: 0, cards: [], id: 0, title: ''};
   editCard: CardResponse;
   isOpenEditCardModal = false;
@@ -57,10 +59,10 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.cardIdFromUrl = parseInt(this.activateRoute.snapshot.params.card_id, 10);
     this.boardIdFromUrl = parseInt(this.activateRoute.snapshot.params.board_id, 10);
-    const shareHash = this.activateRoute.snapshot.params.share_hash;
+    this.shareHash = this.activateRoute.snapshot.params.share_hash;
 
-    if (shareHash) {
-      this.subscriptions.add(this.boardsService.getShareBoard(shareHash)
+    if (this.shareHash) {
+      this.subscriptions.add(this.boardsService.getShareBoard(this.shareHash)
         .subscribe((board: BoardResponse) => {
             this.board = {...board};
             this.boardIdFromUrl = this.board.id;
@@ -116,6 +118,10 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   closeEditModal(event: boolean) {
     this.isOpenEditCardModal = event;
-    this.router.navigate(['/boards', this.boardIdFromUrl]);
+    if (this.shareHash) {
+      this.router.navigate(['/shared', this.shareHash]);
+    } else {
+      this.router.navigate(['/boards', this.boardIdFromUrl]);
+    }
   }
 }
