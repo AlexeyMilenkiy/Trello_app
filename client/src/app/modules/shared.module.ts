@@ -1,22 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ModalErrorComponent } from '@components/modal-error/modal-error.component';
+import { StartHeaderComponent } from '@components/start-header/start-header.component';
 
 @NgModule({
   declarations: [
-    ModalErrorComponent
+    ModalErrorComponent,
+    StartHeaderComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule,
-    ModalErrorComponent
+    ModalErrorComponent,
+    StartHeaderComponent
   ]
 })
 export class SharedModule { }

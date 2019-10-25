@@ -6,7 +6,7 @@ import { AuthGuard } from '@app/guards/auth.guard';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { BoardComponent } from '@components/pages/board/board.component';
-// import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
+import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
 
 
 
@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'shared/:share_hash/cards/:card_id', component: BoardComponent},
     ]
   },
-  // { path: 'accept-page', component: AcceptPageComponent, canActivate: [AuthGuard]},
+  { path: 'accept-page', component: AcceptPageComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

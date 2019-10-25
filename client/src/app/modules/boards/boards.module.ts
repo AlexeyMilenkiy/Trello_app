@@ -21,7 +21,7 @@ import { MainLayoutComponent } from '@components/main-layout/main-layout.compone
 import { MainHeaderComponent } from '@components/main-header/main-header.component';
 
 import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
-// import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
+import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
 
 
 @NgModule({
@@ -37,7 +37,7 @@ import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
     TableFooterComponent,
     ModalEditCardComponent,
     ModalConfirmComponent,
-    // AcceptPageComponent,
+    AcceptPageComponent,
     AutoFocusDirective,
   ],
   imports: [

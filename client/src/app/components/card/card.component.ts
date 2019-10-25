@@ -57,9 +57,10 @@ export class CardComponent implements OnInit, OnDestroy {
 
   openEditorTitle(event) {
     event.stopPropagation();
+    const path = event.path || (event.composedPath && event.composedPath());
     this.isOpenEditor.emit(true);
-    this.top = event.path[3].offsetTop;
-    this.right = event.path[3].offsetLeft;
+    this.top = path[3].offsetTop;
+    this.right = path[3].offsetLeft;
     this.isOpenEditTitle = true;
   }
 

@@ -78,8 +78,9 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   }
 
   openInviteBlock(event) {
-    this.top = event.path[0].offsetTop + 45;
-    this.left = event.path[0].offsetLeft;
+    const path = event.path || (event.composedPath && event.composedPath());
+    this.top = path[0].offsetTop + 45;
+    this.left = path[0].offsetLeft;
     this.isOpenInviteBlock = true;
   }
 

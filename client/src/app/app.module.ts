@@ -10,15 +10,12 @@ import { AuthInterceptor } from '@app/services/auth.interceptor';
 import { AppComponent } from './app.component';
 import { StartPageComponent } from '@components/pages/start-page/start-page.component';
 import { NotFoundPageComponent } from '@components/pages/not-found-page/not-found-page.component';
-import { StartHeaderComponent } from '@components/start-header/start-header.component';
-import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     StartPageComponent,
-    StartHeaderComponent,
     NotFoundPageComponent,
   ],
   imports: [
