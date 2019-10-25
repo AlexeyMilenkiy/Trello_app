@@ -11,6 +11,9 @@ import { AuthService } from '@app/services/auth.service';
 export class MainHeaderComponent implements OnInit {
 
   name: string;
+  isOpenUserBlock = false;
+  top: number;
+  left: number;
 
   constructor(private authService: AuthService,
               private router: Router) { }
@@ -22,5 +25,12 @@ export class MainHeaderComponent implements OnInit {
   logout() {
     this.authService.logout();
     this.router.navigate(['/']);
+  }
+
+  openUserBlock(event) {
+    const path = event.path || (event.composedPath && event.composedPath());
+    this.top = path[0].offsetTop + 45;
+    this.left = path[0].offsetLeft - 270;
+    this.isOpenUserBlock = true;
   }
 }

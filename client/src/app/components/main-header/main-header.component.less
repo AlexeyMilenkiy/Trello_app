@@ -44,39 +44,106 @@
   }
 
   &__user {
-    height: 100%;
+    height: 40px;
+    width: 40px;
+    background-color: #dfe1e6;
     display: flex;
+    justify-content: center;
     align-items: center;
     position: relative;
+    border-radius: 100%;
+    box-sizing: border-box;
+    color: #172b4d;
+    font-family: Roboto, sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-right: 10px;
 
-    &__name {
-      font-family: Roboto, sans-serif;
-      font-size: 23px;
-      font-weight: 400;
-      color: white;
-
-      &:hover {
-        cursor: default;
-      }
+    &:hover {
+      cursor: pointer;
     }
 
-    &__logout {
-      width: 100px;
-      height: 40px;
-      text-align: center;
-      background-color: hsla(0, 0%, 100%, .3);
+    &__dropdown {
+      width: 320px;
+      min-height: 100px;
+      background: #fff;
+      position: absolute;
       border-radius: 3px;
-      font-family: Roboto, sans-serif;
-      font-weight: bold;
-      font-size: 1.2em;
-      color: white;
-      border: none;
-      margin: 0 10px;
-      outline: none;
+      box-shadow: 0 8px 16px -4px rgba(9,30,66,.25), 0 0 0 1px rgba(9,30,66,.08);
+      box-sizing: border-box;
+      outline: 0;
+      overflow: hidden;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-      &:hover {
-        cursor: pointer;
-        background-color: hsla(0,0%,100%,.2);
+      &__title {
+        width: 90%;
+        border-bottom: 1px solid rgba(9, 30, 66, 0.13);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 15px;
+        position: relative;
+      }
+
+      &__name {
+        max-width: 95%;
+        padding: 10px 0;
+        box-sizing: border-box;
+        font-family: Roboto, sans-serif;
+        color: #5e6c84;
+        font-size: 19px;
+        word-wrap: break-word;
+
+        &:hover {
+          cursor: default;
+        }
+      }
+
+      &__close {
+        font-family: Trello, sans-serif;
+        font-size: 19px;
+        color: #6b778c;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        top: 50%;
+        right: -20px;
+
+        &:before {
+          content: "\E918";
+        }
+
+        &:hover {
+          color: #172b4d;
+          cursor: pointer;
+        }
+      }
+
+      &__logout {
+        border: none;
+        background: #fff;
+        border-radius: 0;
+        box-shadow: none;
+        color: #172b4d;
+        display: block;
+        height: 100%;
+        padding: 10px 15px;
+        text-align: left;
+        text-decoration: none;
+        width: 100%;
+        transition: none;
+        margin: 0;
+        outline: 0;
+        font-family: Roboto, sans-serif;
+        font-size: 19px;
+
+        &:hover {
+          color: #172b4d;
+          background: rgba(9,30,66,.04);
+          cursor: pointer;
+        }
       }
     }
   }
