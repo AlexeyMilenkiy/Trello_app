@@ -2,7 +2,6 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 .card__container{
   display: flex;
@@ -10,7 +9,8 @@
   align-items: center;
   min-height: 40px;
   height: 100%;
-  padding: 10px;
+  //padding: 10px;
+  padding: 7px 5px 7px 10px;
   box-sizing: border-box;
 }
 
@@ -28,20 +28,21 @@
 .card__menu {
   font-family: Trello, sans-serif;
   font-size: 23px;
-  background-color: #f4f5f7;
-  background-clip: padding-box;
-  background-origin: padding-box;
+  //background-color: #f4f5f7;
   border-radius: 3px;
   opacity: 0.8;
   padding: 5px;
-  right: 2px;
-  top: 2px;
-  color: #42526e;
+  align-self: flex-start;
+  //right: 2px;
+  //top: 4px;
   margin-right: 3px;
-  position: absolute;
+  //position: absolute;
+  background: transparent;
+  color: transparent;
 
   &:hover {
     background-color: #ebecf0;
+    color: #42526e;
     opacity: 1;
   }
 

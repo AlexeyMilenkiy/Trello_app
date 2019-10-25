@@ -7,7 +7,7 @@ const User = models.User;
 module.exports = {
 
     registerUser (req, res) {
-        let user = req.body;
+        const user = req.body;
         user.password = createHash(user.password);
 
         User.create({ ...user })
@@ -24,7 +24,7 @@ module.exports = {
     },
 
     loginUser (req, res) {
-        let user = req.body;
+        const user = req.body;
 
         User.findOne({where: {email: user.email}})
             .then(data => {
@@ -51,7 +51,7 @@ module.exports = {
     },
 
     socialAuth (req, res) {
-        let user = req.body;
+        const user = req.body;
 
         User.findOrCreate({where: {email: user.email, name: user.name}})
             .then(data => {

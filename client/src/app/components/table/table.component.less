@@ -62,7 +62,7 @@
   cursor: pointer;
   max-width: 300px;
   min-height: 40px;
-  max-height: 250px;
+  max-height: 260px;
   overflow: auto;
   font-family: Roboto, sans-serif;
   font-size: 18px;
@@ -83,12 +83,15 @@
   border-radius: 4px;
   font-size: 0;
   box-shadow: none;
-}
+  position: relative;
+  z-index: 1000;
 
+  .card__menu {
+    display: none;
+  }
 
-.content {
-  width: 100px;
-  height: 30px;
-  background: red;
-  margin: 10px 0;
+  &:hover {
+    background-color: rgba(9,30,66,.04);
+
+  }
 }

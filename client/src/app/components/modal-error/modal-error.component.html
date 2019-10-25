@@ -1,5 +1,4 @@
-<div [style.visibility]="isModal ?  'visible': 'hidden'"
-     [style.opacity]="isModal ? '1' : '0'"
+<div [style.display]="isModal ? 'block': 'none'"
      (click)="close($event)"
      class="modal_wrapper">
   <div  class="modal_window">

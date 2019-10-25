@@ -30,7 +30,7 @@ export class MainHeaderComponent implements OnInit {
   openUserBlock(event) {
     const path = event.path || (event.composedPath && event.composedPath());
     this.top = path[0].offsetTop + 45;
-    this.left = path[0].offsetLeft - 270;
+    this.left = path[0].offsetLeft - 275;
     this.isOpenUserBlock = true;
   }
 }

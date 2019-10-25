@@ -32,9 +32,9 @@ export class TableComponent implements OnDestroy, OnChanges {
   protected defaultPositionCard = 65535;
 
   constructor(private cardsService: CardsService) {
+
     this.subscriptions.add(this.cardsService.getDeletingCard()
       .subscribe((card: CardResponse) => {
-        console.log(card);
         if (this.tableId === card.table_id) {
           this.cardsArray = this.cardsArray.filter(item => item.id !== card.id);
         }
@@ -93,7 +93,6 @@ export class TableComponent implements OnDestroy, OnChanges {
     }
   }
 
-
   createCard(title: string) {
     const position = this.setPositionNewCard();
     this.card = {
@@ -116,7 +115,7 @@ export class TableComponent implements OnDestroy, OnChanges {
   }
 
   sortCardsByName() {
-    this.cardsArray.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+    this.cardsArray = this.cardsArray.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
