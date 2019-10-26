@@ -19,7 +19,7 @@ export class MainHeaderComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.name = localStorage.getItem('name');
+    this.name = this.authService.getUserName();
   }
 
   logout() {

@@ -53,7 +53,7 @@ export class TableComponent implements OnDestroy, OnChanges {
         event.previousIndex,
         event.currentIndex);
     }
-    event.item.data.position = this.setPositionDropCard(event);
+    event.item.data.position = this.setPositionDroppedCard(event);
 
     this.subscriptions.add(this.cardsService.updateCard(event.item.data)
       .subscribe(() => {
@@ -76,7 +76,7 @@ export class TableComponent implements OnDestroy, OnChanges {
     }
   }
 
-  setPositionDropCard(event: CdkDragDrop<CardResponse[]>) {
+  setPositionDroppedCard(event: CdkDragDrop<CardResponse[]>) {
     const newIndex = event.currentIndex;
     const oldIndex = event.previousIndex;
 

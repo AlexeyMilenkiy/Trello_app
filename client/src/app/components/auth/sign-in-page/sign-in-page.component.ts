@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService as GoogleService } from 'angularx-social-login';
-import { GoogleLoginProvider } from 'angularx-social-login';
-import { Subscription } from 'rxjs';
-import {FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { Subscription } from 'rxjs';
+import { GoogleLoginProvider } from 'angularx-social-login';
 
 import { User } from '@app/interfaces/user';
 import { AuthService } from '@app/services/auth.service';

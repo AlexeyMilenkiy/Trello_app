@@ -1,12 +1,17 @@
-<div [style.visibility]="isModal ?  'visible': 'hidden'"
-     [style.opacity]="isModal ? '1' : '0'"
+<div [style.display]="isModal ?  'block': 'none'"
      (click)="close($event)"
      class="modal_wrapper">
+
   <div  class="modal_window">
+
     <span class="modal_text">Are you sure?</span>
+
     <div class="modal_btn_wrapper">
+
       <button id="yes" (click)="confirm()">Yes</button>
       <button class="close_modal" id="no" (click)="close($event)">No</button>
+
     </div>
+
   </div>
 </div>

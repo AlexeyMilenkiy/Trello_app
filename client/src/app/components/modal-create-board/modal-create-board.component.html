@@ -1,5 +1,4 @@
-<div [style.visibility]="isOpen ?  'visible': 'hidden'"
-     [style.opacity]="isOpen ? '1' : '0'"
+<div [style.display]="isOpen ?  'block': 'none'"
      class="modal_wrapper">
 
   <form class="modal-create" [formGroup]="form" (ngSubmit)="create()">
@@ -7,6 +6,7 @@
     <span class="modal-create-close" (click)="close()"></span>
 
     <input formControlName="title"
+           appAutoFocusDirective
            class="modal-create__input"
            type="text"
            placeholder="Add board title">

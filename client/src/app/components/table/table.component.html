@@ -12,7 +12,7 @@
        cdkDropList>
 
     <app-card class="card"
-              *ngFor="let card of cardsArray; let i = index"
+              *ngFor="let card of cardsArray"
               [card]="card"
               [cdkDragData]="card"
               [cdkDragDisabled]="dragDisabled"

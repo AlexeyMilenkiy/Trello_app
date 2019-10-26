@@ -16,7 +16,6 @@ export class CardComponent implements OnInit, OnDestroy {
   @Input() card: CardResponse;
   @Output() isOpenEditor = new EventEmitter<boolean>();
 
-  isShowEditTitleIcon = false;
   isOpenEditTitle = false;
   isError = false;
   top: 0;
@@ -44,6 +43,7 @@ export class CardComponent implements OnInit, OnDestroy {
     this.card.title = this.form.value.titleCard;
     this.subscriptions.add(this.cardsService.updateCard(this.card)
       .subscribe(() =>  {
+          this.isOpenEditor.emit(false);
           this.isOpenEditTitle = false;
         },
         (error) => {

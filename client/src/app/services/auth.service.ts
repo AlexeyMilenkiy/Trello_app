@@ -80,6 +80,10 @@ export class AuthService {
     this.setStorage(null);
   }
 
+  getUserName() {
+    return localStorage.getItem('name');
+  }
+
   setStorage(response: AuthResponse | null) {
     if (response) {
       localStorage.setItem('name', response.name);

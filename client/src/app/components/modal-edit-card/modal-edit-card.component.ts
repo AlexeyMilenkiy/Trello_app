@@ -1,4 +1,4 @@
-import { Component, ComponentRef, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
@@ -30,7 +30,6 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   };
 
   userId: number;
-  ref: ComponentRef<any>;
   isEditDescription = false;
   formTitle: FormGroup;
   formDescription: FormGroup;
@@ -112,7 +111,6 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteCard() {
-    this.ref.destroy();
     this.cardsService.sendDeletingCard(this.editableCard);
     this.isClose.emit(false);
   }

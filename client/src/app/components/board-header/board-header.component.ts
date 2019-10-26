@@ -1,10 +1,10 @@
-import { Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { Router} from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import { Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import { BoardsService} from '@app/services/boards.service';
+import { BoardsService } from '@app/services/boards.service';
 
 
 @Component({
@@ -29,7 +29,8 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   hashLink: string | Int32Array = 'Loading...';
 
   constructor(private boardsService: BoardsService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -67,7 +68,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     this.isDelete = false;
     this.subscriptions.add(this.boardsService.removeBoard(this.boardId)
       .subscribe(() => {
-        this.router.navigate(['/boards']);
+          this.router.navigate(['/boards']);
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
@@ -100,10 +101,12 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     } else {
       this.isCreateLink = false;
       this.subscriptions.add(this.boardsService.changeBoardShareLink(this.boardId, null)
-        .subscribe(() => {
-          this.hashLink = 'Loading...';
-        })
-        // обработать ошибку
+          .subscribe(() => {
+            this.hashLink = 'Loading...';
+          },
+            () => {
+            this.hashLink = 'Sorry, server is unavailable';
+            })
       );
     }
   }

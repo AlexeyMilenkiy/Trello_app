@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -13,7 +13,7 @@ export class TableFooterComponent implements OnInit {
   form: FormGroup;
   isOpen = false;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.form = new FormGroup({
