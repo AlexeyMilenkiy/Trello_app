@@ -9,7 +9,8 @@
 
   <div class="boards__list">
 
-    <div *ngFor="let board of boards" [routerLink]="['/boards', board.id]"
+    <div *ngFor="let board of boards"
+         [routerLink]="['/boards', board.id]"
          class="boards__list__single">
       <div>
         {{board.title}}

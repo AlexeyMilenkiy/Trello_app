@@ -82,15 +82,19 @@
   outline: none;
 
   &:before {
-    content: '';
+    content: '|';
     position: absolute;
     transform: translateX(-50%);
     height: 20px;
     left: -45px;
-    top: 10px;
+    top: 5px;
     width: 1px;
-    background: hsla(0,0%,100%,.24);
+    color: hsla(0, 0%, 100%, 0.24);
     margin: 0 20px;
+
+    &:hover {
+      cursor: default;
+    }
   }
 }
 

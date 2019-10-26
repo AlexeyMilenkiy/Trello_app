@@ -20,15 +20,6 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   @Input() authorId: number;
   @Output() isClose = new EventEmitter<boolean>();
 
-  private editableCard: CardResponse = {
-    board_id: 0,
-    description: undefined,
-    id: 0,
-    position: 0,
-    table_id: 0,
-    title: ''
-  };
-
   userId: number;
   isEditDescription = false;
   formTitle: FormGroup;
@@ -41,9 +32,9 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.card  && changes.card.currentValue) {
       if (changes.card.currentValue) {
-        this.editableCard = changes.card.currentValue;
-        this.formTitle.setValue({titleText : this.editableCard.title});
-        this.formDescription.setValue({descriptionText : this.editableCard.description});
+        this.card = changes.card.currentValue;
+        this.formTitle.setValue({titleText : this.card.title});
+        this.formDescription.setValue({descriptionText : this.card.description});
       }
     }
   }
@@ -74,10 +65,10 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
 
   changeDescription() {
     this.isEditDescription = false;
-    if (this.editableCard.description !== this.formDescription.value.descriptionText.trim()) {
-      this.editableCard.description = this.formDescription.value.descriptionText;
+    if (this.card.description !== this.formDescription.value.descriptionText.trim()) {
+      this.card.description = this.formDescription.value.descriptionText;
 
-      this.subscriptions.add(this.cardsService.updateCard(this.editableCard)
+      this.subscriptions.add(this.cardsService.updateCard(this.card)
         .subscribe(() => {},
           (error) => {
             if ((error.status !== 401) && (error.status !== 422)) {
@@ -89,10 +80,10 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   changeTitle() {
-    if (this.editableCard.title !== this.formTitle.value.titleText.trim()) {
-      this.editableCard.title = this.formTitle.value.titleText;
+    if (this.card.title !== this.formTitle.value.titleText.trim()) {
+      this.card.title = this.formTitle.value.titleText;
 
-      this.subscriptions.add(this.cardsService.updateCard(this.editableCard)
+      this.subscriptions.add(this.cardsService.updateCard(this.card)
         .subscribe(() => {},
           (error) => {
             if ((error.status !== 401) && (error.status !== 422)) {
@@ -111,7 +102,7 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   deleteCard() {
-    this.cardsService.sendDeletingCard(this.editableCard);
+    this.cardsService.sendDeletingCard(this.card);
     this.isClose.emit(false);
   }
 
