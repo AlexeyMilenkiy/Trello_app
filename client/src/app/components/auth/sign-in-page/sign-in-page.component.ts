@@ -66,9 +66,11 @@ export class SignInPageComponent implements OnInit, OnDestroy {
   signInWithGoogle(): void {
     this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user: SocialUser) => {
+        console.log(user);
 
-        this.subscriptions.add(this.authService.socialAuth(user)
-          .subscribe(() => {
+        this.subscriptions.add(this.authService.socialAuth(user.idToken, user.id)
+          .subscribe((res) => {
+            console.log(res)
               this.router.navigate(['/boards']);
             },
             (error) => {

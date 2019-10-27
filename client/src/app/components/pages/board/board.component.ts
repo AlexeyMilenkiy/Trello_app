@@ -87,18 +87,19 @@ export class BoardComponent implements OnInit, OnDestroy {
           })
       );
     } else {
-      this.subscriptions.add(this.boardsService.getBoard(this.boardIdFromUrl)
-        .subscribe((board: BoardResponse) => {
-            if (board.author_id !== this.boardsService.getUserId()) {
+      this.subscriptions.add( this.boardsService.getBoard(this.boardIdFromUrl)
+        .subscribe(async (board: BoardResponse) => {
+          const userId = await this.boardsService.getUserId();
+          if (board.author_id !== userId) {
               this.router.navigate(['boards']);
             }
-            this.board = {...board};
+          this.board = {...board};
 
-            if (this.cardIdFromUrl) {
+          if (this.cardIdFromUrl) {
               this.editCard = this.board.cards.find((card: CardResponse) => card.id === this.cardIdFromUrl);
               this.editCard ? this.isOpenEditCardModal = true : this.router.navigate(['not-found']);
             }
-            this.separateCardsArray();
+          this.separateCardsArray();
           },
           (error) => {
             if ((error.status === 404) || (error.status === 0)) {

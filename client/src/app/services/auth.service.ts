@@ -33,10 +33,8 @@ export class AuthService {
       );
   }
 
-  socialAuth(user: SocialUser): Observable<AuthResponse> {
-    return this.http.post(`${environment.baseUrl}auth/google-auth`, {
-      email: user.email, name: user.name, token: user.authToken
-    })
+  socialAuth(idToken: string, id: string): Observable<AuthResponse> {
+    return this.http.post(`${environment.baseUrl}auth/google-auth`, {token: idToken, clientId: id})
       .pipe(
         tap(this.setStorage),
         catchError(this.checkError.bind(this))

@@ -51,18 +51,21 @@ module.exports = {
     },
 
     socialAuth (req, res) {
-        const user = req.body;
+        const userName = req._user_name;
+        const userEmail = req._user_email;
+        const token = req._user_token;
 
-        User.findOrCreate({where: {email: user.email, name: user.name}})
+        User.findOrCreate({where: {email: userEmail, name: userName}})
             .then(data => {
+                console.log(data);
                 res.json({
                     name: data[0].name,
                     id: data[0].id,
-                    token: createToken({name: data[0].name, id: data[0].id})
+                    token: token
                 });
             })
             .catch(() => {
-                res.sendStatus(401);
+                res.sendStatus(400);
             });
     },
 };
