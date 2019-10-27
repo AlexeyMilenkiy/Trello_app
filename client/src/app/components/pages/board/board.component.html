@@ -21,10 +21,11 @@
                    (closed)="isError = $event">
   </app-modal-error>
 
-  <app-modal-edit-card [isEdit]="isOpenEditCardModal"
-                       [card]="editCard"
-                       [authorId]="board.author_id"
-                       (isClose)="closeEditModal($event)">
-  </app-modal-edit-card>
+  <router-outlet></router-outlet>
+<!--  <app-modal-edit-card [isEdit]="isOpenEditCardModal"-->
+<!--                       [card]="editCard"-->
+<!--                       [authorId]="board.author_id"-->
+<!--                       (isClose)="closeEditModal($event)">-->
+<!--  </app-modal-edit-card>-->
 
 </div>

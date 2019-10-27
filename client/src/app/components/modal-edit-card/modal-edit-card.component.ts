@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -13,33 +14,31 @@ import { BoardsService } from '@app/services/boards.service';
   templateUrl: './modal-edit-card.component.html',
   styleUrls: ['./modal-edit-card.component.less']
 })
-export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
+export class ModalEditCardComponent implements OnInit, OnDestroy {
 
-  @Input() isEdit: boolean;
-  @Input() card: CardResponse;
-  @Input() authorId: number;
-  @Output() isClose = new EventEmitter<boolean>();
-
+  queryCardId: number;
+  card: CardResponse;
   userId: number;
   isEditDescription = false;
   formTitle: FormGroup;
   formDescription: FormGroup;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private cardsService: CardsService,
-              private boardsService: BoardsService) {}
+  constructor(private router: Router,
+              private activateRoute: ActivatedRoute,
+              private cardsService: CardsService,
+              private boardsService: BoardsService) {
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.card  && changes.card.currentValue) {
-      if (changes.card.currentValue) {
-        this.card = changes.card.currentValue;
-        this.formTitle.setValue({titleText : this.card.title});
-        this.formDescription.setValue({descriptionText : this.card.description});
-      }
-    }
+    this.queryCardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
+
+    // this.formTitle.setValue({titleText : this.card.title});
+    // this.formDescription.setValue({descriptionText : this.card.description});
   }
 
+
   ngOnInit() {
+
+    this.card = this.cardsService.getCard(this.queryCardId);
     this.userId = this.boardsService.getUserId();
     this.formTitle = new FormGroup({
       titleText: new FormControl(null, [
@@ -97,13 +96,13 @@ export class ModalEditCardComponent implements OnInit, OnChanges, OnDestroy {
   close(event) {
     const className = event.target.className;
     if ((className === 'modal__card__close') || (className === 'modal__wrapper')) {
-      this.isClose.emit(false);
+      this.router.navigate(['../../'], {relativeTo: this.activateRoute});
     }
   }
 
   deleteCard() {
-    this.cardsService.sendDeletingCard(this.card);
-    this.isClose.emit(false);
+    this.cardsService.sendDeletedCard(this.card);
+    this.router.navigate(['../../'], {relativeTo: this.activateRoute});
   }
 
   ngOnDestroy() {

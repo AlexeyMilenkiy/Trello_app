@@ -33,7 +33,7 @@ export class TableComponent implements OnDestroy, OnChanges {
 
   constructor(private cardsService: CardsService) {
 
-    this.subscriptions.add(this.cardsService.getDeletingCard()
+    this.subscriptions.add(this.cardsService.getDeletedCard()
       .subscribe((card: CardResponse) => {
         if (this.tableId === card.table_id) {
           this.cardsArray = this.cardsArray.filter(item => item.id !== card.id);

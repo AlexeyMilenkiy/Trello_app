@@ -60,7 +60,8 @@ export class BoardsService {
   }
 
   getShareBoard(shareHash: string): Observable<BoardResponse> {
-    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {params : {share_hash: shareHash}});  }
+    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {params : {share_hash: shareHash}});
+  }
 
   changeBoardTitle(title: string, id: number): Observable<number[]> {
     return this.http.put<number[]>(`${environment.baseUrl}boards/change-board-title`, {title, id});
