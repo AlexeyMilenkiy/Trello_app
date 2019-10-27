@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers');
-const { body, header } = require('express-validator');
+const { body, query } = require('express-validator');
 const { validate } = require('../services/validator');
 
 router.post('/create',validate([
@@ -47,7 +47,7 @@ router.put('/update',validate([
 ]),controller.cards.updateCard);
 
 router.delete('/delete',validate([
-    header('card_id')
+    query('card_id')
         .not().isEmpty()
         .isNumeric(),
 ]),controller.cards.deleteCard);

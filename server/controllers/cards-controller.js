@@ -5,7 +5,7 @@ const Op = models.Sequelize.Op;
 module.exports = {
 
     createCard(req, res) {
-        let card = req.body;
+        const card = req.body;
 
         Card.create({...card})
             .then((data) => {
@@ -18,7 +18,7 @@ module.exports = {
     },
 
     updateCard(req, res) {
-        let card = req.body;
+        const card = req.body;
 
         Card.update(
             {...card},
@@ -37,7 +37,7 @@ module.exports = {
     },
 
     deleteCard(req, res) {
-        let cardId = req.headers.card_id;
+        const cardId = req.query.card_id;
 
         Card.destroy(
             { where: {
