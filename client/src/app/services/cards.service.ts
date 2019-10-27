@@ -13,21 +13,31 @@ import { CardBeforeCreate } from '@app/interfaces/cardBeforeCreate';
 })
 export class CardsService {
 
-  cards: CardResponse[];
-  private subjectDeletingCard = new Subject();
-  private subjectEditCard = new Subject();
+  private subjectDeletedCard = new Subject();
+  private subjectUpdatedCard = new Subject();
 
   constructor(private http: HttpClient) { }
 
   sendDeletedCard(card: CardResponse) {
     this.deleteCard(card)
       .subscribe(
-        () => this.subjectDeletingCard.next(card),
-        (err) => this.subjectDeletingCard.next(err));
+        () => this.subjectDeletedCard.next(card),
+        (err) => this.subjectDeletedCard.next(err));
   }
 
   getDeletedCard(): Observable<any> {
-    return this.subjectDeletingCard.asObservable();
+    return this.subjectDeletedCard.asObservable();
+  }
+
+  sendUpdatedCard(card: CardResponse) {
+    this.updateCard(card)
+      .subscribe(
+        () => this.subjectUpdatedCard.next(card),
+        (err) => this.subjectUpdatedCard.next(err));
+  }
+
+  getUpdatedCard(): Observable<any> {
+    return this.subjectUpdatedCard.asObservable();
   }
 
   createCard(card: CardBeforeCreate): Observable<CardResponse> {

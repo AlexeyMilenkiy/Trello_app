@@ -23,7 +23,15 @@ export class CardComponent implements OnInit, OnDestroy {
   form: FormGroup;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardsService) {
+    this.subscriptions.add(this.cardsService.getUpdatedCard()
+      .subscribe((card: CardResponse) => {
+        if (this.card.id === card.id) {
+          this.card = {...card};
+        }
+      })
+    );
+  }
 
   ngOnInit() {
     this.form = new FormGroup({

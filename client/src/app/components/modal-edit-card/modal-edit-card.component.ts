@@ -28,18 +28,10 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
               private activateRoute: ActivatedRoute,
               private cardsService: CardsService,
               private boardsService: BoardsService) {
-
-    this.queryCardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
-
-    // this.formTitle.setValue({titleText : this.card.title});
-    // this.formDescription.setValue({descriptionText : this.card.description});
   }
 
 
   ngOnInit() {
-
-    this.card = this.cardsService.getCard(this.queryCardId);
-    this.userId = this.boardsService.getUserId();
     this.formTitle = new FormGroup({
       titleText: new FormControl(null, [
         Validators.required,
@@ -48,10 +40,26 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       ]),
     });
     this.formDescription = new FormGroup({
-        descriptionText: new FormControl(null, [
-          Validators.maxLength(200)
-        ]),
+      descriptionText: new FormControl(null, [
+        Validators.maxLength(200)
+      ]),
     });
+
+    this.queryCardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
+    this.userId = this.boardsService.getUserId();
+
+    this.subscriptions.add(this.cardsService.getCard(this.queryCardId)
+      .subscribe((card: CardResponse) => {
+        this.card = {...card};
+        this.formTitle.setValue({titleText : this.card.title});
+        this.formDescription.setValue({descriptionText : this.card.description});
+        },
+        (error) => {
+          if ((error.status !== 401) && (error.status !== 422)) {
+            // this.isError = true;
+          }
+        }
+      ));
   }
 
   blurOnTitle(elem: HTMLTextAreaElement) {
@@ -66,30 +74,14 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
     this.isEditDescription = false;
     if (this.card.description !== this.formDescription.value.descriptionText.trim()) {
       this.card.description = this.formDescription.value.descriptionText;
-
-      this.subscriptions.add(this.cardsService.updateCard(this.card)
-        .subscribe(() => {},
-          (error) => {
-            if ((error.status !== 401) && (error.status !== 422)) {
-              // this.isError = true;
-            }
-          }
-        ));
+      this.cardsService.sendUpdatedCard(this.card);
     }
   }
 
   changeTitle() {
     if (this.card.title !== this.formTitle.value.titleText.trim()) {
       this.card.title = this.formTitle.value.titleText;
-
-      this.subscriptions.add(this.cardsService.updateCard(this.card)
-        .subscribe(() => {},
-          (error) => {
-            if ((error.status !== 401) && (error.status !== 422)) {
-              // this.isError = true;
-            }
-          }
-        ));
+      this.cardsService.sendUpdatedCard(this.card);
     }
   }
 

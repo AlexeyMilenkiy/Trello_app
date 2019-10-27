@@ -4,6 +4,12 @@ const controller = require('../controllers');
 const { body, query } = require('express-validator');
 const { validate } = require('../services/validator');
 
+router.get('/get-card',validate([
+    query('card_id')
+        .not().isEmpty()
+        .isNumeric(),
+]),controller.cards.getCard);
+
 router.post('/create',validate([
     body('board_id')
         .not().isEmpty()

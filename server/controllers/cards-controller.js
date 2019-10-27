@@ -4,6 +4,26 @@ const Op = models.Sequelize.Op;
 
 module.exports = {
 
+    getCard(req, res) {
+        const cardId = req.query.card_id;
+
+        Card.findOne(
+            {
+                where: {
+                    id: {
+                        [Op.eq]: cardId
+                    }
+                }
+            }
+        )
+            .then((card) => {
+                res.json(card);
+            })
+            .catch(() => {
+                res.status(400);
+            });
+    },
+
     createCard(req, res) {
         const card = req.body;
 
@@ -22,11 +42,12 @@ module.exports = {
 
         Card.update(
             {...card},
-            { where: {
-                id: {
-                    [Op.eq]:card.id
+            {
+                where: {
+                    id: {
+                        [Op.eq]: card.id
+                    }
                 }
-            }
             })
             .then((data) => {
                 res.json(data);
@@ -40,11 +61,12 @@ module.exports = {
         const cardId = req.query.card_id;
 
         Card.destroy(
-            { where: {
-                id: {
-                    [Op.eq]: cardId
+            {
+                where: {
+                    id: {
+                        [Op.eq]: cardId
+                    }
                 }
-            }
             })
             .then((data) => {
                 res.json(data);
