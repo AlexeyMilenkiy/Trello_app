@@ -27,7 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
 
-        if (error.error === 'token_invalid') {
+        if (error.status === 401) {
           this.authService.logout();
           this.router.navigate(['/']);
         }
