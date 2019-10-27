@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers');
-const { body, header, query } = require('express-validator');
+const { body, query } = require('express-validator');
 const { validate } = require('../services/validator');
 
 router.get('/get-boards', validate([
@@ -30,7 +30,7 @@ router.get('/get-board', validate([
 ]), controller.boards.getBoard);
 
 router.get('/get-share-board', validate([
-    header('share_hash')
+    query('share_hash')
         .isHash("md5")
 ]), controller.boards.getShareBoard);
 

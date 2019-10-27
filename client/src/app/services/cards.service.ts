@@ -36,7 +36,6 @@ export class CardsService {
   }
 
   deleteCard(card: CardResponse): Observable<any> {
-    const headers = new HttpHeaders().set('card_id', `${card.id}`);
-    return this.http.delete(`${environment.baseUrl}cards/delete`, {headers});
+    return this.http.delete(`${environment.baseUrl}cards/delete`, {params : {card_id: `${card.id}`}});
   }
 }
