@@ -96,7 +96,7 @@ module.exports = {
     },
 
     removeBoard(req, res) {
-        let boardId = req.headers.board_id;
+        let boardId = req.query.board_id;
 
         Board.destroy({where: {id: boardId}})
             .then(data => {

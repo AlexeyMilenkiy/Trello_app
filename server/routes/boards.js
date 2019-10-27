@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers');
-const { body, header } = require('express-validator');
+const { body, header, query } = require('express-validator');
 const { validate } = require('../services/validator');
 
 router.get('/get-boards', validate([
@@ -20,7 +20,7 @@ router.post('/create', validate([
 ]), controller.boards.createBoard);
 
 router.delete('/remove-board', validate([
-    header('board_id')
+    query('board_id')
         .not().isEmpty()
 ]), controller.boards.removeBoard);
 

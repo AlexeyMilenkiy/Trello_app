@@ -41,8 +41,7 @@ export class BoardsService {
   }
 
   removeBoard(id: number): Observable<any> {
-    const headers = new HttpHeaders().set('board_id', `${id}`);
-    return this.http.delete(`${environment.baseUrl}boards/remove-board`, {headers});
+    return this.http.delete(`${environment.baseUrl}boards/remove-board`, {params : {board_id: `${id}`}});
   }
 
   changeBoardShareLink(id: number, shareLink: string | Int32Array | null): Observable<number[]> {

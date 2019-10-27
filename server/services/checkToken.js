@@ -35,8 +35,7 @@ const verifyGoogleToken  = async (token, res, next) => {
             idToken: token,
             audience: CLIENT_ID,
         });
-        console.log('tiket goole', ticket);
-        next();
+        if(ticket) next();
 
     } catch (err) {
         res.sendStatus(401);
