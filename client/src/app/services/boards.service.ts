@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable, Subject } from 'rxjs';
 import { Md5 } from 'ts-md5/dist/md5';

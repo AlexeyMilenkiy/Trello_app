@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
 import { AuthResponse } from '@app/interfaces/auth-response';
 import { User } from '@app/interfaces/user';
-import { SocialUser } from '@app/interfaces/social-user';
 
 @Injectable({
   providedIn: 'root'
