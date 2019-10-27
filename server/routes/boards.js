@@ -5,7 +5,7 @@ const { body, header, query } = require('express-validator');
 const { validate } = require('../services/validator');
 
 router.get('/get-boards', validate([
-    header('author_id')
+    query('author_id')
         .not().isEmpty()
 ]), controller.boards.getBoards);
 
@@ -25,7 +25,7 @@ router.delete('/remove-board', validate([
 ]), controller.boards.removeBoard);
 
 router.get('/get-board', validate([
-    header('board_id')
+    query('board_id')
         .not().isEmpty()
 ]), controller.boards.getBoard);
 

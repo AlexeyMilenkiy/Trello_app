@@ -6,7 +6,7 @@ const Op = models.Sequelize.Op;
 module.exports = {
 
     createBoard(req, res) {
-        let board = req.body;
+        const board = req.body;
 
         Board.create({title: board.title, author_id: board.author_id})
             .then(data => {
@@ -18,7 +18,7 @@ module.exports = {
     },
 
     getBoards(req, res) {
-        let userId = req.headers.author_id;
+        const userId = req.query.author_id;
 
         Board.findAll({where: {author_id: userId}})
             .then(data => {
@@ -30,13 +30,13 @@ module.exports = {
     },
 
     getBoard(req, res) {
-        let boardId = req.headers.board_id;
+        const boardId = req.query.board_id;
 
         Board.findOne({
             where: {
-              id: {
-                  [Op.eq]:boardId
-              }
+                id: {
+                    [Op.eq]: boardId
+                }
             },
             include: [{
                 model: Card,
@@ -50,53 +50,51 @@ module.exports = {
             }],
         })
             .then((board) => {
-                if(board) {
+                if (board) {
                     res.json(board);
                 } else {
                     res.sendStatus(404);
                 }
             })
             .catch((err) => {
-                console.log(err);
                 res.status(400);
             });
     },
 
     getShareBoard(req, res) {
-        let shareHash = req.headers.share_hash;
+        const shareHash = req.query.share_hash;
 
         Board.findOne({
             where: {
-              share_hash: {
-                  [Op.eq]: shareHash
-              }
+                share_hash: {
+                    [Op.eq]: shareHash
+                }
             },
             include: [{
                 model: Card,
                 as: 'cards',
                 where: {
                     board_id: {
-                        [Op.col] : 'Board.id'
+                        [Op.col]: 'Board.id'
                     }
                 },
                 required: false,
             }],
         })
             .then((board) => {
-                if(board) {
+                if (board) {
                     res.json(board);
                 } else {
                     res.sendStatus(404);
                 }
             })
             .catch((err) => {
-                console.log(err);
                 res.status(400);
             });
     },
 
     removeBoard(req, res) {
-        let boardId = req.query.board_id;
+        const boardId = req.query.board_id;
 
         Board.destroy({where: {id: boardId}})
             .then(data => {
@@ -108,8 +106,8 @@ module.exports = {
     },
 
     changeBoardTitle(req, res) {
-        let boardId = req.body.id;
-        let title = req.body.title;
+        const boardId = req.body.id;
+        const title = req.body.title;
 
         Board.update({title},
             {where: {id: boardId}})
@@ -122,8 +120,8 @@ module.exports = {
     },
 
     changeBoardLink(req, res) {
-        let boardId = req.body.id;
-        let shareLink = req.body.shareLink;
+        const boardId = req.body.id;
+        const shareLink = req.body.shareLink;
 
         Board.update({share_hash: shareLink},
             {where: {id: boardId}})

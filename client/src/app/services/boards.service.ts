@@ -52,18 +52,15 @@ export class BoardsService {
 
   getBoards(): Observable<BoardResponse[]> {
     const id = this.getUserId();
-    const headers = new HttpHeaders().set('author_id', `${id}`);
-    return this.http.get<BoardResponse[]>(`${environment.baseUrl}boards/get-boards`, {headers});
+    return this.http.get<BoardResponse[]>(`${environment.baseUrl}boards/get-boards`, {params : {author_id: `${id}`}});
   }
 
   getBoard(id: number): Observable<BoardResponse> {
-    const headers = new HttpHeaders().set('board_id', `${id}`);
-    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-board`, {headers});
+    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-board`, {params : {board_id: `${id}`}});
   }
 
   getShareBoard(shareHash: string): Observable<BoardResponse> {
-    const headers = new HttpHeaders().set('share_hash', shareHash);
-    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {headers});  }
+    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {params : {share_hash: shareHash}});  }
 
   changeBoardTitle(title: string, id: number): Observable<number[]> {
     return this.http.put<number[]>(`${environment.baseUrl}boards/change-board-title`, {title, id});
