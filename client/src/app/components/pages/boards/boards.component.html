@@ -26,15 +26,10 @@
 
   </div>
 
-
 </div>
 
-<app-modal-create-board [isOpen]="isOpen"
-                        (closed)="isOpen = $event"
+<app-modal-create-board [isOpen]="isOpenModalCreateBoard"
+                        (closed)="isOpenModalCreateBoard = $event"
                         (newBoard)="create($event)">
 </app-modal-create-board>
 
-<!--<app-modal-confirm [isModal]="isDelete"-->
-<!--                   (confirmed)="deleteBoard()"-->
-<!--                   (closed)="isDelete = $event">-->
-<!--</app-modal-confirm>-->

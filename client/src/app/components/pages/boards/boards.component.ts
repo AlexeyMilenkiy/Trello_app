@@ -15,7 +15,8 @@ export class BoardsComponent implements OnInit, OnDestroy {
 
   board: BoardBeforeCreate;
   boards: BoardResponse[] = [];
-  isOpen = false;
+  isOpenModalCreateBoard = false;
+  isDelete = false;
   subscriptions: Subscription = new Subscription();
 
   constructor(private router: Router,
@@ -23,7 +24,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
               private errorHandlerService: ErrorHandlerService) { }
 
   openModal() {
-    this.isOpen = true;
+    this.isOpenModalCreateBoard = true;
   }
 
   create(title: string) {
@@ -33,11 +34,11 @@ export class BoardsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.boardsService.createBoard(this.board)
       .subscribe((board: BoardResponse) => {
           this.boards.push(board);
-          this.isOpen = false;
+          this.isOpenModalCreateBoard = false;
           this.router.navigate([`/boards/${board.id}`]);
         },
         () => {
-          this.isOpen = false;
+          this.isOpenModalCreateBoard = false;
           this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
@@ -58,10 +59,10 @@ export class BoardsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.boardsService.getBoards()
       .subscribe((boards: BoardResponse[]) => {
           this.boards = [...boards];
-          this.isOpen = false;
+          this.isOpenModalCreateBoard = false;
         },
         () => {
-          this.isOpen = false;
+          this.isOpenModalCreateBoard = false;
           this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
