@@ -1,11 +1,10 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
-import { Subscription } from 'rxjs';
+import {Subscription} from 'rxjs';
 
-import { BoardsService } from '@app/services/boards.service';
-
+import {BoardsService, ErrorHandlerService} from '@app/services';
 
 @Component({
   selector: 'app-board-header',
@@ -19,17 +18,16 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   form: FormGroup;
   editTitle = false;
   subscriptions: Subscription = new Subscription();
-  isError = false;
-  isDelete = false;
-  top: number;
-  left: number;
+  topPosition: number;
+  leftPosition: number;
   isOpenInviteBlock = false;
   isCreateLink = false;
   textInButton = 'Copy';
   hashLink: string | Int32Array = 'Loading...';
 
-  constructor(private boardsService: BoardsService,
-              private router: Router) {
+  constructor(private router: Router,
+              private boardsService: BoardsService,
+              private errorHandlerService: ErrorHandlerService) {
   }
 
   ngOnInit() {
@@ -50,29 +48,15 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       this.editTitle = false;
       return;
     }
-    this.subscriptions.add(this.boardsService.changeBoardTitle(this.form.value.boardTitle, this.boardId)
 
+    this.subscriptions.add(this.boardsService.changeBoardTitle(this.form.value.boardTitle, this.boardId)
       .subscribe(() => {
           this.title = this.form.value.boardTitle;
           this.editTitle = false;
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
-            this.isError = true;
-          }
-        }
-      ));
-  }
-
-  deleteBoard() {
-    this.isDelete = false;
-    this.subscriptions.add(this.boardsService.removeBoard(this.boardId)
-      .subscribe(() => {
-          this.router.navigate(['/boards']);
-        },
-        (error) => {
-          if ((error.status !== 401) && (error.status !== 422)) {
-            this.isError = true;
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
           }
         }
       ));
@@ -80,8 +64,8 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
 
   openInviteBlock(event) {
     const path = event.path || (event.composedPath && event.composedPath());
-    this.top = path[0].offsetTop + 45;
-    this.left = path[0].offsetLeft;
+    this.topPosition = path[0].offsetTop + 45;
+    this.leftPosition = path[0].offsetLeft;
     this.isOpenInviteBlock = true;
   }
 
@@ -101,12 +85,12 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     } else {
       this.isCreateLink = false;
       this.subscriptions.add(this.boardsService.changeBoardShareLink(this.boardId, null)
-          .subscribe(() => {
+        .subscribe(() => {
             this.hashLink = 'Loading...';
           },
-            () => {
+          () => {
             this.hashLink = 'Sorry, server is unavailable';
-            })
+          })
       );
     }
   }
