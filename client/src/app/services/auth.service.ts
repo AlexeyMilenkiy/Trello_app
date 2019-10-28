@@ -5,8 +5,8 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { AuthResponse } from '@app/interfaces/auth-response';
-import { User } from '@app/interfaces/user';
+import { UserResponse } from '@app/interfaces/user-response';
+import { UserBeforeLogin } from '@app/interfaces/user-before-login';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register(user: User): Observable<AuthResponse> {
+  register(user: UserBeforeLogin): Observable<UserResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-up`, user)
       .pipe(
         tap(this.setStorage),
@@ -25,7 +25,7 @@ export class AuthService {
       );
   }
 
-  login(user: User): Observable<AuthResponse> {
+  login(user: UserBeforeLogin): Observable<UserResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-in`, user)
       .pipe(
         tap(this.setStorage),
@@ -33,7 +33,7 @@ export class AuthService {
       );
   }
 
-  socialAuth(idToken: string, id: string): Observable<AuthResponse> {
+  socialAuth(idToken: string, id: string): Observable<UserResponse> {
     return this.http.post(`${environment.baseUrl}auth/google-auth`, {token: idToken, clientId: id})
       .pipe(
         tap(this.setStorage),
@@ -82,7 +82,7 @@ export class AuthService {
     return localStorage.getItem('name');
   }
 
-  setStorage(response: AuthResponse | null) {
+  setStorage(response: UserResponse | null) {
     if (response) {
       localStorage.setItem('name', response.name);
       localStorage.setItem('id', `${response.id}`);

@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { environment } from '@env/environment';
 import { CardResponse } from '@app/interfaces/card-response';
-import { CardBeforeCreate } from '@app/interfaces/cardBeforeCreate';
+import { CardBeforeCreate } from '@app/interfaces/card-before-create';
 
 
 @Injectable({

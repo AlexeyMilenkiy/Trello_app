@@ -31,7 +31,7 @@ Then you need to set data base configuration.
 JWT_SECRET = secret
 
 # Database
-USER = "User Name"
+USER = UUserBeforeLogineforeLogin
 PASSWORD = "*****"
 DATABASE = "Database Name"
 DIALECT = "postgres"

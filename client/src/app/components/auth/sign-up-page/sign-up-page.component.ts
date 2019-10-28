@@ -5,9 +5,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService as GoogleService, GoogleLoginProvider } from 'angularx-social-login';
 
-import { User } from '@app/interfaces/user';
-import { AuthService } from '@app/services/auth.service';
-import { SocialUser } from '@app/interfaces/social-user';
+import { AuthService, ErrorHandlerService } from '@app/services';
+import { UserBeforeLogin, SocialUser } from '@app/interfaces';
 
 @Component({
   selector: 'app-sign-up-page',
@@ -15,7 +14,7 @@ import { SocialUser } from '@app/interfaces/social-user';
   styleUrls: ['./sign-up-page.component.less']
 })
 export class SignUpPageComponent implements OnInit, OnDestroy {
-  user: User  = {
+  user: UserBeforeLogin  = {
     name: '',
     password: '',
     email: ''
@@ -24,9 +23,11 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
   form: FormGroup;
 
-  constructor( private googleService: GoogleService,
+  constructor( private router: Router,
+               private googleService: GoogleService,
                private authService: AuthService,
-               private router: Router) { }
+               private errorHandlerService: ErrorHandlerService,
+  ) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -61,7 +62,7 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
-            this.isError = true;
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
           }
         }
       ));
@@ -77,12 +78,14 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
             },
             (error) => {
               if ((error.status !== 401) && (error.status !== 422)) {
-                this.isError = true;
+                this.errorHandlerService.sendError('Server is not available! Please try again later');
               }
             }
           ));
       })
-      .catch(() => this.isError = true);
+      .catch(() => {
+        this.errorHandlerService.sendError('Server is not available! Please try again later');
+      });
   }
 
   ngOnDestroy(): void {

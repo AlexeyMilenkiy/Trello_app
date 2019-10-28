@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import {CardBeforeCreate} from '@app/interfaces/cardBeforeCreate';
+import {CardBeforeCreate} from '@app/interfaces/card-before-create';
 import {CardsService} from '@app/services/cards.service';
 import {CardResponse} from '@app/interfaces/card-response';
 
