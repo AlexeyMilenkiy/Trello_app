@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Subscription } from 'rxjs';
 
-import { BoardsService } from '@app/services/boards.service';
-import { BoardBeforeCreate } from '@app/interfaces/board-before-create';
-import { BoardResponse } from '@app/interfaces/board-response';
+import { BoardsService, ErrorHandlerService } from '@app/services';
+import { BoardBeforeCreate, BoardResponse } from '@app/interfaces';
 
 @Component({
   selector: 'app-boards',
@@ -13,17 +13,14 @@ import { BoardResponse } from '@app/interfaces/board-response';
 })
 export class BoardsComponent implements OnInit, OnDestroy {
 
-  board: BoardBeforeCreate = {
-    title: '',
-    author_id: this.boardsService.getUserId()
-  };
+  board: BoardBeforeCreate;
   boards: BoardResponse[] = [];
   isOpen = false;
-  isError = false;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private boardsService: BoardsService,
-              private router: Router) { }
+  constructor(private router: Router,
+              private boardsService: BoardsService,
+              private errorHandlerService: ErrorHandlerService) { }
 
   openModal() {
     this.isOpen = true;
@@ -31,6 +28,8 @@ export class BoardsComponent implements OnInit, OnDestroy {
 
   create(title: string) {
     this.board.title = title;
+    this.board.author_id = this.boardsService.getUserId();
+
     this.subscriptions.add(this.boardsService.createBoard(this.board)
       .subscribe((board: BoardResponse) => {
           this.boards.push(board);
@@ -39,7 +38,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
         },
         () => {
           this.isOpen = false;
-          this.isError = true;
+          this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
   }
@@ -50,7 +49,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
           this.boards = this.boards.filter(item => item.id !== id);
         },
         () => {
-          this.isError = true;
+          this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
   }
@@ -63,7 +62,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
         },
         () => {
           this.isOpen = false;
-          this.isError = true;
+          this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
   }

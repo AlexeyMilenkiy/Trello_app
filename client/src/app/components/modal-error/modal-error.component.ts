@@ -1,4 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
+import { ErrorHandlerService } from '@app/services/error-handler.service';
 
 @Component({
   selector: 'app-modal-error',
@@ -6,15 +10,29 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
   styleUrls: ['./modal-error.component.less']
 })
 
-export class ModalErrorComponent {
-  @Input() isModal: boolean;
-  @Input() message: string;
-  @Output() closed = new EventEmitter<boolean>();
+export class ModalErrorComponent implements OnDestroy {
+
+  isModal = false;
+  message: string;
+  subscriptions: Subscription = new Subscription();
+
+  constructor(private errorHandlerService: ErrorHandlerService) {
+    this.subscriptions.add(this.errorHandlerService.getError()
+      .subscribe((msg: string) => {
+          this.message = msg;
+          this.isModal = true;
+      })
+    );
+  }
 
   close(event) {
     const className = event.target.className;
     if ((className === 'modal_wrapper') || (className === 'close_modal')) {
-      this.closed.emit(false);
+      this.isModal = false;
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
