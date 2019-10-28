@@ -20,6 +20,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
   queryCardId: number;
   card: CardResponse;
   userId: number;
+  authorId: number;
   isEditDescription = false;
   formTitle: FormGroup;
   formDescription: FormGroup;
@@ -52,6 +53,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.cardsService.getCard(this.queryCardId)
       .subscribe((card: CardResponse) => {
         this.card = {...card};
+        this.authorId = this.boardsService.getAuthorId();
         this.formTitle.setValue({titleText : this.card.title});
         this.formDescription.setValue({descriptionText : this.card.description});
         this.isDownloaded = true;

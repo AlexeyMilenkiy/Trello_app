@@ -7,7 +7,7 @@ import { MainLayoutComponent } from '@components/main-layout/main-layout.compone
 import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { BoardComponent } from '@components/pages/board/board.component';
 import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
-import {ModalEditCardComponent} from '@components/modal-edit-card/modal-edit-card.component';
+import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 
 const routes: Routes = [
   { path: '', component: MainLayoutComponent, canActivate: [AuthGuard],

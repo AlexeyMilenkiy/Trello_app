@@ -71,7 +71,7 @@ export class SignUpPageComponent implements OnInit, OnDestroy {
     this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user: SocialUser) => {
 
-        this.subscriptions.add(this.authService.socialAuth(user)
+        this.subscriptions.add(this.authService.socialAuth(user.idToken, user.id)
           .subscribe(() => {
               this.router.navigate(['/boards']);
             },

@@ -46,7 +46,7 @@ module.exports = {
                 }
             })
             .catch(() => {
-                res.sendStatus(401);
+                res.sendStatus(400);
             });
     },
 

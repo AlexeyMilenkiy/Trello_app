@@ -62,7 +62,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.subscriptions.add(this.boardsService.getShareBoard(this.shareHash)
         .subscribe((board: BoardResponse) => {
             this.board = {...board};
-            this.queryBoardId = this.board.id;
+            this.boardsService.setAuthorId(this.board.author_id);
             this.separateCardsArray();
           },
           (error) => {
@@ -86,6 +86,7 @@ export class BoardComponent implements OnInit, OnDestroy {
               this.router.navigate(['boards']);
             }
           this.board = {...board};
+          this.boardsService.setAuthorId(this.board.author_id);
           this.separateCardsArray();
           },
           (error) => {

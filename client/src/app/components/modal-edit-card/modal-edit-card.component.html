@@ -40,13 +40,12 @@
             [formGroup]="formDescription"
             (ngSubmit)="changeDescription()">
 
-        <textarea
-                class="modal__card__description__text"
-                placeholder="Add a more detailed description..."
-                formControlName="descriptionText"
-                maxlength="400"
-                (blur)="changeDescription()"
-                appAutoFocusDirective></textarea>
+        <textarea class="modal__card__description__text"
+                  placeholder="Add a more detailed description..."
+                  formControlName="descriptionText"
+                  maxlength="400"
+                  (blur)="changeDescription()"
+                  appAutoFocusDirective></textarea>
 
         <div class="modal__card__description__btn-wrap">
 
@@ -72,7 +71,7 @@
 
     </div>
 
-    <button
+    <button *ngIf="authorId === userId"
             (click)="deleteCard()"
             class="modal__card__delete">
             Delete card

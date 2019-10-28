@@ -14,6 +14,7 @@ import { BoardResponse } from '@app/interfaces/board-response';
 
 export class BoardsService {
 
+  private authorId: number;
   private subject = new Subject();
 
   constructor(private http: HttpClient) { }
@@ -34,6 +35,14 @@ export class BoardsService {
 
   getUserId() {
     return parseInt(localStorage.getItem('id'), 10);
+  }
+
+  setAuthorId(id: number) {
+    this.authorId = id;
+  }
+
+  getAuthorId() {
+    return this.authorId;
   }
 
   createBoard(board: BoardBeforeCreate): Observable<BoardResponse> {
