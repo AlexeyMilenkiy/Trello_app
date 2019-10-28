@@ -3,8 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
-import { CardResponse } from '@app/interfaces/card-response';
-import { CardsService } from '@app/services/cards.service';
+import { CardsService, ErrorHandlerService } from '@app/services';
+import { CardResponse } from '@app/interfaces';
 
 @Component({
   selector: 'app-card',
@@ -17,13 +17,14 @@ export class CardComponent implements OnInit, OnDestroy {
   @Output() isOpenEditor = new EventEmitter<boolean>();
 
   isOpenEditTitle = false;
-  isError = false;
   top: 0;
   right: 0;
   form: FormGroup;
   subscriptions: Subscription = new Subscription();
 
-  constructor(private cardsService: CardsService) {
+  constructor(private cardsService: CardsService,
+              private errorHandlerService: ErrorHandlerService) {
+
     this.subscriptions.add(this.cardsService.getUpdatedCard()
       .subscribe((card: CardResponse) => {
         if (this.card.id === card.id) {
@@ -58,7 +59,7 @@ export class CardComponent implements OnInit, OnDestroy {
         if ((error.status !== 401) && (error.status !== 422)) {
           this.card.title = oldTitle;
           this.isOpenEditTitle = false;
-          this.isError = true;
+          this.errorHandlerService.sendError('Sorry, failed to change title! Please try again later');
         }
         }));
   }

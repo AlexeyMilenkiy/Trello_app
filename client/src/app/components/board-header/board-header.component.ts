@@ -15,6 +15,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
 
   @Input() title: string;
   @Input() boardId: number;
+
   form: FormGroup;
   editTitle = false;
   subscriptions: Subscription = new Subscription();
