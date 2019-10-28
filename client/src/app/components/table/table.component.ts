@@ -3,9 +3,8 @@ import {Subscription} from 'rxjs';
 
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 
-import {CardBeforeCreate} from '@app/interfaces/card-before-create';
-import {CardsService} from '@app/services/cards.service';
-import {CardResponse} from '@app/interfaces/card-response';
+import { CardsService, ErrorHandlerService } from '@app/services';
+import { CardBeforeCreate, CardResponse} from '@app/interfaces';
 
 @Component({
   selector: 'app-table',
@@ -27,11 +26,11 @@ export class TableComponent implements OnDestroy, OnChanges {
   };
 
   dragDisabled = false;
-  isError = false;
   subscriptions: Subscription = new Subscription();
   protected defaultPositionCard = 65535;
 
-  constructor(private cardsService: CardsService) {
+  constructor(private cardsService: CardsService,
+              private errorHandlerService: ErrorHandlerService) {
 
     this.subscriptions.add(this.cardsService.getDeletedCard()
       .subscribe((card: CardResponse) => {
@@ -60,7 +59,7 @@ export class TableComponent implements OnDestroy, OnChanges {
         },
         (error) => {
           if ((error.status === 400) || (error.status === 0)) {
-            this.isError = true;
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
           }
         }
       ));
@@ -82,11 +81,11 @@ export class TableComponent implements OnDestroy, OnChanges {
 
     if (event.container.data.length === 1) {
       return this.defaultPositionCard;
-    } else if ((newIndex === oldIndex) && (event.previousContainer === event.container)) {
+    } if ((newIndex === oldIndex) && (event.previousContainer === event.container)) {
       return this.cardsArray[oldIndex].position;
-    } else if (newIndex === 0) {
+    } if (newIndex === 0) {
       return this.cardsArray[1].position / 2;
-    } else if (newIndex === (this.cardsArray.length - 1)) {
+    } if (newIndex === (this.cardsArray.length - 1)) {
       return (this.cardsArray[newIndex - 1].position) + this.defaultPositionCard + 1;
     } else {
       return (((this.cardsArray[newIndex - 1].position + this.cardsArray[newIndex + 1].position) / 2));
@@ -107,8 +106,8 @@ export class TableComponent implements OnDestroy, OnChanges {
           this.cardsArray.push(card);
         },
         (error) => {
-          if ((error.status === 400) || (error.status === 0)) {
-            this.isError = true;
+          if ((error.status === 400) || (error.status === 500)) {
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
           }
         }
       ));
