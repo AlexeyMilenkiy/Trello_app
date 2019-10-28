@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { Md5 } from 'ts-md5/dist/md5';
 
 import { environment } from '@env/environment';
-import { BoardBeforeCreate } from '@app/interfaces/board-before-create';
-import { BoardResponse } from '@app/interfaces/board-response';
+import { BoardBeforeCreate, BoardResponse } from '@app/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -37,10 +37,6 @@ export class BoardsService {
     return parseInt(localStorage.getItem('id'), 10);
   }
 
-  setAuthorId(id: number) {
-    this.authorId = id;
-  }
-
   getAuthorId() {
     return this.authorId;
   }
@@ -69,7 +65,8 @@ export class BoardsService {
   }
 
   getShareBoard(shareHash: string): Observable<BoardResponse> {
-    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {params : {share_hash: shareHash}});
+    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-share-board`, {params : {share_hash: shareHash}})
+      .pipe(tap((board: BoardResponse) => this.authorId = board.author_id));
   }
 
   changeBoardTitle(title: string, id: number): Observable<number[]> {

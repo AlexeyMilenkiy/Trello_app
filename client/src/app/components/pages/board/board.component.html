@@ -1,6 +1,6 @@
 <div class="board">
-  <app-board-header [title]="board.title"
-                    [boardId]="board.id">
+  <app-board-header [title]="board?.title"
+                    [boardId]="board?.id">
   </app-board-header>
   <div class="board__main">
     <div class="board__main__tables" cdkDropListGroup>
@@ -10,16 +10,11 @@
                  [headline]="tablesMap[i+1]"
                  [cardsArray]="cards"
                  [tableId]="i+1"
-                 [boardId]="board.id">
+                 [boardId]="board?.id">
       </app-table>
 
     </div>
   </div>
-
-<!--  <app-modal-error [isModal]="isError"-->
-<!--                   [message]="'Server is not available! Please try again later'"-->
-<!--                   (closed)="isError = $event">-->
-<!--  </app-modal-error>-->
 
   <router-outlet></router-outlet>
 

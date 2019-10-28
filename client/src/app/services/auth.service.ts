@@ -5,8 +5,7 @@ import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { environment } from '@env/environment';
-import { UserResponse } from '@app/interfaces/user-response';
-import { UserBeforeLogin } from '@app/interfaces/user-before-login';
+import { UserResponse, UserBeforeLogin } from '@app/interfaces';
 
 @Injectable({
   providedIn: 'root'

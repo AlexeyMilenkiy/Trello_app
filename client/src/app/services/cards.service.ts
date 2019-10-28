@@ -4,8 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
 
 import { environment } from '@env/environment';
-import { CardResponse } from '@app/interfaces/card-response';
-import { CardBeforeCreate } from '@app/interfaces/card-before-create';
+import { CardResponse, CardBeforeCreate } from '@app/interfaces';
 
 
 @Injectable({

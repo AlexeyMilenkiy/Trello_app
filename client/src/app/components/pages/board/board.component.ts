@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { BoardsService } from '@app/services/boards.service';
-import { BoardResponse } from '@app/interfaces/board-response';
-import { CardResponse } from '@app/interfaces/card-response';
+import { BoardsService, ErrorHandlerService } from '@app/services';
+import { BoardResponse, CardResponse } from '@app/interfaces';
 
 @Component({
   selector: 'app-board',
@@ -28,13 +27,13 @@ export class BoardComponent implements OnInit, OnDestroy {
 
   queryBoardId: number;
   shareHash = '';
-  board: BoardResponse = {author_id: 0, cards: [], id: 0, title: ''};
+  board: BoardResponse;
   subscriptions: Subscription = new Subscription();
-  isError = false;
 
   constructor(private activateRoute: ActivatedRoute,
               private router: Router,
-              private boardsService: BoardsService) {
+              private boardsService: BoardsService,
+              private errorHandlerService: ErrorHandlerService) {
   }
 
   separateCardsArray() {
@@ -62,19 +61,18 @@ export class BoardComponent implements OnInit, OnDestroy {
       this.subscriptions.add(this.boardsService.getShareBoard(this.shareHash)
         .subscribe((board: BoardResponse) => {
             this.board = {...board};
-            this.boardsService.setAuthorId(this.board.author_id);
             this.separateCardsArray();
           },
           (error) => {
             switch (error.status) {
-              case 404 || 0 || 422:
+              case 404 || 422:
                 this.router.navigate(['not-found']);
                 break;
               case 401 :
                 this.router.navigate(['accept-page']);
                 break;
               default :
-                this.isError = true;
+                this.errorHandlerService.sendError('Server is not available! Please reload page');
             }
           })
       );
@@ -86,14 +84,13 @@ export class BoardComponent implements OnInit, OnDestroy {
               this.router.navigate(['boards']);
             }
           this.board = {...board};
-          this.boardsService.setAuthorId(this.board.author_id);
           this.separateCardsArray();
           },
           (error) => {
-            if ((error.status === 404) || (error.status === 0)) {
+            if (error.status === 404) {
               this.router.navigate(['not-found']);
             } else if ((error.status !== 401) && (error.status !== 422)) {
-              this.isError = true;
+              this.errorHandlerService.sendError('Server is not available! Please reload page');
             }
           }
         )

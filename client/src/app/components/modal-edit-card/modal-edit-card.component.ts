@@ -4,9 +4,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { CardResponse } from '@app/interfaces/card-response';
-import { CardsService } from '@app/services/cards.service';
-import { BoardsService } from '@app/services/boards.service';
+import { CardsService, BoardsService, ErrorHandlerService } from '@app/services';
+import { CardResponse } from '@app/interfaces';
 
 
 @Component({
@@ -29,7 +28,8 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private activateRoute: ActivatedRoute,
               private cardsService: CardsService,
-              private boardsService: BoardsService) {
+              private boardsService: BoardsService,
+              private errorHandlerService: ErrorHandlerService) {
   }
 
 
@@ -49,18 +49,18 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
 
     this.queryCardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
     this.userId = this.boardsService.getUserId();
+    this.authorId = this.boardsService.getAuthorId();
 
     this.subscriptions.add(this.cardsService.getCard(this.queryCardId)
       .subscribe((card: CardResponse) => {
         this.card = {...card};
-        this.authorId = this.boardsService.getAuthorId();
         this.formTitle.setValue({titleText : this.card.title});
         this.formDescription.setValue({descriptionText : this.card.description});
         this.isDownloaded = true;
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
-            // this.isError = true;
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
           }
         }
       ));
