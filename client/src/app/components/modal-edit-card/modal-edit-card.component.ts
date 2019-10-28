@@ -16,6 +16,7 @@ import { BoardsService } from '@app/services/boards.service';
 })
 export class ModalEditCardComponent implements OnInit, OnDestroy {
 
+  isDownloaded = false;
   queryCardId: number;
   card: CardResponse;
   userId: number;
@@ -53,6 +54,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
         this.card = {...card};
         this.formTitle.setValue({titleText : this.card.title});
         this.formDescription.setValue({descriptionText : this.card.description});
+        this.isDownloaded = true;
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
@@ -88,12 +90,14 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
   close(event) {
     const className = event.target.className;
     if ((className === 'modal__card__close') || (className === 'modal__wrapper')) {
+      this.isDownloaded = false;
       this.router.navigate(['../../'], {relativeTo: this.activateRoute});
     }
   }
 
   deleteCard() {
     this.cardsService.sendDeletedCard(this.card);
+    this.isDownloaded = false;
     this.router.navigate(['../../'], {relativeTo: this.activateRoute});
   }
 

@@ -75,6 +75,7 @@ export class CardComponent implements OnInit, OnDestroy {
   closeEditorTitle(event) {
     if ((event.target.className === 'form__container') || (event.target.className === 'form__close')) {
       this.isOpenEditTitle = false;
+      this.isOpenEditor.emit(false);
     }
   }
 

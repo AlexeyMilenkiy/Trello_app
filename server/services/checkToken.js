@@ -22,7 +22,7 @@ const verifyDefaultToken = (token, res, next) => {
         if (decoded) {
             next();
         } else {
-            res.status(401).send('token_invalid');
+            res.sendStatus(401);
         }
     });
 };
@@ -35,8 +35,9 @@ const verifyGoogleToken  = async (token, res, next) => {
             idToken: token,
             audience: CLIENT_ID,
         });
-        if(ticket) next();
-
+        if(ticket) {
+            next()
+        }
     } catch (err) {
         res.sendStatus(401);
     }
