@@ -13,7 +13,10 @@ import { BoardBeforeCreate, BoardResponse } from '@app/interfaces';
 })
 export class BoardsComponent implements OnInit, OnDestroy {
 
-  board: BoardBeforeCreate;
+  board: BoardBeforeCreate = {
+    author_id: 0,
+    title: ''
+  };
   boards: BoardResponse[] = [];
   isOpenModalCreateBoard = false;
   isDelete = false;
