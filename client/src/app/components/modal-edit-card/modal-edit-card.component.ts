@@ -50,7 +50,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
     this.queryCardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
     this.userId = this.boardsService.getUserId();
     this.authorId = this.boardsService.getAuthorId();
-
+    console.log(this.authorId)
     this.subscriptions.add(this.cardsService.getCard(this.queryCardId)
       .subscribe((card: CardResponse) => {
         this.card = {...card};

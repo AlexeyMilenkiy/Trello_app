@@ -1,10 +1,10 @@
-import {Component, Input, OnChanges, OnDestroy, SimpleChanges} from '@angular/core';
-import {Subscription} from 'rxjs';
+import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
 
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 import { CardsService, ErrorHandlerService } from '@app/services';
-import { CardBeforeCreate, CardResponse} from '@app/interfaces';
+import { CardBeforeCreate, CardResponse } from '@app/interfaces';
 
 @Component({
   selector: 'app-table',

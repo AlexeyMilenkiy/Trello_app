@@ -6,10 +6,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModalErrorComponent } from '@components/modal-error/modal-error.component';
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
 
+import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
+
+
 @NgModule({
   declarations: [
     ModalErrorComponent,
     StartHeaderComponent,
+    AutoFocusDirective,
   ],
   imports: [
     CommonModule,
@@ -21,7 +25,8 @@ import { StartHeaderComponent } from '@components/start-header/start-header.comp
     FormsModule,
     ReactiveFormsModule,
     ModalErrorComponent,
-    StartHeaderComponent
+    StartHeaderComponent,
+    AutoFocusDirective,
   ]
 })
 export class SharedModule { }
