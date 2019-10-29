@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from '@app/modules/shared.module';
@@ -25,7 +26,10 @@ import { NotFoundPageComponent } from '@components/pages/not-found-page/not-foun
     HttpClientModule,
     BrowserAnimationsModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

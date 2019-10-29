@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { environment } from '@env/environment';
 import { UserResponse, UserBeforeLogin } from '@app/interfaces';
@@ -14,7 +15,13 @@ export class AuthService {
 
   public error$: Subject<string> = new Subject<string>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              public jwtHelper: JwtHelperService) {}
+
+  isAuthenticated(): boolean {
+    const token = this.getToken();
+    return !this.jwtHelper.isTokenExpired(token);
+  }
 
   register(user: UserBeforeLogin): Observable<UserResponse> {
     return this.http.post(`${environment.baseUrl}auth/sign-up`, user)
