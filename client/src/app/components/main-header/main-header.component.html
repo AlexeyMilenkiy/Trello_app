@@ -17,6 +17,9 @@
   </div>
 
   <div *ngIf="isOpenUserBlock"
+       [clickOutsideEnabled]="true"
+       [emitOnBlur]="true"
+       (clickOutside)="onClickedOutside($event)"
        [ngStyle]="{'top' : top+'px', 'left' : left+'px'}"
        class="main__header__user__dropdown">
     <div class="main__header__user__dropdown__title">

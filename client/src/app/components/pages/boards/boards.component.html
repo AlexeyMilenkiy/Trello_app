@@ -30,6 +30,9 @@
 
 <app-modal-create-board [isOpen]="isOpenModalCreateBoard"
                         (closed)="isOpenModalCreateBoard = $event"
+                        [clickOutsideEnabled]="true"
+                        [emitOnBlur]="true"
+                        (clickOutside)="onClickedOutside($event)"
                         (newBoard)="create($event)">
 </app-modal-create-board>
 

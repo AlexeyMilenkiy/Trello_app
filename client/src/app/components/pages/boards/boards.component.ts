@@ -19,7 +19,6 @@ export class BoardsComponent implements OnInit, OnDestroy {
   };
   boards: BoardResponse[] = [];
   isOpenModalCreateBoard = false;
-  isDelete = false;
   subscriptions: Subscription = new Subscription();
 
   constructor(private router: Router,
@@ -73,5 +72,13 @@ export class BoardsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  onClickedOutside(event) {
+    debugger
+    if (event.target.className !== 'boards__list__create') {
+      this.isOpenModalCreateBoard = false;
+    }
+    console.log(event)
   }
 }

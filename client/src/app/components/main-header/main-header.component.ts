@@ -33,4 +33,12 @@ export class MainHeaderComponent implements OnInit {
     this.left = path[0].offsetLeft - 275;
     this.isOpenUserBlock = !this.isOpenUserBlock;
   }
+
+  onClickedOutside(event) {
+    if (event.target.className === 'main__header__user') {
+      return;
+    } else {
+      this.isOpenUserBlock = false;
+    }
+  }
 }
