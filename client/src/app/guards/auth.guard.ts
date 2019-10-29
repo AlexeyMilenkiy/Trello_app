@@ -10,7 +10,7 @@ import { AuthService } from '@app/services/auth.service';
 })
 export class AuthGuard implements CanActivate {
   constructor( private router: Router,
-               private authService: AuthService){
+               private authService: AuthService) {
   }
 
   canActivate(
@@ -20,27 +20,9 @@ export class AuthGuard implements CanActivate {
     const isValidToken = this.authService.isAuthenticated();
 
     switch (state.url) {
-      case '/' :
-        if (isValidToken) {
-          this.router.navigate(['/boards']);
-        } else {
-          return true;
-        }
-        break;
+      case '/':
       case '/sign-up' :
-        if (isValidToken) {
-          this.router.navigate(['/boards']);
-        } else {
-          return true;
-        }
-        break;
       case '/login' :
-        if (isValidToken) {
-          this.router.navigate(['/boards']);
-        } else {
-          return true;
-        }
-        break;
       case '/accept-page' :
         if (isValidToken) {
           this.router.navigate(['/boards']);

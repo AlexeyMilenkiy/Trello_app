@@ -10,10 +10,8 @@ import { NotFoundPageComponent } from '@components/pages/not-found-page/not-foun
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'},
   { path: '', component: StartPageComponent, canActivate: [AuthGuard]},
-
   { path: '', loadChildren: () => import('./modules/auth/auth.module').then(m => m.AuthModule)},
   { path: '', loadChildren: () => import('./modules/boards/boards.module').then(m => m.BoardsModule)},
-
   { path: '**', component: NotFoundPageComponent},
 ];
 
