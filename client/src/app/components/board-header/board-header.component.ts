@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
-import {Subscription} from 'rxjs';
+import { Subscription } from 'rxjs';
 
-import {BoardsService, ErrorHandlerService} from '@app/services';
+import { BoardsService, ErrorHandlerService } from '@app/services';
 
 @Component({
   selector: 'app-board-header',
@@ -66,12 +66,12 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   openInviteBlock(event) {
     const path = event.path || (event.composedPath && event.composedPath());
     this.topPosition = path[0].offsetTop + 45;
-    this.leftPosition = path[0].offsetLeft;
+    if ((path[0].offsetLeft + 350) >= event.view.innerWidth) {
+      this.leftPosition = event.view.innerWidth - 360;
+    } else {
+      this.leftPosition = path[0].offsetLeft;
+    }
     this.isOpenInviteBlock = !this.isOpenInviteBlock;
-  }
-
-  ngOnDestroy(): void {
-    this.subscriptions.unsubscribe();
   }
 
   generateLink() {
@@ -103,5 +103,17 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.textInButton = 'Copy';
     }, 2000);
+  }
+
+  onClickedOutside($event) {
+    if ($event.target.id === 'invite') {
+      return;
+    } else {
+      this.isOpenInviteBlock = false;
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }

@@ -29,7 +29,8 @@ import { NotFoundPageComponent } from '@components/pages/not-found-page/not-foun
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
-    JwtHelperService],
+    JwtHelperService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

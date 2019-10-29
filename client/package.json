@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.9",
     "@auth0/angular-jwt": "^3.0.0",
     "angularx-social-login": "^1.2.7",
+    "ng-click-outside": "^5.1.1",
     "ngx-autosize": "^1.6.4",
     "ngx-autosize-input": "^2.3.6",
     "rxjs": "~6.4.0",

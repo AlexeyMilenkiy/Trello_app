@@ -27,7 +27,7 @@ export class TableComponent implements OnDestroy, OnChanges {
 
   dragDisabled = false;
   subscriptions: Subscription = new Subscription();
-  protected defaultPositionCard = 65535;
+  protected defaultCardPosition = 65535;
 
   constructor(private cardsService: CardsService,
               private errorHandlerService: ErrorHandlerService) {
@@ -67,28 +67,25 @@ export class TableComponent implements OnDestroy, OnChanges {
   setPositionNewCard() {
     const cardQty = this.cardsArray.length;
 
-    return cardQty === 0 ?
-      this.defaultPositionCard :
-      ((this.cardsArray[cardQty - 1].position) + this.defaultPositionCard + 1);
+    if (cardQty === 0) {
+      return this.defaultCardPosition;
+    }
+    return ((this.cardsArray[cardQty - 1].position) + this.defaultCardPosition + 1);
   }
 
   setDroppedCardPosition(event: CdkDragDrop<CardResponse[]>) {
     const newIndex = event.currentIndex;
 
+    if (event.container.data.length === 1) {
+      return this.defaultCardPosition;
+    }
     if (newIndex === 0) {
       return this.cardsArray[1].position / 2;
     }
-
-    const nextPosition = this.cardsArray[newIndex + 1].position;
-    const prevPosition = this.cardsArray[newIndex - 1].position;
-
-    if (event.container.data.length === 1) {
-      return this.defaultPositionCard;
-    }
     if (newIndex === (this.cardsArray.length - 1)) {
-      return prevPosition + this.defaultPositionCard + 1;
+      return (this.cardsArray[newIndex - 1].position) + this.defaultCardPosition + 1;
     }
-    return (((prevPosition + nextPosition) / 2));
+    return (((this.cardsArray[newIndex - 1].position + this.cardsArray[newIndex + 1].position) / 2));
   }
 
   createCard(title: string) {

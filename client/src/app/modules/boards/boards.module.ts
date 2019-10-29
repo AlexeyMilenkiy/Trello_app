@@ -19,6 +19,7 @@ import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-c
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { MainHeaderComponent } from '@components/main-header/main-header.component';
 import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
+import {ClickOutsideModule} from 'ng-click-outside';
 
 // import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
 
@@ -44,7 +45,8 @@ import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.c
     BoardsRoutingModule,
     AutosizeModule,
     AutoSizeInputModule,
-    DragDropModule
+    DragDropModule,
+    ClickOutsideModule
   ]
 })
 export class BoardsModule { }

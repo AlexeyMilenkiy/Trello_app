@@ -19,11 +19,15 @@
           (click)="editTitle = true"
           class="board__header__text">{{title}}</span>
 
-    <button class="board__header__btn"
-            id="invite"
-            (click)="openInviteBlock($event)">Invite</button>
+      <button class="board__header__btn"
+              id="invite"
+              (click)="openInviteBlock($event)">Invite</button>
+
 
     <div *ngIf="isOpenInviteBlock"
+         [clickOutsideEnabled]="true"
+         [emitOnBlur]="true"
+         (clickOutside)="onClickedOutside($event)"
          class="invite__board__block"
          [ngStyle]="{'top' : topPosition+'px', 'left' : leftPosition+'px'}">
 
