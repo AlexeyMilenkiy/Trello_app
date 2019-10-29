@@ -67,7 +67,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     const path = event.path || (event.composedPath && event.composedPath());
     this.topPosition = path[0].offsetTop + 45;
     this.leftPosition = path[0].offsetLeft;
-    this.isOpenInviteBlock = true;
+    this.isOpenInviteBlock = !this.isOpenInviteBlock;
   }
 
   ngOnDestroy(): void {
