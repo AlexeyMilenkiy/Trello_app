@@ -48,15 +48,14 @@ export class TableComponent implements OnDestroy, OnChanges {
     } else {
       event.item.data.table_id = this.tableId;
       transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
+                        event.container.data,
+                        event.previousIndex,
+                        event.currentIndex);
     }
-    event.item.data.position = this.setPositionDroppedCard(event);
+    event.item.data.position = this.setDroppedCardPosition(event);
 
     this.subscriptions.add(this.cardsService.updateCard(event.item.data)
-      .subscribe(() => {
-        },
+      .subscribe(() => {},
         (error) => {
           if ((error.status === 400) || (error.status === 0)) {
             this.errorHandlerService.sendError('Server is not available! Please try again later');
@@ -66,30 +65,30 @@ export class TableComponent implements OnDestroy, OnChanges {
   }
 
   setPositionNewCard() {
-    if (this.cardsArray.length === 0) {
-      return this.defaultPositionCard;
-    } else {
-      return (
-        (this.cardsArray[this.cardsArray.length - 1].position) + this.defaultPositionCard + 1
-      );
-    }
+    const cardQty = this.cardsArray.length;
+
+    return cardQty === 0 ?
+      this.defaultPositionCard :
+      ((this.cardsArray[cardQty - 1].position) + this.defaultPositionCard + 1);
   }
 
-  setPositionDroppedCard(event: CdkDragDrop<CardResponse[]>) {
+  setDroppedCardPosition(event: CdkDragDrop<CardResponse[]>) {
     const newIndex = event.currentIndex;
-    const oldIndex = event.previousIndex;
+
+    if (newIndex === 0) {
+      return this.cardsArray[1].position / 2;
+    }
+
+    const nextPosition = this.cardsArray[newIndex + 1].position;
+    const prevPosition = this.cardsArray[newIndex - 1].position;
 
     if (event.container.data.length === 1) {
       return this.defaultPositionCard;
-    } if ((newIndex === oldIndex) && (event.previousContainer === event.container)) {
-      return this.cardsArray[oldIndex].position;
-    } if (newIndex === 0) {
-      return this.cardsArray[1].position / 2;
-    } if (newIndex === (this.cardsArray.length - 1)) {
-      return (this.cardsArray[newIndex - 1].position) + this.defaultPositionCard + 1;
-    } else {
-      return (((this.cardsArray[newIndex - 1].position + this.cardsArray[newIndex + 1].position) / 2));
     }
+    if (newIndex === (this.cardsArray.length - 1)) {
+      return prevPosition + this.defaultPositionCard + 1;
+    }
+    return (((prevPosition + nextPosition) / 2));
   }
 
   createCard(title: string) {
@@ -114,7 +113,7 @@ export class TableComponent implements OnDestroy, OnChanges {
   }
 
   sortCardsByName() {
-    this.cardsArray = this.cardsArray.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
+    this.cardsArray.sort((a, b) => (a.title > b.title) ? 1 : ((b.title > a.title) ? -1 : 0));
   }
 
   ngOnChanges(changes: SimpleChanges) {

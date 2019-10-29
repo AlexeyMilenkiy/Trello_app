@@ -1,13 +1,15 @@
 <div class="board">
+
   <app-board-header [title]="board?.title"
                     [boardId]="board?.id">
   </app-board-header>
+
   <div class="board__main">
     <div class="board__main__tables" cdkDropListGroup>
 
       <app-table class="table__wrapper"
                  *ngFor="let cards of cardsArray; let i = index"
-                 [headline]="tablesMap[i+1]"
+                 [headline]="defaultTablesMap[i+1]"
                  [cardsArray]="cards"
                  [tableId]="i+1"
                  [boardId]="board?.id">

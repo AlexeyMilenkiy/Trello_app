@@ -13,7 +13,7 @@ import { BoardResponse, CardResponse } from '@app/interfaces';
 })
 export class BoardComponent implements OnInit, OnDestroy {
 
-  protected tablesMap = {
+  protected defaultTablesMap = {
     1: 'Todo',
     2: 'Doing',
     3: 'Done',
@@ -65,7 +65,8 @@ export class BoardComponent implements OnInit, OnDestroy {
           },
           (error) => {
             switch (error.status) {
-              case 404 || 422:
+              case 404 :
+              case 422 :
                 this.router.navigate(['not-found']);
                 break;
               case 401 :
