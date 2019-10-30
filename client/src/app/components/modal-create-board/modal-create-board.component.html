@@ -1,4 +1,4 @@
-<div [style.display]="isOpen ? 'block': 'none'"
+<div *ngIf="isOpen"
      (click)="close($event)"
      class="modal_wrapper">
 
