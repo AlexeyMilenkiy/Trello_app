@@ -27,6 +27,7 @@ import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    ClickOutsideModule,
     ModalErrorComponent,
     StartHeaderComponent,
     AutoFocusDirective,

@@ -1,14 +1,16 @@
 <div [style.display]="isOpen ? 'block': 'none'"
+     (click)="close($event)"
      class="modal_wrapper">
 
   <form class="modal-create" [formGroup]="form" (ngSubmit)="create()">
 
-    <span class="modal-create-close" (click)="close()"></span>
+    <span class="modal-create-close" (click)="close($event)"></span>
 
     <input formControlName="title"
            appAutoFocusDirective
            class="modal-create__input"
            type="text"
+           maxlength="200"
            placeholder="Add board title">
 
     <button [ngClass]="{disabled: form.invalid}"

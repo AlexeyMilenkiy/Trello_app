@@ -36,8 +36,10 @@ export class ModalCreateBoardComponent implements OnInit {
     this.form.reset();
   }
 
-  close() {
-    this.closed.emit(false);
-    this.form.reset();
+  close(event) {
+    if ((event.target.className === 'modal_wrapper') || (event.target.className === 'modal-create-close')) {
+      this.closed.emit(false);
+      this.form.reset();
+    }
   }
 }

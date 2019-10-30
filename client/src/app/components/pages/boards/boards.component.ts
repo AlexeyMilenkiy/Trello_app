@@ -73,12 +73,4 @@ export class BoardsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
-
-  onClickedOutside(event) {
-    debugger
-    if (event.target.className !== 'boards__list__create') {
-      this.isOpenModalCreateBoard = false;
-    }
-    console.log(event)
-  }
 }
