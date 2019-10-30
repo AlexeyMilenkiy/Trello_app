@@ -6,7 +6,7 @@ This application is a simplified copy of Trello.
 You need to download this project to run it locally.
 To launch it you must install dependencies and then launch the app. First you need to set the data base.
 
-### Prerequisites
+### Main stack
 
 The app uses Node Js and PostgreSQL data bases. 
 If you don't have its then just follow the link and install its 
