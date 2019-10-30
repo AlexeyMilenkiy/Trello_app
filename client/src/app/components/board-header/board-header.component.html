@@ -8,7 +8,6 @@
              formControlName="boardTitle"
              maxlength="200"
              class="board__header__title__input"
-             [value]="title"
              (blur)="changeBoardTitle()"
              appAutoFocusDirective
              AutoSizeInput
@@ -16,7 +15,7 @@
     </form>
 
     <span *ngIf="!editTitle"
-          (click)="editTitle = true"
+          (click)="showInput()"
           class="board__header__text">{{title}}</span>
 
       <button class="board__header__btn"

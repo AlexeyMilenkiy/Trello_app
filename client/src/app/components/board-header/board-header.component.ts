@@ -66,7 +66,8 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   openInviteBlock(event) {
     const path = event.path || (event.composedPath && event.composedPath());
     this.topPosition = path[0].offsetTop + 45;
-    if ((path[0].offsetLeft + 350) >= event.view.innerWidth) {
+
+    if ((path[0].offsetLeft + 350) >= event.view.innerWidth) {     // 350 it's width invite's block
       this.leftPosition = event.view.innerWidth - 360;
     } else {
       this.leftPosition = path[0].offsetLeft;
@@ -115,5 +116,10 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  showInput() {
+    this.form.setValue({boardTitle: this.title});
+    this.editTitle = true;
   }
 }
