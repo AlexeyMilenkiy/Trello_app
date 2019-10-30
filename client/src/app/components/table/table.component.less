@@ -22,23 +22,6 @@
       font-weight: 700;
       cursor: default;
     }
-
-    button {
-      font-family: Roboto, sans-serif;
-      font-size: 16px;
-      color: black;
-      border: none;
-      background: transparent;
-      outline: none;
-      padding: 3px;
-      border-radius: 3px;
-
-      &:hover {
-        cursor: pointer;
-        background-color: rgba(9,30,66,.08);
-        color: #172b4d;
-      }
-    }
   }
 
   &__cards {
@@ -47,6 +30,23 @@
     overflow-x: hidden;
     flex: 1 1 auto;
     flex-direction: column;
+  }
+}
+
+button {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  color: black;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 3px;
+  border-radius: 3px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: rgba(9,30,66,.08);
+    color: #172b4d;
   }
 }
 
@@ -88,3 +88,9 @@
     background-color: rgba(9,30,66,.1);
   }
 }
+
+.disabled:hover {
+  background: none;
+  cursor: not-allowed;
+}
+
