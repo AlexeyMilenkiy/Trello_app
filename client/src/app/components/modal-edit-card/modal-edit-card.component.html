@@ -1,11 +1,11 @@
-<div [style.display]="isDownloaded ? 'block': 'none'"
+<div *ngIf="isDownloaded"
      (click)="close($event)"
      class="modal__wrapper">
 
   <div class="modal__card">
 
     <div class="modal__card__header">
-      <span class="modal__card__header__cardIcon"></span>
+      <span class="modal__card__header__card-icon"></span>
 
       <form [formGroup]="formTitle"
             (ngSubmit)="changeTitle()">
@@ -15,7 +15,8 @@
                   #titleCard
                   formControlName="titleText"
                   autosize
-                  [minRows]="3"
+                  [onlyGrow]="false"
+                  [value]="card?.title"
                   (keydown.enter)="$event.preventDefault(); $event.target.blur()"
                   (keydown.shift.enter)="$event.preventDefault()"
                   (blur)="blurOnTitle(titleCard)"></textarea>

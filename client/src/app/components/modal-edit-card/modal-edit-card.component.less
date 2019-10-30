@@ -37,17 +37,23 @@
       max-height: 80px;
     }
 
-    &__cardIcon {
+    &__card-icon {
       font-family: Trello, sans-serif;
       font-size: 35px;
       color: #172b4d;
       width: 40px;
       height: 40px;
+      display: flex;
+      align-items: flex-end;
 
       &:before {
         content: "\E910";
       }
     }
+  }
+
+  form {
+    width: 525px;
   }
 
   &__title {
@@ -56,16 +62,12 @@
     box-shadow: none;
     font-size: 23px;
     font-weight: 600;
-    overflow-wrap: break-word;
-    width: 525px;
-    line-height: 24px;
+    width: 100%;
     resize: none;
     border: none;
-    max-height: 200px;
-    min-height: 30px;
     align-self: flex-start;
-    padding: 5px;
     box-sizing: content-box;
+    padding: 8px 5px 5px;
     font-family: Roboto, sans-serif;
     color: #172b4d;
 
@@ -193,7 +195,7 @@
       margin-left: 70px;
       padding: 10px;
       width: 520px;
-      height: 70px;
+      height: 90px;
       text-decoration: none;
     }
   }
