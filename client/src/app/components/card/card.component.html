@@ -6,8 +6,8 @@
     <span (click)="openEditorTitle($event)"
           class="card__menu"></span>
   </span>
-
   <span *ngIf="card.description" class="card__description-icon"></span>
+
 </div>
 
 <div class="form__container"
@@ -36,9 +36,5 @@
 
   <span class="form__close" (click)="closeEditorTitle($event)"></span>
 
-<!--  <app-modal-error [isModal]="isError"-->
-<!--                   [message]="'Sorry, failed to change title! Please try again later'"-->
-<!--                   (closed)="isError = $event">-->
-<!--  </app-modal-error>-->
 </div>
 

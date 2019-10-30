@@ -78,7 +78,7 @@ export class BoardComponent implements OnInit, OnDestroy {
           })
       );
     } else {
-      this.subscriptions.add( this.boardsService.getBoard(this.queryBoardId)
+      this.subscriptions.add(this.boardsService.getBoard(this.queryBoardId)
         .subscribe((board: BoardResponse) => {
           const userId = this.boardsService.getUserId();
           if (board.author_id !== userId) {

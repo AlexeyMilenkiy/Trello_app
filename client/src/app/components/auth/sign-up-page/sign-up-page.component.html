@@ -32,8 +32,9 @@
           name="password">
 
   <div class="warning"
-        *ngIf="(form.get('password').touched && form.get('password').errors)">
-    Minimum password length 8 characters</div>
+       *ngIf="(form.get('password').touched && form.get('password').errors)">
+       Minimum password length 8 characters
+  </div>
 
   <button type="submit"
           class="auth__form__submit"
@@ -43,8 +44,7 @@
 
   <div (click)="signInWithGoogle()"
        id="google-link"
-       class="google-button"
-       tabindex="0">
+       class="google-button">
     <span class="icon"></span>
     <span class="label" data-gas-action-subject-id="loginWithGmailButton">Sign up with Google</span>
   </div>
