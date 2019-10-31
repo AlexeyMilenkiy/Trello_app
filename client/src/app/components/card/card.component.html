@@ -11,8 +11,7 @@
 </div>
 
 <div class="form__container"
-     *ngIf="isOpenEditTitle"
-     (click)="closeEditorTitle($event)">
+     *ngIf="isOpenEditTitle">
 
   <form class="form"
         [formGroup]="form"
@@ -22,6 +21,9 @@
     <textarea class="form__title"
               formControlName="titleCard"
               maxlength="200"
+              [clickOutsideEnabled]="true"
+              [emitOnBlur]="true"
+              (clickOutside)="closeEditorTitle($event)"
               (keydown.enter)="form.invalid ? $event.preventDefault() : changeCardTitle()"
               (keydown.shift.enter)="$event.preventDefault()"
               appAutoFocusDirective
@@ -34,7 +36,8 @@
               class="form__btn">Save</button>
   </form>
 
-  <span class="form__close" (click)="closeEditorTitle($event)"></span>
+  <span class="form__close"
+        (click)="closeEditorTitle($event)"></span>
 
 </div>
 

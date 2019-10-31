@@ -48,6 +48,10 @@ export class CardComponent implements OnInit, OnDestroy {
     if (this.form.invalid || !this.form.value.titleCard.trim().length) {
       return;
     }
+    if (this.form.value.titleCard.trim() === this.card.title) {
+      this.isOpenEditTitle = false;
+      return;
+    }
     const oldTitle = this.card.title;
     this.card.title = this.form.value.titleCard;
     this.subscriptions.add(this.cardsService.updateCard(this.card)
@@ -74,10 +78,11 @@ export class CardComponent implements OnInit, OnDestroy {
   }
 
   closeEditorTitle(event) {
-    if ((event.target.className === 'form__container') || (event.target.className === 'form__close')) {
-      this.isOpenEditTitle = false;
-      this.isOpenEditor.emit(false);
+    if (event.target.className === 'form__btn') {
+      return;
     }
+    this.isOpenEditTitle = false;
+    this.isOpenEditor.emit(false);
   }
 
   ngOnDestroy() {
