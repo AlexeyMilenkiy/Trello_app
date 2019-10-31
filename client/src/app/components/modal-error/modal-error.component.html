@@ -1,8 +1,12 @@
-<div [style.display]="isModal ? 'block': 'none'"
-     (click)="close($event)"
+<div *ngIf="isModal"
      class="modal_wrapper">
-  <div  class="modal_window">
-    <span class="close_modal" (click)="close($event)"></span>
+
+  <div  class="modal_window"
+        [clickOutsideEnabled]="true"
+        [emitOnBlur]="true"
+        (clickOutside)="close()">
+    <span class="close_modal" (click)="close()"></span>
     <span class="modal_text">{{message}}</span>
   </div>
+
 </div>

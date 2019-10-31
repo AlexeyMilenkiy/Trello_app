@@ -7,15 +7,24 @@ import { Observable, Subject } from 'rxjs';
 })
 export class ErrorHandlerService {
 
-  private subject = new Subject();
+  private subjectMsg = new Subject();
+  private subjectClose = new Subject();
 
   constructor() { }
 
   sendError(msg: string) {
-    this.subject.next(msg);
+    this.subjectMsg.next(msg);
   }
 
   getError(): Observable<any> {
-    return this.subject.asObservable();
+    return this.subjectMsg.asObservable();
+  }
+
+  sendEventClose() {
+    this.subjectClose.next(false);
+  }
+
+  getEventClose(): Observable<any> {
+    return this.subjectClose.asObservable();
   }
 }

@@ -25,11 +25,9 @@ export class ModalErrorComponent implements OnDestroy {
     );
   }
 
-  close(event) {
-    const className = event.target.className;
-    if ((className === 'modal_wrapper') || (className === 'close_modal')) {
-      this.isModal = false;
-    }
+  close() {
+    this.isModal = false;
+    this.errorHandlerService.sendEventClose();
   }
 
   ngOnDestroy() {

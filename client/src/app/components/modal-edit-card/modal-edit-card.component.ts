@@ -32,6 +32,13 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
               private cardsService: CardsService,
               private boardsService: BoardsService,
               private errorHandlerService: ErrorHandlerService) {
+
+    this.subscriptions.add(this.errorHandlerService.getEventClose()
+      .subscribe(() => {
+        this.router.navigate(['../../'], {relativeTo: this.activateRoute});
+        }
+      )
+    );
   }
 
 
@@ -66,7 +73,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
-            this.errorHandlerService.sendError('Server is not available! Please reload page!');
+            this.errorHandlerService.sendError('Server is not available! Please try again later!');
           }
         }
       ));

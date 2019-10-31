@@ -1,7 +1,10 @@
 <div *ngIf="isDownloaded"
      class="modal__wrapper">
 
-  <div class="modal__card">
+  <div [clickOutsideEnabled]="true"
+       [emitOnBlur]="true"
+       (clickOutside)="close()"
+       class="modal__card">
 
     <div class="modal__card__header">
       <span class="modal__card__header__card-icon"></span>
