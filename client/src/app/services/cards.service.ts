@@ -18,10 +18,7 @@ export class CardsService {
   constructor(private http: HttpClient) { }
 
   sendDeletedCard(card: CardResponse) {
-    this.deleteCard(card)
-      .subscribe(
-        () => this.subjectDeletedCard.next(card),
-        (err) => this.subjectDeletedCard.next(err));
+    this.subjectDeletedCard.next(card);
   }
 
   getDeletedCard(): Observable<any> {
@@ -29,10 +26,7 @@ export class CardsService {
   }
 
   sendUpdatedCard(card: CardResponse) {
-    this.updateCard(card)
-      .subscribe(
-        () => this.subjectUpdatedCard.next(card),
-        (err) => this.subjectUpdatedCard.next(err));
+   this.subjectUpdatedCard.next(card);
   }
 
   getUpdatedCard(): Observable<any> {

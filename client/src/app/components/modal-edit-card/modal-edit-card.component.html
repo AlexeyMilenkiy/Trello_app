@@ -1,5 +1,4 @@
 <div *ngIf="isDownloaded"
-     (click)="close($event)"
      class="modal__wrapper">
 
   <div class="modal__card">
@@ -8,12 +7,12 @@
       <span class="modal__card__header__card-icon"></span>
 
       <form [formGroup]="formTitle"
-            (ngSubmit)="changeTitle()">
+            (ngSubmit)="changeCard('title')">
 
         <textarea class="modal__card__title"
                   maxlength="200"
                   #titleCard
-                  formControlName="titleText"
+                  formControlName="title"
                   autosize
                   [onlyGrow]="false"
                   (keydown.enter)="$event.preventDefault(); $event.target.blur()"
@@ -21,8 +20,8 @@
                   (blur)="blurOnTitle(titleCard)"></textarea>
       </form>
 
-      <span (click)="close($event)"
-         class="modal__card__close"></span>
+      <span class="modal__card__close"
+            (click)="close()"></span>
 
     </div>
 
@@ -38,19 +37,19 @@
 
       <form *ngIf="isEditDescription"
             [formGroup]="formDescription"
-            (ngSubmit)="changeDescription()">
+            (ngSubmit)="changeCard('description')">
 
         <textarea class="modal__card__description__text"
                   placeholder="Add a more detailed description..."
-                  formControlName="descriptionText"
+                  formControlName="description"
                   maxlength="400"
-                  (blur)="changeDescription()"
+                  (blur)="changeCard('description')"
                   appAutoFocusDirective></textarea>
 
         <div class="modal__card__description__btn-wrap">
 
           <button type="submit" class="modal__card__description-save">Save</button>
-          <span (click)="changeDescription()"
+          <span (click)="changeCard('description')"
                 class="modal__card__description-close">
           </span>
         </div>
@@ -71,11 +70,19 @@
 
     </div>
 
-    <button *ngIf="(authorId === userId) || (authorId === undefined)"
-            (click)="deleteCard()"
-            class="modal__card__delete">
-            Delete card
-    </button>
+    <div class="modal__card__action__container">
+
+      <small *ngIf="isError">
+        Something went wrong and the card could not be {{textInError}}. Please try again later.
+      </small>
+
+      <button *ngIf="(authorId === userId) || (authorId === undefined)"
+              (click)="deleteCard()"
+              class="modal__card__delete">
+        Delete card
+      </button>
+
+    </div>
 
   </div>
 

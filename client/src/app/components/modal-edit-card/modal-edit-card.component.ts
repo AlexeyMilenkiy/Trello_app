@@ -18,6 +18,8 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
   isDownloaded = false;
   queryCardId: number;
   card: CardResponse;
+  isError = false;
+  textInError = '';
   userId: number;
   authorId: number;
   isEditDescription = false;
@@ -35,14 +37,14 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.formTitle = new FormGroup({
-      titleText: new FormControl(null, [
+      title: new FormControl(null, [
         Validators.required,
         Validators.minLength(1),
         Validators.maxLength(200)
       ]),
     });
     this.formDescription = new FormGroup({
-      descriptionText: new FormControl(null, [
+      description: new FormControl(null, [
         Validators.maxLength(200)
       ]),
     });
@@ -53,54 +55,71 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(this.cardsService.getCard(this.queryCardId)
       .subscribe((card: CardResponse) => {
+        if (!card) {
+          this.router.navigate(['../../'], {relativeTo: this.activateRoute});
+          return;
+        }
         this.card = {...card};
-        this.formTitle.setValue({titleText : this.card.title});
-        this.formDescription.setValue({descriptionText : this.card.description});
+        this.formTitle.setValue({title : this.card.title});
+        this.formDescription.setValue({description : this.card.description});
         this.isDownloaded = true;
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
-            this.errorHandlerService.sendError('Server is not available! Please try again later');
+            this.errorHandlerService.sendError('Server is not available! Please reload page!');
           }
         }
       ));
   }
 
   blurOnTitle(elem: HTMLTextAreaElement) {
-    if (this.formTitle.invalid || !this.formTitle.value.titleText.trim()) {
+    if (this.formTitle.invalid || !this.formTitle.value.title.trim()) {
       elem.focus();
     } else {
-      this.changeTitle();
+      this.changeCard('title');
     }
   }
 
-  changeDescription() {
-    this.isEditDescription = false;
-    if (this.card.description !== this.formDescription.value.descriptionText.trim()) {
-      this.card.description = this.formDescription.value.descriptionText;
-      this.cardsService.sendUpdatedCard(this.card);
+  changeCard(attr: string) {
+    let formGroup = this.formTitle;
+
+    if (attr === 'description') {
+      this.isEditDescription = false;
+      formGroup = this.formDescription;
     }
+    if (this.card[attr] === formGroup.value[attr].trim()) {
+      return;
+    }
+    this.card[attr] = formGroup.value[attr];
+    this.subscriptions.add(this.cardsService.updateCard(this.card)
+      .subscribe(
+        () => this.cardsService.sendUpdatedCard(this.card),
+        () => {
+          this.textInError = 'changed';
+          this.isError = true;
+        }
+      )
+    );
   }
 
-  changeTitle() {
-    if (this.card.title !== this.formTitle.value.titleText.trim()) {
-      this.card.title = this.formTitle.value.titleText;
-      this.cardsService.sendUpdatedCard(this.card);
-    }
-  }
-
-  close(event) {
-    const className = event.target.className;
-    if ((className === 'modal__card__close') || (className === 'modal__wrapper')) {
-      this.isDownloaded = false;
-      this.router.navigate(['../../'], {relativeTo: this.activateRoute});
-    }
+  close() {
+    this.isDownloaded = false;
+    this.router.navigate(['../../'], {relativeTo: this.activateRoute});
   }
 
   deleteCard() {
-    this.cardsService.sendDeletedCard(this.card);
-    this.isDownloaded = false;
-    this.router.navigate(['../../'], {relativeTo: this.activateRoute});
+    this.subscriptions.add(this.cardsService.deleteCard(this.card)
+      .subscribe(
+        () => {
+          this.cardsService.sendDeletedCard(this.card);
+          this.router.navigate(['../../'], {relativeTo: this.activateRoute});
+        },
+        () => {
+          this.textInError = 'deleted';
+          this.isError = true;
+        }
+      )
+    );
   }
 
   ngOnDestroy() {

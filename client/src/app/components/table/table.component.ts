@@ -37,8 +37,8 @@ export class TableComponent implements OnDestroy, OnChanges {
         if (this.tableId === card.table_id) {
           this.cardsArray = this.cardsArray.filter(item => item.id !== card.id);
         }
-      })
-    );
+      },
+    ));
   }
 
   drop(event: CdkDragDrop<CardResponse[]>) {

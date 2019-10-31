@@ -253,11 +253,25 @@
     border: none;
     color: #fff;
     border-radius: 4px;
-    align-self: flex-end;
     outline: none;
 
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  &__action__container {
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    small {
+      font-family: Roboto, sans-serif;
+      font-size: 19px;
+      color: red;
+      width: calc(100% - 150px);
+      margin-right: 30px;
     }
   }
 }

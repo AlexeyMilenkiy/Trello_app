@@ -52,12 +52,11 @@ router.put('/update',validate([
         .isLength({ min: 0, max: 400 }),
 ]),controller.cards.updateCard);
 
-router.delete('/delete',validate([
-    query('card_id')
-        .not().isEmpty()
-        .isNumeric(),
-]),controller.cards.deleteCard);
+router.delete('/delete',controller.cards.deleteCard);
 
 module.exports = router;
 
-
+// validate([
+//     query('card_id')
+//         .not().isEmpty()
+// ]),
