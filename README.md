@@ -42,6 +42,12 @@ Next launch the migrations.
 ```
 npx sequelize-cli db:migrate
 ```
+
+If you want, you can populate your base with default values. To do this, you need to run the command.
+```
+psql -d "Database Name" -f dump.sql
+```
+
 And than launch the server.
 
 ```
