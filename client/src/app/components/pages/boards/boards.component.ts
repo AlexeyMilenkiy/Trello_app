@@ -23,10 +23,7 @@ export class BoardsComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private boardsService: BoardsService,
-              private errorHandlerService: ErrorHandlerService) { }
-
-  openModal() {
-    this.isOpenModalCreateBoard = true;
+              private errorHandlerService: ErrorHandlerService) {
   }
 
   create(title: string) {

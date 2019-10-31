@@ -2,7 +2,9 @@
      (click)="close($event)"
      class="modal_wrapper">
 
-  <form class="modal-create" [formGroup]="form" (ngSubmit)="create()">
+  <form class="modal-create"
+        [formGroup]="form"
+        (ngSubmit)="create()">
 
     <span class="modal-create-close" (click)="close($event)"></span>
 
