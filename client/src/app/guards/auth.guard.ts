@@ -26,13 +26,14 @@ export class AuthGuard implements CanActivate {
       case '/accept-page' :
         if (isValidToken) {
           this.router.navigate(['/boards']);
+          return false;
         } else {
           return true;
         }
-        break;
       default:
         if (!isValidToken) {
           this.router.navigate(['/']);
+          return false;
         } else {
           return true;
         }
