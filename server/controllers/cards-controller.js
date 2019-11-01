@@ -59,7 +59,6 @@ module.exports = {
 
     deleteCard(req, res) {
         const cardId = req.query.card_id;
-        console.log(cardId);
 
         Card.destroy(
             {
