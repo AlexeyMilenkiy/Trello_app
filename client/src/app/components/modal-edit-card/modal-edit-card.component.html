@@ -1,9 +1,7 @@
 <div *ngIf="isDownloaded"
      class="modal__wrapper">
 
-  <div [clickOutsideEnabled]="true"
-       [emitOnBlur]="true"
-       (clickOutside)="close()"
+  <div
        class="modal__card">
 
     <div class="modal__card__header">
@@ -52,7 +50,7 @@
         <div class="modal__card__description__btn-wrap">
 
           <button type="submit" class="modal__card__description-save">Save</button>
-          <span (click)="changeCard('description')"
+          <span (mousedown)="closeDescriptionForm()"
                 class="modal__card__description-close">
           </span>
         </div>
@@ -61,13 +59,13 @@
 
       <p *ngIf="card?.description && !isEditDescription"
          (click)="isEditDescription = true"
-        class="modal__card__description__content">
+         class="modal__card__description__content">
         {{card.description}}
       </p>
 
       <p *ngIf="!card?.description && !isEditDescription"
          (click)="isEditDescription = true"
-        class="modal__card__description__preview">
+         class="modal__card__description__preview">
         Add a more detailed description...
       </p>
 

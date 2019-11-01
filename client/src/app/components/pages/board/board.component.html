@@ -1,4 +1,4 @@
-<div class="board">
+<div *ngIf="board" class="board">
 
   <app-board-header [title]="board?.title"
                     [boardId]="board?.id">

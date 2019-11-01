@@ -79,6 +79,11 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       ));
   }
 
+  closeDescriptionForm() {
+    this.isEditDescription = false;
+    this.formDescription.setValue({description : this.card.description});
+  }
+
   blurOnTitle(elem: HTMLTextAreaElement) {
     if (this.formTitle.invalid || !this.formTitle.value.title.trim()) {
       elem.focus();
