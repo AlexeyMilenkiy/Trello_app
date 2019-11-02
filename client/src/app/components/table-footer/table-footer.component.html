@@ -10,7 +10,7 @@
               #titleCard
               maxlength="200"
               (blur)="blurOnTitle(titleCard)"
-              (keydown.enter)="form.invalid ? $event.preventDefault() : createCard()"
+              (keydown.enter)="form.invalid ? $event.preventDefault() : createCard($event)"
               (keydown.shift.enter)="$event.preventDefault()"
               appAutoFocusDirective
               autosize

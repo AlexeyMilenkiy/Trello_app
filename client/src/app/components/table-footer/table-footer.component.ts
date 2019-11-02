@@ -46,13 +46,16 @@ export class TableFooterComponent implements OnInit {
     this.isOpen = false;
   }
 
-  createCard() {
+  createCard(event?) {
     if (this.form.invalid || !this.form.value.titleCard.trim().length) {
       return;
     }
     this.newCard.emit(this.form.value.titleCard);
     this.form.reset();
     this.isCreated = true;
+    if (event) {
+      event.preventDefault();
+    }
   }
 
   close() {
