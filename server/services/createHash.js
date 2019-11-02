@@ -1,8 +1,6 @@
 const bcrypt = require('bcrypt');
-const salt =  10;
+const saltRounds =  10;
 
 module.exports = (pass) => {
-    return bcrypt.hashSync (pass, salt);
+    return bcrypt.hashSync (pass, saltRounds);
 };
-
- 
