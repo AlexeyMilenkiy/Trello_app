@@ -2,8 +2,7 @@
 
   <div class="table__title">
     <span>{{headline}}</span>
-    <button [disabled]="(cardsArray.length ===  1) || (cardsArray.length === 0)"
-            [ngClass]="{disabled: (cardsArray.length ===  1) || (cardsArray.length === 0)}"
+    <button *ngIf="cardsArray.length > 1"
             (click)="sortCardsByName()">Sort by Name</button>
   </div>
 

@@ -7,8 +7,9 @@
 
     <textarea placeholder="Enter a title for this card..."
               formControlName="titleCard"
+              #titleCard
               maxlength="200"
-              (blur)="createCard()"
+              (blur)="blurOnTitle(titleCard)"
               (keydown.enter)="form.invalid ? $event.preventDefault() : createCard()"
               (keydown.shift.enter)="$event.preventDefault()"
               appAutoFocusDirective
@@ -19,11 +20,12 @@
 
       <button [ngClass]="{disabled: form.invalid}"
               [disabled]="form.invalid"
+              (mousedown)="createCard()"
               type="submit"
               class="add-card__btn">
               Add Card
       </button>
-      <span class="add-card__close" (click)="close()"></span>
+      <span class="add-card__close" (mousedown)="close()"></span>
 
     </div>
   </form>

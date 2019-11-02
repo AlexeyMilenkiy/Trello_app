@@ -12,6 +12,7 @@ export class TableFooterComponent implements OnInit {
 
   form: FormGroup;
   isOpen = false;
+  isCreated = false;
 
   constructor() {}
 
@@ -25,14 +26,33 @@ export class TableFooterComponent implements OnInit {
     });
   }
 
-  createCard() {
+  blurOnTitle(elem: HTMLTextAreaElement) {
+    if (!this.isOpen) {
+      return;
+    }
+    if (this.isCreated) {
+      elem.focus();
+      this.isCreated = false;
+      return;
+    }
     if (this.form.invalid || !this.form.value.titleCard.trim().length) {
+      this.isCreated = false;
       this.isOpen = false;
       return;
     }
     this.newCard.emit(this.form.value.titleCard);
     this.form.reset();
+    this.isCreated = false;
     this.isOpen = false;
+  }
+
+  createCard() {
+    if (this.form.invalid || !this.form.value.titleCard.trim().length) {
+      return;
+    }
+    this.newCard.emit(this.form.value.titleCard);
+    this.form.reset();
+    this.isCreated = true;
   }
 
   close() {
