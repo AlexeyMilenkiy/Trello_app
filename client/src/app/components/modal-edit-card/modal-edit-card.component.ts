@@ -15,7 +15,6 @@ import { CardResponse } from '@app/interfaces';
 })
 export class ModalEditCardComponent implements OnInit, OnDestroy {
 
-  isDownloaded = false;
   queryCardId: number;
   card: CardResponse;
   isError = false;
@@ -40,7 +39,6 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       )
     );
   }
-
 
   ngOnInit() {
     this.formTitle = new FormGroup({
@@ -69,7 +67,6 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
         this.card = {...card};
         this.formTitle.setValue({title : this.card.title});
         this.formDescription.setValue({description : this.card.description});
-        this.isDownloaded = true;
         },
         (error) => {
           if ((error.status !== 401) && (error.status !== 422)) {
@@ -115,7 +112,6 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
   }
 
   close() {
-    this.isDownloaded = false;
     this.router.navigate(['../../'], {relativeTo: this.activateRoute});
   }
 

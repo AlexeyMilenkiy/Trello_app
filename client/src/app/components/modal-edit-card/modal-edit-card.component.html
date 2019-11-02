@@ -1,14 +1,15 @@
-<div *ngIf="isDownloaded"
+<div *ngIf="card"
+     (click)="close()"
      class="modal__wrapper">
 
-  <div
-       class="modal__card">
+    <div (click)="$event.stopPropagation()"
+         class="modal__card">
 
-    <div class="modal__card__header">
-      <span class="modal__card__header__card-icon"></span>
+      <div class="modal__card__header">
+        <span class="modal__card__header__card-icon"></span>
 
-      <form [formGroup]="formTitle"
-            (ngSubmit)="changeCard('title')">
+        <form [formGroup]="formTitle"
+              (ngSubmit)="changeCard('title')">
 
         <textarea class="modal__card__title"
                   maxlength="200"
@@ -19,26 +20,26 @@
                   (keydown.enter)="$event.preventDefault(); $event.target.blur()"
                   (keydown.shift.enter)="$event.preventDefault()"
                   (blur)="blurOnTitle(titleCard)"></textarea>
-      </form>
+        </form>
 
-      <span class="modal__card__close"
-            (click)="close()"></span>
+        <span class="modal__card__close"
+              (click)="close()"></span>
 
-    </div>
-
-    <div class="modal__card__description">
-
-      <div class="modal__card__description__container">
-        <span class="modal__card__description-icon"></span>
-        <span class="modal__card__description__headline">Description</span>
-        <button *ngIf="card?.description && !isEditDescription"
-                (click)="isEditDescription = true"
-                class="modal__card__edit-btn">Edit</button>
       </div>
 
-      <form *ngIf="isEditDescription"
-            [formGroup]="formDescription"
-            (ngSubmit)="changeCard('description')">
+      <div class="modal__card__description">
+
+        <div class="modal__card__description__container">
+          <span class="modal__card__description-icon"></span>
+          <span class="modal__card__description__headline">Description</span>
+          <button *ngIf="card?.description && !isEditDescription"
+                  (click)="isEditDescription = true"
+                  class="modal__card__edit-btn">Edit</button>
+        </div>
+
+        <form *ngIf="isEditDescription"
+              [formGroup]="formDescription"
+              (ngSubmit)="changeCard('description')">
 
         <textarea class="modal__card__description__text"
                   placeholder="Add a more detailed description..."
@@ -47,44 +48,44 @@
                   (blur)="changeCard('description')"
                   appAutoFocusDirective></textarea>
 
-        <div class="modal__card__description__btn-wrap">
+          <div class="modal__card__description__btn-wrap">
 
-          <button type="submit" class="modal__card__description-save">Save</button>
-          <span (mousedown)="closeDescriptionForm()"
-                class="modal__card__description-close">
+            <button type="submit" class="modal__card__description-save">Save</button>
+            <span (mousedown)="closeDescriptionForm()"
+                  class="modal__card__description-close">
           </span>
-        </div>
+          </div>
 
-      </form>
+        </form>
 
-      <p *ngIf="card?.description && !isEditDescription"
-         (click)="isEditDescription = true"
-         class="modal__card__description__content">
-        {{card.description}}
-      </p>
+        <p *ngIf="card?.description && !isEditDescription"
+           (click)="this.isEditDescription = true"
+           class="modal__card__description__content">
+          {{card.description}}
+        </p>
 
-      <p *ngIf="!card?.description && !isEditDescription"
-         (click)="isEditDescription = true"
-         class="modal__card__description__preview">
-        Add a more detailed description...
-      </p>
+        <p *ngIf="!card?.description && !isEditDescription"
+           (click)="this.isEditDescription = true"
+           class="modal__card__description__preview">
+          Add a more detailed description...
+        </p>
+
+      </div>
+
+      <div class="modal__card__action__container">
+
+        <small *ngIf="isError">
+          Something went wrong and the card could not be {{textInError}}. Please try again later.
+        </small>
+
+        <button *ngIf="(authorId === userId) || (authorId === undefined)"
+                (click)="deleteCard()"
+                class="modal__card__delete">
+          Delete card
+        </button>
+
+      </div>
 
     </div>
-
-    <div class="modal__card__action__container">
-
-      <small *ngIf="isError">
-        Something went wrong and the card could not be {{textInError}}. Please try again later.
-      </small>
-
-      <button *ngIf="(authorId === userId) || (authorId === undefined)"
-              (click)="deleteCard()"
-              class="modal__card__delete">
-        Delete card
-      </button>
-
-    </div>
-
-  </div>
 
 </div>
