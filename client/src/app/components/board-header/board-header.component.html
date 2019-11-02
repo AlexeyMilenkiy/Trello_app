@@ -18,10 +18,12 @@
           (click)="showInput()"
           class="board__header__text">{{title}}</span>
 
-      <button class="board__header__btn"
-              id="invite"
-              (click)="openInviteBlock($event)">Invite</button>
+    <div class="board__header__container">
 
+      <div class="board__header__pipe"></div>
+      <button class="board__header__btn"
+              (click)="openInviteBlock($event)">Invite</button>
+    </div>
 
     <div *ngIf="isOpenInviteBlock"
          [clickOutsideEnabled]="true"

@@ -78,27 +78,19 @@
       background-color: hsla(0,0%,100%,.4);
     }
   }
-}
 
-#invite {
-  position: relative;
-  margin-left: 40px;
-  outline: none;
+  &__container {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
+  }
 
-  &:before {
-    content: '|';
-    position: absolute;
-    transform: translateX(-50%);
-    height: 20px;
-    left: -45px;
-    top: 5px;
-    width: 1px;
-    color: hsla(0, 0%, 100%, 0.24);
-    margin: 0 20px;
-
-    &:hover {
-      cursor: default;
-    }
+  &__pipe {
+    width: 2px;
+    height: 25px;
+    background: hsla(0, 0%, 100%, 0.24);
   }
 }
 
@@ -132,7 +124,7 @@
 
   &__close {
     font-family: Trello, sans-serif;
-    font-size: 18px;
+    font-size: 20px;
     color: #6b778c;
     position: absolute;
     transform: translate(-50%, -50%);

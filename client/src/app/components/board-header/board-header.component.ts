@@ -107,7 +107,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   }
 
   onClickedOutside($event) {
-    if ($event.target.id === 'invite') {
+    if ($event.target.className === 'board__header__btn') {
       return;
     } else {
       this.isOpenInviteBlock = false;
