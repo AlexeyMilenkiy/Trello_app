@@ -13,16 +13,15 @@ router.post('/sign-up', validate([
         .isLength({ min: 2, max: 50 }),
     body('email')
         .isEmail()
-        .normalizeEmail()
         .isLength({ min: 6, max: 50 }),
-    body('password').isLength({ min: 8, max: 50 })
+    body('password')
+        .isLength({ min: 8, max: 50 })
 ]), controller.auth.registerUser);
 
 
 router.post('/sign-in', validate([
     body('email')
         .isEmail()
-        .normalizeEmail()
         .isLength({ min: 6, max: 50 }),
     body('password')
         .isLength({ min: 8, max: 50})

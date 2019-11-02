@@ -57,7 +57,6 @@ module.exports = {
 
         User.findOrCreate({where: {email: userEmail, name: userName}})
             .then(data => {
-                console.log(data);
                 res.json({
                     name: data[0].name,
                     id: data[0].id,
