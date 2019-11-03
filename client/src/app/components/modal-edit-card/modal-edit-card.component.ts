@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { CardsService, BoardsService, ErrorHandlerService } from '@app/services';
-import {BoardResponse, CardResponse} from '@app/interfaces';
+import { CardResponse} from '@app/interfaces';
 
 
 @Component({
