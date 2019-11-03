@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, Router, RouterStateSnapshot } from '@angular/router';
+import { CanActivate, CanActivateChild, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 
 import { Observable } from 'rxjs';
 
@@ -8,7 +8,8 @@ import { AuthService } from '@app/services';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate, CanActivateChild {
+export class SharedGuard implements CanActivate, CanActivateChild {
+
   constructor( private router: Router,
                private authService: AuthService) {
   }
@@ -22,7 +23,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     if (isValidToken) {
       return true;
     } else {
-      this.router.navigate(['/']);
+      this.router.navigate(['/accept-page']);
       return false;
     }
   }

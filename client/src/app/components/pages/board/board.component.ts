@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -25,8 +25,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     []  // Done cards
   ];
 
-  queryBoardId: number;
-  shareHash = '';
   board: BoardResponse;
   subscriptions: Subscription = new Subscription();
 
@@ -53,50 +51,17 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    this.queryBoardId = parseInt(this.activateRoute.snapshot.params.board_id, 10);
-    this.shareHash = this.activateRoute.snapshot.params.share_hash;
-
-    if (this.shareHash) {
-      this.subscriptions.add(this.boardsService.getShareBoard(this.shareHash)
-        .subscribe((board: BoardResponse) => {
-            this.board = {...board};
+    this.subscriptions.add(this.activateRoute.data
+      .subscribe(
+        (res: { board: BoardResponse }) => {
+          if (res.board) {
+            this.board = {...res.board};
             this.separateCardsArray();
-          },
-          (error) => {
-            switch (error.status) {
-              case 404 :
-              case 422 :
-                this.router.navigate(['not-found']);
-                break;
-              case 401 :
-                this.router.navigate(['accept-page']);
-                break;
-              default :
-                this.errorHandlerService.sendError('Server is not available! Please reload page');
-            }
-          })
-      );
-    } else {
-      this.subscriptions.add(this.boardsService.getBoard(this.queryBoardId)
-        .subscribe((board: BoardResponse) => {
-          const userId = this.boardsService.getUserId();
-          if (board.author_id !== userId) {
-              this.router.navigate(['boards']);
-            }
-          this.board = {...board};
-          this.separateCardsArray();
-          },
-          (error) => {
-            if (error.status === 404) {
-              this.router.navigate(['not-found']);
-            } else if ((error.status !== 401) && (error.status !== 422)) {
-              this.errorHandlerService.sendError('Server is not available! Please reload page');
-            }
+          } else {
+            this.errorHandlerService.sendError('Server is not available! Please reload page');
           }
-        )
-      );
-    }
+        }
+      ));
   }
 
   ngOnDestroy(): void {

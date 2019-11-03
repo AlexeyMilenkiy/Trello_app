@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { AuthGuard } from '@app/guards/auth.guard';
+import { AuthGuard, SharedGuard, NotAuthGuard } from '@app/guards';
+
+import { BoardResolver } from '@app/services/board-resolver.service';
 
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
 import { BoardsComponent } from '@components/pages/boards/boards.component';
@@ -10,27 +12,32 @@ import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.c
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 
 const routes: Routes = [
-  { path: '', component: MainLayoutComponent, canActivate: [AuthGuard],
+  { path: '', component: MainLayoutComponent,
     children: [
-      { path: 'boards', component: BoardsComponent },
-      { path: 'boards/:board_id', component: BoardComponent,
-        children : [
-          { path: 'cards/:card_id', component: ModalEditCardComponent }
-        ]
-      },
-      { path: 'shared/:share_hash', component: BoardComponent,
+      { path: 'boards', component: BoardsComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard], },
+      { path: 'boards/:board_id', component: BoardComponent, resolve: {board: BoardResolver},
         children : [
           { path: 'cards/:card_id', component: ModalEditCardComponent }
         ]
       },
     ]
   },
-  { path: 'accept-page', component: AcceptPageComponent, canActivate: [AuthGuard]},
+  { path: '', component: MainLayoutComponent, canActivate: [SharedGuard], canActivateChild: [SharedGuard],
+    children: [
+      { path: 'shared/:share_hash', component: BoardComponent, resolve: {board: BoardResolver},
+        children : [
+          { path: 'cards/:card_id', component: ModalEditCardComponent }
+        ]
+      },
+    ]
+  },
+  { path: 'accept-page', component: AcceptPageComponent, canActivate: [NotAuthGuard]},
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [BoardResolver]
 })
 export class BoardsRoutingModule {
 }

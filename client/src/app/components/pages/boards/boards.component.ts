@@ -58,10 +58,10 @@ export class BoardsComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.boardsService.getBoards()
       .subscribe((boards: BoardResponse[]) => {
           this.boards = [...boards];
-          this.isOpenModalCreateBoard = false;
+          // this.isOpenModalCreateBoard = false;
         },
         () => {
-          this.isOpenModalCreateBoard = false;
+          // this.isOpenModalCreateBoard = false;
           this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));

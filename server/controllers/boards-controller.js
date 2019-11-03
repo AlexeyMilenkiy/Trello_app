@@ -88,7 +88,7 @@ module.exports = {
                     res.sendStatus(404);
                 }
             })
-            .catch((err) => {
+            .catch(() => {
                 res.status(400);
             });
     },
