@@ -7,6 +7,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
 
 import { ModalErrorComponent } from '@components/modal-error/modal-error.component';
 import { StartHeaderComponent } from '@components/start-header/start-header.component';
+import { MainHeaderComponent } from '@components/main-header/main-header.component';
 
 import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
 
@@ -15,6 +16,7 @@ import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
   declarations: [
     ModalErrorComponent,
     StartHeaderComponent,
+    MainHeaderComponent,
     AutoFocusDirective,
   ],
   imports: [
@@ -30,6 +32,7 @@ import { AutoFocusDirective } from '@app/directives/auto-focus.directive';
     ClickOutsideModule,
     ModalErrorComponent,
     StartHeaderComponent,
+    MainHeaderComponent,
     AutoFocusDirective,
   ]
 })

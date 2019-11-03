@@ -17,15 +17,14 @@ import { CardComponent } from '@components/card/card.component';
 import { TableFooterComponent } from '@components/table-footer/table-footer.component';
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
 import { MainLayoutComponent } from '@components/main-layout/main-layout.component';
-import { MainHeaderComponent } from '@components/main-header/main-header.component';
 import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
+import { BoardNotFoundComponent } from '@components/pages/board-not-found/board-not-found.component';
 
 
 @NgModule({
   declarations: [
     BoardsComponent,
     MainLayoutComponent,
-    MainHeaderComponent,
     ModalCreateBoardComponent,
     BoardComponent,
     BoardHeaderComponent,
@@ -34,6 +33,7 @@ import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.c
     TableFooterComponent,
     ModalEditCardComponent,
     AcceptPageComponent,
+    BoardNotFoundComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,9 @@
+<app-start-header *ngIf="!isAuth" [isLogout]="true"></app-start-header>
+<app-main-header *ngIf="isAuth"></app-main-header>
+
+<div class="not-found-board">
+  <div class="not-found-board-container">
+    <h1>Board not found.</h1>
+    <p>This page may be private. If someone gave you this link, they may need to invite you to one of their boards or teams.</p>
+  </div>
+</div>

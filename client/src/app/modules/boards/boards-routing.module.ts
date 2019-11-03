@@ -10,6 +10,7 @@ import { BoardsComponent } from '@components/pages/boards/boards.component';
 import { BoardComponent } from '@components/pages/board/board.component';
 import { AcceptPageComponent } from '@components/pages/accept-page/accept-page.component';
 import { ModalEditCardComponent } from '@components/modal-edit-card/modal-edit-card.component';
+import {BoardNotFoundComponent} from '@components/pages/board-not-found/board-not-found.component';
 
 const routes: Routes = [
   { path: '', component: MainLayoutComponent,
@@ -32,6 +33,7 @@ const routes: Routes = [
     ]
   },
   { path: 'accept-page', component: AcceptPageComponent, canActivate: [NotAuthGuard]},
+  { path: 'board-not-found', component: BoardNotFoundComponent},
 ];
 
 @NgModule({

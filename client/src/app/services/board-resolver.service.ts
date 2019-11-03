@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
+import {ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
 
 import { Observable, of, EMPTY } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -14,11 +14,12 @@ import { BoardResponse } from '@app/interfaces';
 export class BoardResolver implements Resolve<BoardResponse> {
 
   constructor(private router: Router,
+              private activateRoute: ActivatedRoute,
               private boardsService: BoardsService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BoardResponse> | Promise<BoardResponse> | BoardResponse {
-
+    console.log('resolver');
     const queryBoardId = parseInt(route.params.board_id, 10);
     const shareHash = route.params.share_hash;
     const userId = this.boardsService.getUserId();
@@ -35,7 +36,7 @@ export class BoardResolver implements Resolve<BoardResponse> {
           }),
           catchError((error: HttpErrorResponse) => {
             if (error.status === 404) {
-              this.router.navigate(['not-found']);
+              this.router.navigate(['board-not-found']);
               return EMPTY;
             } else if ((error.status !== 401) && (error.status !== 422)) {
               return EMPTY;
@@ -52,7 +53,7 @@ export class BoardResolver implements Resolve<BoardResponse> {
             switch (error.status) {
               case 404 :
               case 422 :
-                this.router.navigate(['not-found']);
+                this.router.navigate(['board-not-found']);
                 break;
               case 401 :
                 this.router.navigate(['accept-page']);
