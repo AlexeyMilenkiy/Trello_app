@@ -87,7 +87,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       this.isEditDescription = false;
       formGroup = this.formDescription;
     }
-    if (!(formGroup.value[attr] === null) && (this.card[attr] === formGroup.value[attr].trim())) {
+    if ((formGroup.value[attr] !== null) && (this.card[attr] === formGroup.value[attr].trim())) {
       return;
     }
     this.card[attr] = formGroup.value[attr];
