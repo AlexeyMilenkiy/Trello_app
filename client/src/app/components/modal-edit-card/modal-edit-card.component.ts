@@ -67,9 +67,9 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       ));
   }
 
-  closeDescriptionForm() {
-    this.isEditDescription = false;
+  openDescriptionForm() {
     this.formDescription.setValue({description : this.card.description});
+    this.isEditDescription = true;
   }
 
   blurOnTitle(elem: HTMLTextAreaElement) {
@@ -123,10 +123,5 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
-  }
-
-  openEditorDescription() {
-    this.formDescription.setValue({description : this.card.description});
-    this.isEditDescription = true;
   }
 }
