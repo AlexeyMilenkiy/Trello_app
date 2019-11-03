@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { CardsService, BoardsService, ErrorHandlerService } from '@app/services';
-import { CardResponse } from '@app/interfaces';
+import {BoardResponse, CardResponse} from '@app/interfaces';
 
 
 @Component({
@@ -15,7 +15,6 @@ import { CardResponse } from '@app/interfaces';
 })
 export class ModalEditCardComponent implements OnInit, OnDestroy {
 
-  queryCardId: number;
   card: CardResponse;
   isError = false;
   textInError = '';
@@ -54,23 +53,15 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       ]),
     });
 
-    this.queryCardId = parseInt(this.activateRoute.snapshot.params.card_id, 10);
-    this.userId = this.boardsService.getUserId();
-    this.authorId = this.boardsService.getAuthorId();
-
-    this.subscriptions.add(this.cardsService.getCard(this.queryCardId)
-      .subscribe((card: CardResponse) => {
-        if (!card) {
-          this.router.navigate(['../../'], {relativeTo: this.activateRoute});
-          return;
-        }
-        this.card = {...card};
-        this.formTitle.setValue({title : this.card.title});
-        this.formDescription.setValue({description : this.card.description});
-        },
-        (error) => {
-          if ((error.status !== 401) && (error.status !== 422)) {
-            this.errorHandlerService.sendError('Server is not available! Please try again later!');
+    this.subscriptions.add(this.activateRoute.data
+      .subscribe(
+        (res: { card: CardResponse }) => {
+          if (res.card) {
+            this.card = {...res.card};
+            this.formTitle.setValue({title : this.card.title});
+            this.formDescription.setValue({description : this.card.description});
+          } else {
+            this.errorHandlerService.sendError('Server is not available! Please reload page');
           }
         }
       ));
@@ -96,7 +87,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
       this.isEditDescription = false;
       formGroup = this.formDescription;
     }
-    if (this.card[attr] === formGroup.value[attr].trim()) {
+    if (!(formGroup.value[attr] === null) && (this.card[attr] === formGroup.value[attr].trim())) {
       return;
     }
     this.card[attr] = formGroup.value[attr];
@@ -132,5 +123,10 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  openEditorDescription() {
+    this.formDescription.setValue({description : this.card.description});
+    this.isEditDescription = true;
   }
 }

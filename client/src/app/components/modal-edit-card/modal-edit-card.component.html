@@ -1,5 +1,4 @@
-<div *ngIf="card"
-     (click)="close()"
+<div (click)="close()"
      class="modal__wrapper">
 
     <div (click)="$event.stopPropagation()"
@@ -59,13 +58,13 @@
         </form>
 
         <p *ngIf="card?.description && !isEditDescription"
-           (click)="this.isEditDescription = true"
+           (click)="openEditorDescription()"
            class="modal__card__description__content">
           {{card.description}}
         </p>
 
         <p *ngIf="!card?.description && !isEditDescription"
-           (click)="this.isEditDescription = true"
+           (click)="openEditorDescription()"
            class="modal__card__description__preview">
           Add a more detailed description...
         </p>

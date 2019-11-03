@@ -28,7 +28,8 @@ export class CardComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.cardsService.getUpdatedCard()
       .subscribe((card: CardResponse) => {
         if (this.card.id === card.id) {
-          this.card = {...card};
+          this.card.title = card.title;
+          this.card.description = card.description;
         }
       })
     );
@@ -70,6 +71,7 @@ export class CardComponent implements OnInit, OnDestroy {
 
   openEditorTitle(event) {
     event.stopPropagation();
+    this.form.setValue({titleCard: this.card.title});
     const path = event.path || (event.composedPath && event.composedPath());
     this.isOpenEditor.emit(true);
     this.top = path[3].offsetTop;

@@ -18,12 +18,7 @@ export class TableComponent implements OnDestroy, OnChanges {
   @Input() tableId: number;
   @Input() boardId: number;
 
-  card: CardBeforeCreate = {
-    board_id: 0,
-    table_id: 0,
-    position: 0,
-    title: ''
-  };
+  card: CardBeforeCreate;
 
   dragDisabled = false;
   subscriptions: Subscription = new Subscription();
@@ -42,7 +37,6 @@ export class TableComponent implements OnDestroy, OnChanges {
   }
 
   drop(event: CdkDragDrop<CardResponse[]>) {
-
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {

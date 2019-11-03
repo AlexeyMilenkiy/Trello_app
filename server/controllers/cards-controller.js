@@ -17,7 +17,11 @@ module.exports = {
             }
         )
             .then((card) => {
-                res.json(card);
+                if (card) {
+                    res.json(card);
+                } else {
+                    res.sendStatus(404);
+                }
             })
             .catch(() => {
                 res.status(400);

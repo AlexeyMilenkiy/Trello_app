@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import {ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 
 import { Observable, of, EMPTY } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -19,7 +19,7 @@ export class BoardResolver implements Resolve<BoardResponse> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<BoardResponse> | Promise<BoardResponse> | BoardResponse {
-    console.log('resolver');
+
     const queryBoardId = parseInt(route.params.board_id, 10);
     const shareHash = route.params.share_hash;
     const userId = this.boardsService.getUserId();
