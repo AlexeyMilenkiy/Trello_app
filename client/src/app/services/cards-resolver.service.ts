@@ -28,7 +28,6 @@ export class CardsResolver {
           return of(card);
         }),
         catchError((error: HttpErrorResponse) => {
-          debugger
           if (error.status === 404) {
             this.router.navigate(['page-not-found']);
             return EMPTY;

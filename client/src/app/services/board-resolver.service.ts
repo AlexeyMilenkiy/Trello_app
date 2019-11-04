@@ -38,9 +38,11 @@ export class BoardResolver implements Resolve<BoardResponse> {
             if (error.status === 404) {
               this.router.navigate(['board-not-found']);
               return EMPTY;
-            } else if ((error.status !== 401) && (error.status !== 422)) {
+            }
+            if ((error.status !== 401) && (error.status !== 422)) {
               return EMPTY;
             }
+            return EMPTY;
           })
         );
     } else {
@@ -50,17 +52,15 @@ export class BoardResolver implements Resolve<BoardResponse> {
             return of(board);
           }),
           catchError((error: HttpErrorResponse) => {
-            switch (error.status) {
-              case 404 :
-              case 422 :
-                this.router.navigate(['board-not-found']);
-                break;
-              case 401 :
-                this.router.navigate(['accept-page']);
-                break;
-              default :
-                return EMPTY;
+            if ((error.status === 404) || (error.status === 422)) {
+              this.router.navigate(['board-not-found']);
+              return EMPTY;
             }
+            if (error.status === 401) {
+              this.router.navigate(['accept-page']);
+              return EMPTY;
+            }
+            return EMPTY;
           })
         );
     }
