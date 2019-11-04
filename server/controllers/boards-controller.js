@@ -75,7 +75,7 @@ module.exports = {
                 as: 'cards',
                 where: {
                     board_id: {
-                        [Op.col]: 'Board.id'
+                        [Op.col]: 'board.id'
                     }
                 },
                 required: false,

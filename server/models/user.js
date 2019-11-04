@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             underscored: true,
-            tableName: 'Users',
+            tableName: 'users',
         });
     User.associate = function (models) {
         User.hasMany(models.Board, {

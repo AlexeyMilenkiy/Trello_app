@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
         position: DataTypes.DECIMAL
     }, {
         underscored: true,
-        tableName: 'Cards'
+        tableName: 'cards'
     });
     Card.associate = function (models) {
 
