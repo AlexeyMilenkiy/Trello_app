@@ -52,11 +52,13 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
         Validators.maxLength(200)
       ]),
     });
-    console.log('ng0n init')
+
+    this.userId = this.boardsService.getUserId();
+    this.authorId = this.boardsService.getAuthorId();
+
     this.subscriptions.add(this.activateRoute.data
       .subscribe(
         (res: { card: CardResponse }) => {
-          console.log(res)
           if (res.card) {
             this.card = {...res.card};
             this.formTitle.setValue({title : this.card.title});

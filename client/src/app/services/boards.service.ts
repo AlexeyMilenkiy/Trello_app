@@ -61,7 +61,8 @@ export class BoardsService {
   }
 
   getBoard(id: number): Observable<BoardResponse> {
-    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-board`, {params : {board_id: `${id}`}});
+    return this.http.get<BoardResponse>(`${environment.baseUrl}boards/get-board`, {params : {board_id: `${id}`}})
+      .pipe(tap((board: BoardResponse) => this.authorId = board.author_id));
   }
 
   getShareBoard(shareHash: string): Observable<BoardResponse> {

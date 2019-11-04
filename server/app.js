@@ -10,6 +10,7 @@ const errorHandler = require('./services/error-handlers');
 const routes = require('./routes');
 
 const app = express();
+
 app.use(cors());
 app.use(helmet());
 app.disable('x-powered-by');

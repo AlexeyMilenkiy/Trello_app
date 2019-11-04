@@ -1,4 +1,5 @@
-<app-start-header [isLogout]="true"></app-start-header>
+<app-start-header *ngIf="!isAuth" [isLogout]="true"></app-start-header>
+<app-main-header *ngIf="isAuth"></app-main-header>
 <div class="not-found-page">
   <div class="not-found-page-container">
     <h1>Page not found.</h1>

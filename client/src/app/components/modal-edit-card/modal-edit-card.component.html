@@ -78,7 +78,7 @@
           Something went wrong and the card could not be {{textInError}}. Please try again later.
         </small>
 
-        <button *ngIf="(authorId === userId) || (authorId === undefined)"
+        <button *ngIf="authorId === userId"
                 (click)="deleteCard()"
                 class="modal__card__delete">
           Delete card

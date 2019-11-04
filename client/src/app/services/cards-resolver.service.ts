@@ -16,11 +16,10 @@ export class CardsResolver {
   constructor(private router: Router,
               private activateRoute: ActivatedRoute,
               private cardsService: CardsService,
-              private errorHsndlerService: ErrorHandlerService) {
+              private errorHandlerService: ErrorHandlerService) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<CardResponse> | Promise<CardResponse> | CardResponse {
-    console.log('cards resolver');
     const queryCardId = parseInt(route.params.card_id, 10);
 
     return this.cardsService.getCard(queryCardId)
@@ -29,19 +28,16 @@ export class CardsResolver {
           return of(card);
         }),
         catchError((error: HttpErrorResponse) => {
-          console.log(error);
+          debugger
           if (error.status === 404) {
             this.router.navigate(['page-not-found']);
             return EMPTY;
           }
-          if (error.status === 0) {
-            this.errorHsndlerService.sendError('jkhjk');
-            return EMPTY;
-          }
           if ((error.status !== 401) && (error.status !== 422)) {
-            console.log('cards resolver 2344');
             return EMPTY;
           }
+          this.errorHandlerService.sendError('Something went wrong and it is impossible to open the card. Please try again later');
+          return EMPTY;
         })
       );
 

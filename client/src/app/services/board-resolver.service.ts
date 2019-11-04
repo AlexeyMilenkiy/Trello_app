@@ -29,7 +29,7 @@ export class BoardResolver implements Resolve<BoardResponse> {
         .pipe(
           tap((board: BoardResponse) => {
             if (board.author_id !== userId) {
-              this.router.navigate(['boards']);
+              this.router.navigate(['board-not-found']);
               return EMPTY;
             }
             return of(board);
