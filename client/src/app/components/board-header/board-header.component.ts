@@ -64,7 +64,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       ));
   }
 
-  openInviteBlock(event) {
+  toggleInviteBlock(event) {
     const path = event.path || (event.composedPath && event.composedPath());
     this.topPosition = path[0].offsetTop + 45;
 
@@ -74,6 +74,9 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       this.leftPosition = path[0].offsetLeft;
     }
     this.isOpenInviteBlock = !this.isOpenInviteBlock;
+    if (this.isCreateLink) {
+      this.isCreateLink = false;
+    }
   }
 
   generateLink() {
@@ -110,6 +113,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   onClickedOutside($event) {
     if ($event.target.className !== 'board__header__btn') {
       this.isOpenInviteBlock = false;
+      this.isCreateLink = false;
     }
   }
 
