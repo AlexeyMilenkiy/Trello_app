@@ -32,9 +32,6 @@ export class CardsResolver {
             this.router.navigate(['page-not-found']);
             return EMPTY;
           }
-          if ((error.status !== 401) && (error.status !== 422)) {
-            return EMPTY;
-          }
           this.errorHandlerService.sendError('Something went wrong and it is impossible to open the card. Please try again later');
           return EMPTY;
         })

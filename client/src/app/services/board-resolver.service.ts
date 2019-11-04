@@ -39,9 +39,6 @@ export class BoardResolver implements Resolve<BoardResponse> {
               this.router.navigate(['board-not-found']);
               return EMPTY;
             }
-            if ((error.status !== 401) && (error.status !== 422)) {
-              return EMPTY;
-            }
             return EMPTY;
           })
         );
