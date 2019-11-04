@@ -57,6 +57,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
           this.editTitle = false;
         },
         () => {
+          this.editTitle = false;
           this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
