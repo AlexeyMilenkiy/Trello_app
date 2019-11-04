@@ -95,10 +95,8 @@ export class TableComponent implements OnDestroy, OnChanges {
       .subscribe((card: CardResponse) => {
           this.cardsArray.push(card);
         },
-        (error) => {
-          if ((error.status === 400) || (error.status === 500)) {
-            this.errorHandlerService.sendError('Server is not available! Please try again later');
-          }
+        () => {
+          this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
   }
