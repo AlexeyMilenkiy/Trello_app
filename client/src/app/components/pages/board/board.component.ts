@@ -58,7 +58,7 @@ export class BoardComponent implements OnInit, OnDestroy {
             this.board = {...res.board};
             this.separateCardsArray();
           } else {
-            this.errorHandlerService.sendError('Server is not available! Please reload page');
+            this.errorHandlerService.sendError('Server is not available! Please reload page!');
           }
         }
       ));
