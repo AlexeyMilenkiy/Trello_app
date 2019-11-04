@@ -45,7 +45,8 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
     if (this.form.invalid || (this.form.value.boardTitle === this.title)) {
       this.editTitle = false;
       return;
-    } else if (!this.form.value.boardTitle.trim().length) {
+    }
+    if (!this.form.value.boardTitle.trim().length) {
       this.editTitle = false;
       return;
     }

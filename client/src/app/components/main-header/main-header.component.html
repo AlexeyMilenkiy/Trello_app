@@ -22,10 +22,13 @@
        (clickOutside)="onClickedOutside($event)"
        [ngStyle]="{'top' : top+'px', 'left' : left+'px'}"
        class="main__header__user__dropdown">
+
     <div class="main__header__user__dropdown__title">
+
       <span class="main__header__user__dropdown__name">{{name}}</span>
       <span class="main__header__user__dropdown__close"
             (click)="isOpenUserBlock = false"></span>
+
     </div>
     <button (click)="logout()"
             class="main__header__user__dropdown__logout">

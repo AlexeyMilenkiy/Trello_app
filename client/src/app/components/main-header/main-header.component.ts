@@ -37,8 +37,7 @@ export class MainHeaderComponent implements OnInit {
   onClickedOutside(event) {
     if (event.target.className === 'main__header__user') {
       return;
-    } else {
-      this.isOpenUserBlock = false;
     }
+    this.isOpenUserBlock = false;
   }
 }
