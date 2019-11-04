@@ -52,16 +52,17 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
         Validators.maxLength(200)
       ]),
     });
-
+    console.log('ng0n init')
     this.subscriptions.add(this.activateRoute.data
       .subscribe(
         (res: { card: CardResponse }) => {
+          console.log(res)
           if (res.card) {
             this.card = {...res.card};
             this.formTitle.setValue({title : this.card.title});
             this.formDescription.setValue({description : this.card.description});
           } else {
-            this.errorHandlerService.sendError('Server is not available! Please reload page');
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
           }
         }
       ));

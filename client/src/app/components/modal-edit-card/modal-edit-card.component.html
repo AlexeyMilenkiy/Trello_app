@@ -1,4 +1,5 @@
-<div (click)="close()"
+<div *ngIf="card"
+     (click)="close()"
      class="modal__wrapper">
 
     <div (click)="$event.stopPropagation()"
