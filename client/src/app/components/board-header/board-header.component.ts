@@ -56,10 +56,8 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
           this.title = this.form.value.boardTitle;
           this.editTitle = false;
         },
-        (error) => {
-          if ((error.status !== 401) && (error.status !== 422)) {
-            this.errorHandlerService.sendError('Server is not available! Please try again later');
-          }
+        () => {
+          this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
       ));
   }
@@ -95,7 +93,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
             this.hashLink = 'Loading...';
           },
           () => {
-            this.hashLink = 'Sorry, server is unavailable';
+            this.hashLink = 'Server is not available!';
           })
       );
     }

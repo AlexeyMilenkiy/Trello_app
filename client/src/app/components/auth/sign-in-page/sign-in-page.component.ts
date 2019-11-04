@@ -78,8 +78,10 @@ export class SignInPageComponent implements OnInit, OnDestroy {
             }
           ));
       })
-      .catch(() => {
-        this.errorHandlerService.sendError('Server is not available! Please try again later');
+      .catch((error) => {
+        if (error !== 'User cancelled login or did not fully authorize.') {
+          this.errorHandlerService.sendError('Server is not available! Please try again later');
+        }
       });
   }
 

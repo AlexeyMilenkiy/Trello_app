@@ -5,7 +5,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { EMPTY, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
-import {CardsService, ErrorHandlerService} from '@app/services';
+import { CardsService, ErrorHandlerService } from '@app/services';
 import { CardResponse } from '@app/interfaces';
 
 @Injectable({
@@ -32,7 +32,7 @@ export class CardsResolver {
             this.router.navigate(['page-not-found']);
             return EMPTY;
           }
-          this.errorHandlerService.sendError('Something went wrong and it is impossible to open the card. Please try again later');
+          this.errorHandlerService.sendError('Server is not available! Please try opening the card later!');
           return EMPTY;
         })
       );

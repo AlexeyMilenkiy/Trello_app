@@ -60,13 +60,12 @@ export class CardComponent implements OnInit, OnDestroy {
           this.isOpenEditor.emit(false);
           this.isOpenEditTitle = false;
         },
-        (error) => {
-        if ((error.status !== 401) && (error.status !== 422)) {
+        () => {
           this.card.title = oldTitle;
           this.isOpenEditTitle = false;
           this.errorHandlerService.sendError('Sorry, failed to change title! Please try again later');
-        }
-        }));
+        })
+    );
   }
 
   openEditorTitle(event) {
