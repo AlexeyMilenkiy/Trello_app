@@ -50,10 +50,14 @@ export class TableComponent implements OnDestroy, OnChanges {
 
     this.subscriptions.add(this.cardsService.updateCard(event.item.data)
       .subscribe(() => {},
-        () => {
+        (error) => {
+        if (error.status === 404) {
+          this.errorHandlerService.sendError('The board has been removed! You cannot change it!');
+        } else {
           this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
-      ));
+      }
+    ));
   }
 
   setPositionNewCard() {

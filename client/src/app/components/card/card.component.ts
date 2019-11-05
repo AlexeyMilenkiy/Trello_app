@@ -64,7 +64,7 @@ export class CardComponent implements OnInit, OnDestroy {
           this.card.title = oldTitle;
           this.isOpenEditTitle = false;
           if (error.status === 404) {
-          this.errorHandlerService.sendError('The card has been deleted, you cannot change it!');
+          this.errorHandlerService.sendError('The card has been removed, you cannot change it!');
         } else {
           this.errorHandlerService.sendError('Sorry, failed to change title! Please try again later');
         }
