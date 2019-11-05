@@ -96,7 +96,7 @@ module.exports = {
     removeBoard(req, res) {
         const boardId = req.query.board_id;
 
-        Board.destroy({where: {id: boardId}})
+        Board.destroy({where: {id: {[Op.eq] :  boardId}}})
             .then(data => {
                 res.json(data);
             })

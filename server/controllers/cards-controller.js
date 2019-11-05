@@ -47,7 +47,7 @@ module.exports = {
                             res.sendStatus(400);
                         });
                 } else {
-                    res.status(400).send('board_not_found');
+                    res.status(404).send('board_not_found');
                 }
             })
             .catch(() => {
@@ -68,7 +68,11 @@ module.exports = {
                 }
             })
             .then((data) => {
-                res.json(data);
+                if(data[0] === 0) {
+                    res.sendStatus(404);
+                } else {
+                    res.json(data);
+                }
             })
             .catch(() => {
                 res.sendStatus(400);

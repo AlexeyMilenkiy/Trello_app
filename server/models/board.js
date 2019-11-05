@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
         Board.hasMany(models.Card, {
             foreignKey: 'board_id',
-            as: 'cards'
+            as: 'cards',
         });
     };
 

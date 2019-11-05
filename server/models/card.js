@@ -14,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
 
         Card.belongsTo(models.Board, {
             foreignKey: 'board_id',
-            foreignKeyConstraint: true,
-            onDelete: 'cascade'
         });
     };
 
