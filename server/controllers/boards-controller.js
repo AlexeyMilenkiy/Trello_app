@@ -2,6 +2,7 @@ const models = require('../models');
 const Board = models.Board;
 const Card = models.Card;
 const Op = models.Sequelize.Op;
+const channels_client = require('../config/pusher');
 
 module.exports = {
 
@@ -122,8 +123,12 @@ module.exports = {
             .then(data => {
                 if (data[0] === 0) {
                     res.sendStatus(404);
+                } else {
+                    res.json(data);
+                    channels_client.trigger('boards-channel', 'change-board', {
+                        "board": `${title}`
+                    });
                 }
-                res.json(data);
             })
             .catch(() => {
                 res.status(400);

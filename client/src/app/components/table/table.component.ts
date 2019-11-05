@@ -105,17 +105,17 @@ export class TableComponent implements OnDestroy, OnChanges, OnInit {
   }
 
   ngOnInit() {
-    this.pusherService.channel.bind('new-card', data => {
+    this.pusherService.cardsChannel.bind('new-card', data => {
       const newCard = JSON.parse(data.card);
       if (newCard.table_id === this.tableId) {
         this.cardsArray.push(newCard);
       }
     });
 
-    this.pusherService.channel.bind('edit-card', data => {
+    this.pusherService.cardsChannel.bind('edit-card', data => {
     });
 
-    this.pusherService.channel.bind('delete-card', (data) => {
+    this.pusherService.cardsChannel.bind('delete-card', (data) => {
       const index = this.cardsArray.findIndex(item => item.id === +data.card);
       if (~index) {
         this.cardsArray.splice(index, 1);

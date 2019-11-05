@@ -10,13 +10,15 @@ import { environment } from '@env/environment';
 export class PusherService {
 
   pusher: any;
-  channel: any;
+  cardsChannel: any;
+  boardsChannel: any;
 
   constructor() {
     this.pusher = new Pusher(environment.pusher.key, {
       cluster: environment.pusher.cluster,
       encrypted: true
     });
-    this.channel = this.pusher.subscribe('cards-channel');
+    this.cardsChannel = this.pusher.subscribe('cards-channel');
+    this.boardsChannel = this.pusher.subscribe('boards-channel');
   }
 }

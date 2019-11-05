@@ -1,11 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Subscription } from 'rxjs';
 
-import { BoardsService, ErrorHandlerService } from '@app/services';
-import {HttpErrorResponse} from '@angular/common/http';
+import { BoardsService, ErrorHandlerService, PusherService } from '@app/services';
 
 @Component({
   selector: 'app-board-header',
@@ -29,6 +29,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private boardsService: BoardsService,
+              private pusherService: PusherService,
               private errorHandlerService: ErrorHandlerService) {
   }
 
@@ -39,6 +40,10 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
         Validators.minLength(1),
         Validators.maxLength(200)
       ]),
+    });
+
+    this.pusherService.boardsChannel.bind('change-board', data => {
+      this.title = data.board;
     });
   }
 

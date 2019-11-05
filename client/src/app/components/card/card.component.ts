@@ -36,7 +36,7 @@ export class CardComponent implements OnInit, OnDestroy {
       ]),
     });
 
-    this.pusherService.channel.bind('edit-card', data => {
+    this.pusherService.cardsChannel.bind('edit-card', data => {
       const changedCard = JSON.parse(data.card);
       if (this.card.id === changedCard.id) {
         this.card = changedCard;
