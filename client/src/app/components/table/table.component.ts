@@ -97,10 +97,14 @@ export class TableComponent implements OnDestroy, OnChanges {
       .subscribe((card: CardResponse) => {
           this.cardsArray.push(card);
         },
-        () => {
+        (error) => {
+        if (error.status === 404) {
+          this.errorHandlerService.sendError('The board has been removed! You cannot change it!');
+        } else {
           this.errorHandlerService.sendError('Server is not available! Please try again later');
         }
-      ));
+      }
+    ));
   }
 
   sortCardsByName() {
