@@ -1,9 +1,9 @@
-import { Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
-import { CardsService, ErrorHandlerService } from '@app/services';
+import { CardsService, ErrorHandlerService, PusherService } from '@app/services';
 import { CardBeforeCreate, CardResponse } from '@app/interfaces';
 
 @Component({
@@ -11,7 +11,7 @@ import { CardBeforeCreate, CardResponse } from '@app/interfaces';
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.less']
 })
-export class TableComponent implements OnDestroy, OnChanges {
+export class TableComponent implements OnDestroy, OnChanges, OnInit {
 
   @Input() cardsArray: CardResponse[];
   @Input() headline: string;
@@ -25,15 +25,8 @@ export class TableComponent implements OnDestroy, OnChanges {
   protected defaultCardPosition = 65535;
 
   constructor(private cardsService: CardsService,
-              private errorHandlerService: ErrorHandlerService) {
-
-    this.subscriptions.add(this.cardsService.getDeletedCard()
-      .subscribe((card: CardResponse) => {
-        if (this.tableId === card.table_id) {
-          this.cardsArray = this.cardsArray.filter(item => item.id !== card.id);
-        }
-      },
-    ));
+              private errorHandlerService: ErrorHandlerService,
+              private pusherService: PusherService) {
   }
 
   drop(event: CdkDragDrop<CardResponse[]>) {
@@ -94,17 +87,9 @@ export class TableComponent implements OnDestroy, OnChanges {
     };
 
     this.subscriptions.add(this.cardsService.createCard(this.card)
-      .subscribe((card: CardResponse) => {
-          this.cardsArray.push(card);
-        },
-        (error) => {
-        if (error.status === 404) {
-          this.errorHandlerService.sendError('The board has been removed! You cannot change it!');
-        } else {
-          this.errorHandlerService.sendError('Server is not available! Please try again later');
-        }
-      }
-    ));
+      .subscribe(() => {},
+        () => this.errorHandlerService.sendError('Server is not available! Please try again later'))
+    );
   }
 
   sortCardsByName() {
@@ -117,5 +102,24 @@ export class TableComponent implements OnDestroy, OnChanges {
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  ngOnInit() {
+    this.pusherService.channel.bind('new-card', data => {
+      const newCard = JSON.parse(data.card);
+      if (newCard.table_id === this.tableId) {
+        this.cardsArray.push(newCard);
+      }
+    });
+
+    this.pusherService.channel.bind('edit-card', data => {
+    });
+
+    this.pusherService.channel.bind('delete-card', (data) => {
+      const index = this.cardsArray.findIndex(item => item.id === +data.card);
+      if (~index) {
+        this.cardsArray.splice(index, 1);
+      }
+    });
   }
 }

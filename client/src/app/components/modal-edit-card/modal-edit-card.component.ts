@@ -96,7 +96,7 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
     this.card[attr] = formGroup.value[attr];
     this.subscriptions.add(this.cardsService.updateCard(this.card)
       .subscribe(
-        () => this.cardsService.sendUpdatedCard(this.card),
+        () => {},
         () => {
           this.textInError = 'changed';
           this.isError = true;
@@ -113,7 +113,6 @@ export class ModalEditCardComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.cardsService.deleteCard(this.card)
       .subscribe(
         () => {
-          this.cardsService.sendDeletedCard(this.card);
           this.router.navigate(['../../'], {relativeTo: this.activateRoute});
         },
         () => {

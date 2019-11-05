@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Subscription } from 'rxjs';
 
-import { CardsService, ErrorHandlerService } from '@app/services';
+import { CardsService, ErrorHandlerService, PusherService } from '@app/services';
 import { CardResponse } from '@app/interfaces';
 
 @Component({
@@ -23,16 +23,8 @@ export class CardComponent implements OnInit, OnDestroy {
   subscriptions: Subscription = new Subscription();
 
   constructor(private cardsService: CardsService,
-              private errorHandlerService: ErrorHandlerService) {
-
-    this.subscriptions.add(this.cardsService.getUpdatedCard()
-      .subscribe((card: CardResponse) => {
-        if (this.card.id === card.id) {
-          this.card.title = card.title;
-          this.card.description = card.description;
-        }
-      })
-    );
+              private errorHandlerService: ErrorHandlerService,
+              private pusherService: PusherService) {
   }
 
   ngOnInit() {
@@ -42,6 +34,13 @@ export class CardComponent implements OnInit, OnDestroy {
         Validators.minLength(1),
         Validators.maxLength(200)
       ]),
+    });
+
+    this.pusherService.channel.bind('edit-card', data => {
+      const changedCard = JSON.parse(data.card);
+      if (this.card.id === changedCard.id) {
+        this.card = changedCard;
+      }
     });
   }
 
@@ -55,20 +54,16 @@ export class CardComponent implements OnInit, OnDestroy {
     }
     const oldTitle = this.card.title;
     this.card.title = this.form.value.titleCard;
+    this.isOpenEditor.emit(false);
+    this.isOpenEditTitle = false;
+
     this.subscriptions.add(this.cardsService.updateCard(this.card)
-      .subscribe(() =>  {
-          this.isOpenEditor.emit(false);
-          this.isOpenEditTitle = false;
-        },
-        (error) => {
+      .subscribe(() =>  {},
+        () => {
           this.card.title = oldTitle;
           this.isOpenEditTitle = false;
-          if (error.status === 404) {
-          this.errorHandlerService.sendError('The card has been removed, you cannot change it!');
-        } else {
           this.errorHandlerService.sendError('Sorry, failed to change title! Please try again later');
-        }
-      })
+        })
     );
   }
 

@@ -26,6 +26,7 @@
     "ng-click-outside": "^5.1.1",
     "ngx-autosize": "^1.6.4",
     "ngx-autosize-input": "^2.3.6",
+    "pusher-js": "^5.0.2",
     "rxjs": "~6.4.0",
     "ts-md5": "^1.2.7",
     "tslib": "^1.10.0",

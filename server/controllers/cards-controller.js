@@ -2,6 +2,16 @@ const models = require('../models');
 const Card = models.Card;
 const Board = models.Board;
 const Op = models.Sequelize.Op;
+const Pusher = require('pusher');
+
+const channels_client = new Pusher({
+    appId: '894091',
+    key: 'a18db759af1623ba4ed2',
+    secret: '114b9abff9702954c63a',
+    cluster: 'eu',
+    encrypted: true
+});
+
 
 module.exports = {
 
@@ -41,7 +51,11 @@ module.exports = {
                     Card.create({...card})
                         .then((data) => {
                             data.position = Number(data.position);
-                            res.json(data);
+                            res.send({});
+                            const newCard = JSON.stringify(data.dataValues);
+                            channels_client.trigger('cards-channel', 'new-card', {
+                                "card": `${newCard}`
+                            });
                         })
                         .catch(() => {
                             res.sendStatus(400);
@@ -71,7 +85,11 @@ module.exports = {
                 if(data[0] === 0) {
                     res.sendStatus(404);
                 } else {
-                    res.json(data);
+                    res.send({});
+                    const changedCard = JSON.stringify(card);
+                    channels_client.trigger('cards-channel', 'edit-card', {
+                        "card": `${changedCard}`
+                    });
                 }
             })
             .catch(() => {
@@ -91,6 +109,9 @@ module.exports = {
             })
             .then((data) => {
                 res.json(data);
+                channels_client.trigger('cards-channel', 'delete-card', {
+                    'card': `${cardId}`
+                });
             })
             .catch(() => {
                 res.sendStatus(400);

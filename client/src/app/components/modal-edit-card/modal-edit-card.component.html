@@ -17,7 +17,6 @@
                     #titleCard
                     formControlName="title"
                     autosize
-                    [onlyGrow]="true"
                     (keydown.enter)="$event.preventDefault(); $event.target.blur()"
                     (keydown.shift.enter)="$event.preventDefault()"
                     (blur)="blurOnTitle(titleCard)"></textarea>

@@ -8,6 +8,10 @@ export const environment: Environment = {
   production: false,
   baseUrl: 'http://localhost:3000/api/v1/',
   baseClientUrl: 'http://localhost:4200/',
+  pusher: {
+    key: 'a18db759af1623ba4ed2',
+    cluster: 'eu',
+  }
 };
 
 /*
