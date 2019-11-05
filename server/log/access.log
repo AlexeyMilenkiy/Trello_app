@@ -1,2 +1,0 @@
-::1 - - [04/Nov/2019:22:25:15 +0000] "GET /api/v1/boards/get-board?board_id=3 HTTP/1.1" 200 71 "http://localhost:4200/boards/3" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36"
-::1 - - [04/Nov/2019:22:26:01 +0000] "PUT /api/v1/boards/change-board-title HTTP/1.1" 200 3 "http://localhost:4200/boards/3" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.70 Safari/537.36"

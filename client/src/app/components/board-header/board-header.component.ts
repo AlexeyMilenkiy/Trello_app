@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { BoardsService, ErrorHandlerService } from '@app/services';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-board-header',
@@ -24,7 +25,7 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
   isOpenInviteBlock = false;
   isCreateLink = false;
   textInButton = 'Copy';
-  hashLink: string | Int32Array = 'Loading...';
+  hashLink = 'Loading...';
 
   constructor(private router: Router,
               private boardsService: BoardsService,
@@ -56,9 +57,14 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
           this.title = this.form.value.boardTitle;
           this.editTitle = false;
         },
-        () => {
-          this.editTitle = false;
-          this.errorHandlerService.sendError('Server is not available! Please try again later');
+        (error) => {
+          if (error.status === 404) {
+            this.editTitle = false;
+            this.errorHandlerService.sendError('The board has been removed! You cannot change it!');
+          } else {
+            this.editTitle = false;
+            this.errorHandlerService.sendError('Server is not available! Please try again later');
+          }
         }
       ));
   }
@@ -83,19 +89,28 @@ export class BoardHeaderComponent implements OnInit, OnDestroy {
       this.isCreateLink = true;
       this.boardsService.createHashLink(this.title, this.boardId);
       this.subscriptions.add(this.boardsService.getHashLink()
-        .subscribe((hashLink: string) => {
-          this.hashLink = hashLink;
+        .subscribe((response: string | HttpErrorResponse) => {
+          if (typeof response === 'string') {
+            this.hashLink = response;
+            return;
+          }
+          if (response.status === 404) {
+            this.isCreateLink = false;
+            this.isOpenInviteBlock = false;
+            this.errorHandlerService.sendError('The board has been removed! You cannot change it!');
+            return;
+          }
+          this.hashLink = 'Server is not available!';
         })
       );
     } else {
-      this.isCreateLink = false;
       this.subscriptions.add(this.boardsService.changeBoardShareLink(this.boardId, null)
         .subscribe(() => {
+            this.isCreateLink = false;
             this.hashLink = 'Loading...';
           },
-          () => {
-            this.hashLink = 'Server is not available!';
-          })
+      () => this.hashLink = 'Server is not available! Unable to disable link, try again Later'
+        )
       );
     }
   }

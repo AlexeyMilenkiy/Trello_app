@@ -9,17 +9,18 @@
         <span class="modal__card__header__card-icon"></span>
 
         <form [formGroup]="formTitle"
-              (ngSubmit)="changeCard('title')">
+              (ngSubmit)="changeCard('title')"
+              class="modal__form__title">
 
-        <textarea class="modal__card__title"
-                  maxlength="200"
-                  #titleCard
-                  formControlName="title"
-                  autosize
-                  [onlyGrow]="false"
-                  (keydown.enter)="$event.preventDefault(); $event.target.blur()"
-                  (keydown.shift.enter)="$event.preventDefault()"
-                  (blur)="blurOnTitle(titleCard)"></textarea>
+          <textarea class="modal__card__title"
+                    maxlength="200"
+                    #titleCard
+                    formControlName="title"
+                    autosize
+                    [onlyGrow]="true"
+                    (keydown.enter)="$event.preventDefault(); $event.target.blur()"
+                    (keydown.shift.enter)="$event.preventDefault()"
+                    (blur)="blurOnTitle(titleCard)"></textarea>
         </form>
 
         <span class="modal__card__close"
@@ -41,20 +42,21 @@
               [formGroup]="formDescription"
               (ngSubmit)="changeCard('description')">
 
-        <textarea class="modal__card__description__text"
-                  placeholder="Add a more detailed description..."
-                  formControlName="description"
-                  maxlength="400"
-                  (blur)="changeCard('description')"
-                  appAutoFocusDirective></textarea>
+          <textarea class="modal__card__description__text"
+                    placeholder="Add a more detailed description..."
+                    formControlName="description"
+                    maxlength="400"
+                    (blur)="changeCard('description')"
+                    appAutoFocusDirective></textarea>
 
-          <div class="modal__card__description__btn-wrap">
+            <div class="modal__card__description__btn-wrap">
 
-            <button type="submit" class="modal__card__description-save">Save</button>
-            <span (mousedown)="isEditDescription = false"
-                  class="modal__card__description-close">
-          </span>
-          </div>
+              <button type="submit" class="modal__card__description-save">Save</button>
+              <span (mousedown)="isEditDescription = false"
+                    class="modal__card__description-close">
+              </span>
+
+            </div>
 
         </form>
 

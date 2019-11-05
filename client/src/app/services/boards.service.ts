@@ -26,7 +26,7 @@ export class BoardsService {
     this.changeBoardShareLink(boardId, shareLink)
       .subscribe(
         () => this.subject.next(`${environment.baseClientUrl}shared/${shareLink}`),
-        () => this.subject.next('Sorry server is unavailable'));
+        (error) => this.subject.next(error));
   }
 
   getHashLink(): Observable<any> {
@@ -49,9 +49,9 @@ export class BoardsService {
     return this.http.delete(`${environment.baseUrl}boards/remove-board`, {params : {board_id: `${id}`}});
   }
 
-  changeBoardShareLink(id: number, shareLink: string | Int32Array | null): Observable<number[]> {
+  changeBoardShareLink(id: number, shareLink: string | Int32Array | null): Observable<any> {
     return (
-      this.http.put<number[]>(`${environment.baseUrl}boards/change-board-link`, {id, shareLink})
+      this.http.put(`${environment.baseUrl}boards/change-board-link`, {id, shareLink})
     );
   }
 

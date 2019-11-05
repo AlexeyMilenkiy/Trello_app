@@ -109,9 +109,20 @@ module.exports = {
         const boardId = req.body.id;
         const title = req.body.title;
 
-        Board.update({title},
-            {where: {id: boardId}})
+        Board.update(
+            {title},
+            {
+                where:
+                    {
+                        id: {
+                            [Op.eq] : boardId
+                        }
+                    }
+            })
             .then(data => {
+                if (data[0] === 0) {
+                    res.sendStatus(404);
+                }
                 res.json(data);
             })
             .catch(() => {
@@ -123,9 +134,17 @@ module.exports = {
         const boardId = req.body.id;
         const shareLink = req.body.shareLink;
 
-        Board.update({share_hash: shareLink},
-            {where: {id: boardId}})
+        Board.update(
+            {share_hash: shareLink},
+            {
+                where: {
+                    id: boardId
+                }
+            })
             .then(data => {
+                if (data[0] === 0) {
+                    res.sendStatus(404);
+                }
                 res.json(data);
             })
             .catch(() => {

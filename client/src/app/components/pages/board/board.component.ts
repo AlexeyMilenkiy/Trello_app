@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
@@ -50,10 +50,10 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.subscriptions.add(this.activateRoute.data
       .subscribe(
-        (res: { board: BoardResponse }) => {
+        (res: { board: BoardResponse}) => {
           if (res.board) {
             this.board = {...res.board};
             this.separateCardsArray();
@@ -64,7 +64,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       ));
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 }

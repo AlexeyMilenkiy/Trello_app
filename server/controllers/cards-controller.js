@@ -1,5 +1,6 @@
 const models = require('../models');
 const Card = models.Card;
+const Board = models.Board;
 const Op = models.Sequelize.Op;
 
 module.exports = {
@@ -7,15 +8,13 @@ module.exports = {
     getCard(req, res) {
         const cardId = req.query.card_id;
 
-        Card.findOne(
-            {
+        Card.findOne({
                 where: {
                     id: {
                         [Op.eq]: cardId
                     }
                 }
-            }
-        )
+            })
             .then((card) => {
                 if (card) {
                     res.json(card);
@@ -24,21 +23,36 @@ module.exports = {
                 }
             })
             .catch(() => {
-                res.status(400);
+                res.sendStatus(400);
             });
     },
 
     createCard(req, res) {
         const card = req.body;
 
-        Card.create({...card})
-            .then((data) => {
-                data.position = Number(data.position);
-                res.json(data);
+        Board.findOne({
+            where: {
+                id: {
+                    [Op.eq]: card.board_id
+                }
+            }})
+            .then( (board) => {
+                if(board) {
+                    Card.create({...card})
+                        .then((data) => {
+                            data.position = Number(data.position);
+                            res.json(data);
+                        })
+                        .catch(() => {
+                            res.sendStatus(400);
+                        });
+                } else {
+                    res.status(400).send('board_not_found');
+                }
             })
             .catch(() => {
-                res.status(400);
-            });
+                res.sendStatus(400);
+            })
     },
 
     updateCard(req, res) {
@@ -57,15 +71,14 @@ module.exports = {
                 res.json(data);
             })
             .catch(() => {
-                res.status(400);
+                res.sendStatus(400);
             });
     },
 
     deleteCard(req, res) {
         const cardId = req.query.card_id;
 
-        Card.destroy(
-            {
+        Card.destroy({
                 where: {
                     id: {
                         [Op.eq]: cardId
@@ -76,7 +89,7 @@ module.exports = {
                 res.json(data);
             })
             .catch(() => {
-                res.status(400);
+                res.sendStatus(400);
             });
     }
 };
