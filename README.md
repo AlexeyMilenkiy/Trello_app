@@ -47,7 +47,7 @@ PUSHER_API_SECRET = "PUSHER_API_SECRET"
 PUSHER_APP_CLUSTER = "PUSHER_APP_CLUSTER"
 
 ```
-Next launch the migrations. This is necessary for the correct database tables.
+Next launch the migrations. <b>This is necessary for the correct database tables.</b>
 
 ```
 npx sequelize-cli db:migrate
