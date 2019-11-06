@@ -31,7 +31,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(private activateRoute: ActivatedRoute,
               private router: Router,
               private boardsService: BoardsService,
-              private pusherService: PusherService,
               private errorHandlerService: ErrorHandlerService) {
   }
 

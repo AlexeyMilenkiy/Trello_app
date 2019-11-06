@@ -42,7 +42,7 @@ module.exports = {
                     Card.create({...card})
                         .then((data) => {
                             data.position = Number(data.position);
-                            res.send({});
+                            res.send(data);
                             const newCard = JSON.stringify(data.dataValues);
                             channels_client.trigger('cards-channel', 'new-card', {
                                 "card": `${newCard}`
@@ -76,7 +76,7 @@ module.exports = {
                 if(data[0] === 0) {
                     res.sendStatus(404);
                 } else {
-                    res.send({});
+                    res.send(data);
                     const changedCard = JSON.stringify(card);
                     channels_client.trigger('cards-channel', 'edit-card', {
                         "card": `${changedCard}`
