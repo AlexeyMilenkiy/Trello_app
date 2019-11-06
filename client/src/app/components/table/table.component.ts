@@ -121,6 +121,7 @@ export class TableComponent implements OnDestroy, OnChanges, OnInit {
 
     this.pusherService.cardsChannel.bind('edit-card', data => {
       const card = JSON.parse(data.card);
+      console.log(card);
       const index = this.cardsArray.findIndex(item => item.id === card.id);
       if (~index) {
         this.cardsArray.splice(index, 1);
