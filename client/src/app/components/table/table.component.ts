@@ -19,7 +19,6 @@ export class TableComponent implements OnDestroy, OnChanges, OnInit {
   @Input() boardId: number;
 
   card: CardBeforeCreate;
-
   dragDisabled = false;
   subscriptions: Subscription = new Subscription();
   protected defaultCardPosition = 65535;
@@ -34,6 +33,7 @@ export class TableComponent implements OnDestroy, OnChanges, OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       event.item.data.table_id = this.tableId;
+
       transferArrayItem(event.previousContainer.data,
                         event.container.data,
                         event.previousIndex,
@@ -112,13 +112,22 @@ export class TableComponent implements OnDestroy, OnChanges, OnInit {
       }
     });
 
-    this.pusherService.cardsChannel.bind('edit-card', data => {
-    });
-
     this.pusherService.cardsChannel.bind('delete-card', (data) => {
       const index = this.cardsArray.findIndex(item => item.id === +data.card);
       if (~index) {
         this.cardsArray.splice(index, 1);
+      }
+    });
+
+    this.pusherService.cardsChannel.bind('edit-card', data => {
+      const card = JSON.parse(data.card);
+      const index = this.cardsArray.findIndex(item => item.id === card.id);
+      if (~index) {
+        this.cardsArray.splice(index, 1);
+      }
+      if (card.table_id === this.tableId) {
+        this.cardsArray = [card, ...this.cardsArray];
+        this.cardsArray.sort((a, b) => (a.position > b.position) ? 1 : ((b.position > a.position) ? -1 : 0));
       }
     });
   }

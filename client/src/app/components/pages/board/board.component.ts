@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 
-import { BoardsService, ErrorHandlerService } from '@app/services';
+import {BoardsService, ErrorHandlerService, PusherService} from '@app/services';
 import { BoardResponse, CardResponse } from '@app/interfaces';
 
 @Component({
@@ -31,6 +31,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   constructor(private activateRoute: ActivatedRoute,
               private router: Router,
               private boardsService: BoardsService,
+              private pusherService: PusherService,
               private errorHandlerService: ErrorHandlerService) {
   }
 
