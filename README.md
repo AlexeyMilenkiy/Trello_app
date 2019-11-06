@@ -37,7 +37,7 @@ DATABASE = "Database Name"
 DIALECT = "postgres"
 
 ```
-Next launch the migrations. 
+Next launch the migrations. <b>This is necessary for the correct database tables.</b>
 
 ```
 npx sequelize-cli db:migrate
