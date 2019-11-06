@@ -17,7 +17,7 @@ export class ModalCreateBoardComponent implements OnInit {
   title = '';
   form: FormGroup;
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = new FormGroup({
       title: new FormControl(null, [
         Validators.required,

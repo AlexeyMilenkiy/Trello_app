@@ -28,7 +28,7 @@ export class SignInPageComponent implements OnInit, OnDestroy {
                private errorHandlerService: ErrorHandlerService,
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.form = new FormGroup({
       email: new FormControl(null, [
         Validators.required,
@@ -63,7 +63,7 @@ export class SignInPageComponent implements OnInit, OnDestroy {
       ));
   }
 
-  signInWithGoogle(): void {
+  signInWithGoogle() {
     this.googleService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then((user: SocialUser) => {
 
@@ -85,7 +85,7 @@ export class SignInPageComponent implements OnInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
 }
