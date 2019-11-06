@@ -1,10 +1,10 @@
 const Pusher = require('pusher');
 
 const channels_client = new Pusher({
-    appId: '894091',
-    key: 'a18db759af1623ba4ed2',
-    secret: '114b9abff9702954c63a',
-    cluster: 'eu',
+    appId: `${process.env.PUSHER_APP_ID}`,
+    key: `${process.env.PUSHER_API_KEY}`,
+    secret: `${process.env.PUSHER_API_SECRET}`,
+    cluster: `${process.env.PUSHER_APP_CLUSTER}`,
     encrypted: true
 });
 

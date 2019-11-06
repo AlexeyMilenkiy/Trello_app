@@ -1,6 +1,7 @@
-# Trello
+# Trello_v1
 
-This application is a simplified copy of Trello.
+This application is a simplified copy of Trello. 
+`This version with real time update UI`.
 
 ## Getting Started
 You need to download this project to run it locally.
@@ -27,6 +28,9 @@ Then you need to set data base configuration.
     This is necessary for the correct settings.
  2) You only need to create the data base, and change the fields in the file.
  
+ 3) You need to register at [Pusher](https://dashboard.pusher.com) in order to get the keys for `Realtime util`.
+ 
+ 
 ```json
 JWT_SECRET = secret
 
@@ -36,8 +40,14 @@ PASSWORD = "*****"
 DATABASE = "Database Name"
 DIALECT = "postgres"
 
+# Realtime util
+PUSHER_APP_ID = "PUSHER_APP_ID"
+PUSHER_API_KEY = "PUSHER_API_KEY"
+PUSHER_API_SECRET = "PUSHER_API_SECRET"
+PUSHER_APP_CLUSTER = "PUSHER_APP_CLUSTER"
+
 ```
-Next launch the migrations. 
+Next launch the migrations. This is necessary for the correct database tables.
 
 ```
 npx sequelize-cli db:migrate
